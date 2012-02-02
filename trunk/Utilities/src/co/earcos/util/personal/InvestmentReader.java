@@ -132,15 +132,12 @@ public class InvestmentReader extends JFrame implements ActionListener {
                 dataString = dataString.replaceAll("[\\.]", "").replaceAll("[,]", ".").trim();
                 for (char c : dataString.toCharArray()) {
                     if (c == '.') {
-                        robot.keyPress(KeyEvent.VK_PERIOD);
-                        robot.keyRelease(KeyEvent.VK_PERIOD);
+                        pressAndReleaseKey(KeyEvent.VK_PERIOD);
                     } else {
-                        robot.keyPress(NUMERIC_KEYS[Integer.parseInt(c + "")]);
-                        robot.keyRelease(NUMERIC_KEYS[Integer.parseInt(c + "")]);
+                        pressAndReleaseKey(NUMERIC_KEYS[Integer.parseInt(c + "")]);
                     }
                 }
-                robot.keyPress(KeyEvent.VK_TAB);
-                robot.keyRelease(KeyEvent.VK_TAB);
+                pressAndReleaseKey(KeyEvent.VK_TAB);
                 
                 accIndex++;
                 if (accIndex == ACCOUNTS.length) {
@@ -148,6 +145,11 @@ public class InvestmentReader extends JFrame implements ActionListener {
                 }
             }
         }
+    }
+    
+    private void pressAndReleaseKey(int key){
+        robot.keyPress(key);
+        robot.keyRelease(key);
     }
 
     /**
