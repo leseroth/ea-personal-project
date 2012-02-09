@@ -40,10 +40,6 @@ public class MusicFileSync {
         System.out.println("Compara from - to");
         genericCompareMap(FROM_DIR, fromMap, TO_DIR, toMap);
         System.out.println("Fin from-to");
-//        System.out.println();
-//        System.out.println("Compara to-from");
-//        genericCompareMap(TO_DIR, toMap, FROM_DIR, fromMap);
-//        System.out.println("Fin to-from");
     }
 
     private void listFiles(TreeMap<String, File> map, String relativeTo, File file) {
@@ -75,11 +71,14 @@ public class MusicFileSync {
     }
 
     private void createDirectory(String fromKey, String toDir) {
-        String subDir = fromKey.substring(0, fromKey.lastIndexOf(File.separator));
-        File directory = new File(toDir + subDir);
-        if (!directory.exists()) {
-            directory.mkdirs();
-            System.out.println("-- Se crea el directorio: " + directory.getAbsolutePath());
+        int indexOfFolder = fromKey.lastIndexOf(File.separator);
+        if (indexOfFolder != -1) {
+            String subDir = fromKey.substring(0, indexOfFolder);
+            File directory = new File(toDir + subDir);
+            if (!directory.exists()) {
+                directory.mkdirs();
+                System.out.println("-- Se crea el directorio: " + directory.getAbsolutePath());
+            }
         }
     }
 
@@ -95,7 +94,7 @@ public class MusicFileSync {
             int bytesRead;
 
             while ((bytesRead = fis.read(buffer)) != -1) {
-                fos.write(buffer, 0, bytesRead); // write
+                fos.write(buffer, 0, bytesRead);
             }
 
             System.out.println("-- Se copio el archivo: " + fromKey);
