@@ -15,8 +15,8 @@ import java.util.logging.Logger;
  */
 public class MusicFileSync {
 
-    private static final String FROM_DIR = "D:\\ErikArcos\\Musica\\";
-    private static final String TO_DIR = "G:\\Musica\\";
+    private static final String FROM_DIR = "G:\\Musica\\Inglés\\";
+    private static final String TO_DIR = "D:\\ErikArcos\\Musica\\Inglés\\";
     private TreeMap<String, File> fromMap;
     private TreeMap<String, File> toMap;
 
@@ -40,10 +40,10 @@ public class MusicFileSync {
         System.out.println("Compara from - to");
         genericCompareMap(FROM_DIR, fromMap, TO_DIR, toMap);
         System.out.println("Fin from-to");
-        System.out.println();
-        System.out.println("Compara to-from");
-        genericCompareMap(TO_DIR, toMap, FROM_DIR, fromMap);
-        System.out.println("Fin to-from");
+//        System.out.println();
+//        System.out.println("Compara to-from");
+//        genericCompareMap(TO_DIR, toMap, FROM_DIR, fromMap);
+//        System.out.println("Fin to-from");
     }
 
     private void listFiles(TreeMap<String, File> map, String relativeTo, File file) {
@@ -68,7 +68,6 @@ public class MusicFileSync {
                     System.out.println("-- Este archivo es diferente: " + fromKey);
                 }
             } else {
-                System.out.println("-- Archivo no encontrado: " + fromKey);
                 createDirectory(fromKey, toDir);
                 copyFile(fromKey, fromFile, toDir);
             }
