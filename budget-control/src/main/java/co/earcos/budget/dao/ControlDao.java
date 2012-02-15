@@ -32,7 +32,7 @@ public class ControlDao {
 
         try {
             String sql = "select mov.cuenta, sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where to_char(mov.fecha,'yyyyMM') <= ? group by mov.cuenta";
+                    + "where formatdatetime(mov.fecha,'yyyyMM') <= ? group by mov.cuenta";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             result = stmt.executeQuery();
@@ -61,7 +61,7 @@ public class ControlDao {
 
         try {
             String sql = "select mov.cuenta, sum(valor) variacion from TBL_MOVIMIENTO mov "
-                    + "where to_char(mov.fecha,'yyyyMM') = ? group by mov.cuenta";
+                    + "where formatdatetime(mov.fecha,'yyyyMM') = ? group by mov.cuenta";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             result = stmt.executeQuery();
@@ -90,7 +90,7 @@ public class ControlDao {
 
         try {
             String sql = "select sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where to_char(mov.fecha,'yyyyMM') <= ? and concepto = ?";
+                    + "where formatdatetime(mov.fecha,'yyyyMM') <= ? and concepto = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             stmt.setString(2, concept.getLabel());
@@ -120,7 +120,7 @@ public class ControlDao {
 
         try {
             String sql = "select sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where to_char(mov.fecha,'yyyyMM') = ? and cuenta = ? and concepto = ?";
+                    + "where formatdatetime(mov.fecha,'yyyyMM') = ? and cuenta = ? and concepto = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             stmt.setString(2, account.getId());
@@ -227,7 +227,7 @@ public class ControlDao {
         sb.append("valores.valor");
         for (Account account : Account.values()) {
             if (!account.isCreditCard()) {
-                sb.append(",(select sum(mov.valor) from tbl_movimiento mov where to_char(mov.fecha,'yyyy/MM/dd')<=valores.valor and cuenta = '");
+                sb.append(",(select sum(mov.valor) from tbl_movimiento mov where formatdatetime(mov.fecha,'yyyy/MM/dd')<=valores.valor and cuenta = '");
                 sb.append(account.getId());
                 sb.append("') ");
                 sb.append(account.getLabel());
@@ -288,7 +288,7 @@ public class ControlDao {
 
         String sql = "select tm.cue,"
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue ) total,"
-                + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue and to_char(mov.fecha,'yyyyMM') = ?) mesactual"
+                + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue and formatdatetime(mov.fecha,'yyyyMM') = ?) mesactual"
                 + " from (select unique(tm.cuenta) cue from tbl_movimiento tm) tm order by tm.cue";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, fixedMonth);
@@ -322,7 +322,7 @@ public class ControlDao {
 
         String sql = "select info.* from (select tm.cue, tm.con, "
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta || mov.concepto = tm.cue || tm.con ) total, "
-                + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta || mov.concepto = tm.cue || tm.con and to_char(mov.fecha,'yyyyMM')=?) mesactual "
+                + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta || mov.concepto = tm.cue || tm.con and formatdatetime(mov.fecha,'yyyyMM')=?) mesactual "
                 + "from (select tm.cuenta cue, tm.concepto con from tbl_movimiento tm where tm.concepto not in ('Saldo','XD Apps','Movimiento','Prestamo','Universidad') group by tm.cuenta, tm.concepto) tm "
                 + ") info where info.mesactual is not null order by info.cue";
         stmt = conn.prepareStatement(sql);
@@ -358,7 +358,7 @@ public class ControlDao {
 
         String sql = "select * from (select tm.con, tm.obs, "
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.concepto || mov.observacion = tm.con || tm.obs) total, "
-                + "(select sum(mov.valor) from tbl_movimiento mov where mov.concepto || mov.observacion = tm.con || tm.obs and to_char(mov.fecha,'yyyyMM')=?) mesactual "
+                + "(select sum(mov.valor) from tbl_movimiento mov where mov.concepto || mov.observacion = tm.con || tm.obs and formatdatetime(mov.fecha,'yyyyMM')=?) mesactual "
                 + "from (select tm.concepto con, tm.observacion obs from tbl_movimiento tm where tm.observacion is not null group by tm.concepto, tm.observacion) tm) tm "
                 + "where tm.total != 0 and tm.mesactual != 0 order by tm.con, tm.obs";
         stmt = conn.prepareStatement(sql);

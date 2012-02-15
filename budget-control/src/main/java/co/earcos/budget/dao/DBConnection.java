@@ -1,22 +1,25 @@
 package co.earcos.budget.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.h2.jdbcx.JdbcConnectionPool;
 
 public class DBConnection {
 
     private static Connection conn;
+    private static JdbcConnectionPool connPool;
+    private static final String DB_URL = "jdbc:h2:file:D:/ErikArcos/Dropbox/Docs/db/budget;MODE=Oracle;AUTO_SERVER=TRUE";
+    private static final String DB_USER = "earcos";
+    private static final String DB_PASS = "earcos";
 
     public static Connection getConnection() {
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
-            conn = DriverManager.getConnection(url, "earcos", "earcos");
+            if (connPool == null) {
+                connPool = JdbcConnectionPool.create(DB_URL, DB_USER, DB_PASS);
+            }
+            conn = connPool.getConnection();
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.toString());
-        } catch (ClassNotFoundException cE) {
-            System.out.println("Class Not Found Exception: " + cE.toString());
         }
         return conn;
     }
@@ -27,8 +30,8 @@ public class DBConnection {
                 conn.close();
             }
             conn = null;
-        } catch (SQLException ex) {
-            System.out.println("SQLException " + ex.toString());
+        } catch (SQLException e) {
+            System.out.println("SQLException " + e.toString());
         }
     }
 }
