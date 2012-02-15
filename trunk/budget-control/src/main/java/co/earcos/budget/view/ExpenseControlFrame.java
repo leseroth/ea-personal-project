@@ -4,14 +4,7 @@ import co.earcos.budget.control.MonthData;
 import co.earcos.budget.util.Util;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 /**
  *
@@ -84,6 +77,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         Util.centerFrame(frame);
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(exitItem)) {
             System.exit(0);
@@ -123,6 +117,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 createAndShowGUI();
             }
