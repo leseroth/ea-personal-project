@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,7 +20,7 @@ import javax.swing.*;
  */
 public class DayPanel extends JPanel implements MouseListener {
 
-    private static final String ICON_LOCATION = "resources/";
+    private static final String ICON_LOCATION = "src/main/resources/images/";
     private static final String ICON_FORMAT = ".png";
     private static final String INGRESO = "ingreso";
     private static final String EGRESO = "egreso";
@@ -88,9 +89,10 @@ public class DayPanel extends JPanel implements MouseListener {
     }
 
     private ImageIcon createImageIcon(String path) {
-        URL imgURL = getClass().getResource(ICON_LOCATION + path + ICON_FORMAT);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
+        String filename = ICON_LOCATION + path + ICON_FORMAT;
+        File imageFile = new File(filename);
+        if (imageFile.exists()) {
+            return new ImageIcon(filename);
         } else {
             System.err.println("No se encuentra el archivo: " + ICON_LOCATION + path + ICON_FORMAT);
             return null;

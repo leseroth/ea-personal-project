@@ -27,7 +27,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
     //Data
     private MonthData monthData;
 
-    public ExpenseControlFrame(String title) {
+    private ExpenseControlFrame(String title) {
         super(title);
         controlFrame = this;
 
