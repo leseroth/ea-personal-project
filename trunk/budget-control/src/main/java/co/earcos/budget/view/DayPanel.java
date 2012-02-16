@@ -8,14 +8,11 @@ import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -110,6 +107,7 @@ public class DayPanel extends JPanel implements MouseListener {
     movementFrame = null;
   }
 
+  @Override
   public void mouseClicked(MouseEvent event) {
     if (movementFrame == null) {
       movementFrame = new MovementFrame(dayData, this);
@@ -117,17 +115,21 @@ public class DayPanel extends JPanel implements MouseListener {
     movementFrame.requestFocus();
   }
 
+  @Override
   public void mouseEntered(MouseEvent event) {
     setBackground(new Color(0xe0, 0xe0, 0xe0));
   }
 
+  @Override
   public void mouseExited(MouseEvent event) {
     setBackground(Color.white);
   }
 
+  @Override
   public void mousePressed(MouseEvent e) {
   }
 
+  @Override
   public void mouseReleased(MouseEvent e) {
   }
 }
