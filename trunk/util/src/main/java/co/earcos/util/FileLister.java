@@ -1,4 +1,4 @@
-package co.earcos.util.generic;
+package co.earcos.util;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package co.earcos.util.generic;
+package co.earcos.util;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
