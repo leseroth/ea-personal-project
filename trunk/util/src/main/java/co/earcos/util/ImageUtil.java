@@ -11,10 +11,19 @@ public abstract class ImageUtil {
 
     public static BufferedImage getScaledInstance(BufferedImage originalImage, int targetWidth,
             int targetHeight) {
-        boolean upscaling = originalImage.getHeight() < targetHeight || originalImage.getWidth() < targetWidth;
-        Object hint = upscaling ? RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR : RenderingHints.VALUE_INTERPOLATION_BILINEAR;
-        
-        return getScaledInstance(originalImage, targetWidth, targetHeight, hint, !upscaling);
+
+        BufferedImage scaledInstance;
+        boolean sameSize = originalImage.getHeight() == targetHeight && originalImage.getWidth() == targetWidth;
+
+        if (sameSize) {
+            scaledInstance = originalImage;
+        } else {
+            boolean upscaling = originalImage.getHeight() < targetHeight || originalImage.getWidth() < targetWidth;
+            Object hint = upscaling ? RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR : RenderingHints.VALUE_INTERPOLATION_BILINEAR;
+            scaledInstance = getScaledInstance(originalImage, targetWidth, targetHeight, hint, !upscaling);
+        }
+
+        return scaledInstance;
     }
 
     public static BufferedImage getBufferedImageFromFile(String fileName) throws IOException {
