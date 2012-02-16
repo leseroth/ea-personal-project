@@ -1,4 +1,4 @@
-package co.earcos.util.generic;
+package co.earcos.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

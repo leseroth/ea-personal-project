@@ -1,4 +1,4 @@
-package co.earcos.util.generic;
+package co.earcos.util;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
