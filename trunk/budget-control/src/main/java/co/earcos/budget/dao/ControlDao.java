@@ -4,7 +4,8 @@ import co.earcos.budget.control.DayData;
 import co.earcos.budget.control.MonthData;
 import co.earcos.budget.control.ResumeData;
 import co.earcos.budget.util.Util;
-import co.earcos.budget.util.Util.*;
+import co.earcos.budget.util.Util.Account;
+import co.earcos.budget.util.Util.Concept;
 import co.earcos.budget.view.ExpenseControlFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -289,7 +290,7 @@ public class ControlDao {
         String sql = "select tm.cue,"
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue ) total,"
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue and formatdatetime(mov.fecha,'yyyyMM') = ?) mesactual"
-                + " from (select unique(tm.cuenta) cue from tbl_movimiento tm) tm order by tm.cue";
+                + " from (select distinct(tm.cuenta) cue from tbl_movimiento tm) tm order by tm.cue";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, fixedMonth);
         result = stmt.executeQuery();
