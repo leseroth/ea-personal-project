@@ -7,13 +7,14 @@ import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
 public class Util {
-
+    
     public static final int GAP = 4;
 
     public enum Account {
@@ -76,7 +77,7 @@ public class Util {
     }
 
     public static String getCurrencyValue(double value) {
-        return NumberFormat.getCurrencyInstance().format(value);
+        return NumberFormat.getCurrencyInstance(new Locale("es", "CO")).format(value);
     }
 
     public static String getFormattedDate(Date date) {
