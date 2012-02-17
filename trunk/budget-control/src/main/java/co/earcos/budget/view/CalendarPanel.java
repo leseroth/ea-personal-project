@@ -2,7 +2,7 @@ package co.earcos.budget.view;
 
 import co.earcos.budget.control.DayData;
 import co.earcos.budget.control.MonthData;
-import co.earcos.budget.util.Util;
+import co.earcos.budget.util.Constants;
 import java.awt.GridLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,8 +17,8 @@ public class CalendarPanel extends JPanel {
         daysOfMonth = monthData.getDaysOfMonth();
 
         GridLayout gridLayout = new GridLayout(daysOfMonth.length, 7);
-        gridLayout.setHgap(Util.GAP);
-        gridLayout.setVgap(Util.GAP);
+        gridLayout.setHgap(Constants.GAP);
+        gridLayout.setVgap(Constants.GAP);
         setLayout(gridLayout);
 
         for (int i = 0; i < daysOfMonth.length; i++) {

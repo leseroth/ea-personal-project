@@ -3,7 +3,7 @@ package co.earcos.budget.view;
 import co.earcos.budget.control.ResumeData;
 import co.earcos.budget.dao.ControlDao;
 import co.earcos.budget.dao.DBConnection;
-import co.earcos.budget.util.Util;
+import co.earcos.budget.util.Constants;
 import co.earcos.budget.view.table.CurrencyCellRenderer;
 import co.earcos.budget.view.table.ResumeTableDataModel;
 import java.awt.Color;
@@ -57,7 +57,7 @@ public class CompleteResumePanel extends JPanel {
         JLabel titleLabel = new JLabel(title, JLabel.TRAILING);
         titleLabel.setForeground(new Color(0x33, 0x99, 0x00));
         titleLabel.setAlignmentX(CENTER_ALIGNMENT);
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(3 * Util.GAP, 0, Util.GAP, 0));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(3 * Constants.GAP, 0, Constants.GAP, 0));
 
         box.add(titleLabel);
         box.add(tableScroll);
@@ -94,7 +94,7 @@ public class CompleteResumePanel extends JPanel {
         mtcr.setHorizontalAlignment(SwingConstants.RIGHT);
         table.getColumn("Saldo").setCellRenderer(mtcr);
         table.getColumn("Mes actual").setCellRenderer(mtcr);
-        
+
         return table;
     }
 }

@@ -1,13 +1,10 @@
 package co.earcos.budget.dao;
 
-import co.earcos.budget.util.Util;
 import co.earcos.budget.model.MovementVO;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import co.earcos.budget.util.Constants.Account;
+import co.earcos.budget.util.Constants.Concept;
+import co.earcos.budget.util.Util;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +30,10 @@ public class MovementDao {
                 + "and fecha > (select max(fecha) from tbl_movimiento where concepto = ? and cuenta = ?) "
                 + "order by fecha desc, concepto desc";
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, Util.Concept.INTERESTS.getLabel());
-        stmt.setString(2, Util.Account.INDEACCION.getId());
-        stmt.setString(3, Util.Concept.MOVEMENT.getLabel());
-        stmt.setString(4, Util.Account.INDEACCION.getId());
+        stmt.setString(1, Concept.INTERESTS.getLabel());
+        stmt.setString(2, Account.INDEACCION.getId());
+        stmt.setString(3, Concept.MOVEMENT.getLabel());
+        stmt.setString(4, Account.INDEACCION.getId());
         return listQuery(stmt);
     }
 

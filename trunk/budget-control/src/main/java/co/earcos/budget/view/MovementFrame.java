@@ -4,12 +4,13 @@ import co.earcos.budget.control.DayData;
 import co.earcos.budget.control.FieldValidator;
 import co.earcos.budget.dao.DBConnection;
 import co.earcos.budget.dao.MovementDao;
+import co.earcos.budget.model.MovementVO;
+import co.earcos.budget.util.Constants;
+import co.earcos.budget.util.Constants.Account;
+import co.earcos.budget.util.Constants.Concept;
 import co.earcos.budget.util.Util;
-import co.earcos.budget.util.Util.Account;
-import co.earcos.budget.util.Util.Concept;
 import co.earcos.budget.view.table.CurrencyCellRenderer;
 import co.earcos.budget.view.table.MovementTableDataModel;
-import co.earcos.budget.model.MovementVO;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -159,8 +160,8 @@ public class MovementFrame extends JFrame implements ActionListener {
         saveButton.addActionListener(this);
 
         GridLayout gridLayout = new GridLayout(1, 2);
-        gridLayout.setHgap(Util.GAP);
-        gridLayout.setVgap(Util.GAP);
+        gridLayout.setHgap(Constants.GAP);
+        gridLayout.setVgap(Constants.GAP);
 
         panel.setLayout(gridLayout);
         panel.add(addMovement);
@@ -175,6 +176,7 @@ public class MovementFrame extends JFrame implements ActionListener {
         return !valueField.getText().isEmpty();
     }
 
+  @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(addMovement)) {
             actionAddMovement();

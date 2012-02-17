@@ -99,11 +99,6 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
 
         pack();
         Util.centerFrame(this);
-
-        String advice = monthData.getMovementAdvice();
-        if (advice != null) {
-            JOptionPane.showMessageDialog(this, advice, "Información", JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
     public DateSelectionPanel getDateSelectionPanel() {

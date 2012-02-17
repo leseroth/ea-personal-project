@@ -1,5 +1,6 @@
 package co.earcos.budget.util;
 
+import co.earcos.budget.util.Constants.Account;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -14,52 +15,6 @@ import javax.swing.Spring;
 import javax.swing.SpringLayout;
 
 public class Util {
-    
-    public static final int GAP = 4;
-
-    public enum Account {
-
-        CASH("ef", "Efectivo"), SAVING("ah", "Ahorro"),
-        UNIACCION("un", "Uniaccion"), FIDUCUENTA("fi", "Fiducuenta"), INDEACCION("in", "Indeaccion"),
-        AMEX("cp", "AMEX Pesos"), AMEXUSD("cd", "AMEX Dolares"), CMR("cm", "CMR");
-        private String id;
-        private String label;
-
-        Account(String ids, String labels) {
-            id = ids;
-            label = labels;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-
-        public boolean isCreditCard() {
-            return this == AMEX || this == AMEXUSD || this == CMR;
-        }
-    }
-
-    public enum Concept {
-
-        FOOD("Comida"), TRANSPORT("Transporte"), OTHERS("Otros"), INTERESTS("Intereses"),
-        LOAN_INTEREST("Intereses Prestamo"), LOAN("Prestamo"), MOVEMENT("Movimiento"), SALARY("Sueldo"),
-        SERVICES("Servicios"), RENT("Arriendo"), PAYMENT("Pago"), CELLPHONE("Celular"),
-        CLOTHES("Ropa"), MOVIES("Cine"), UNIVERSITY("Universidad"), TRAVEL("Viaje"),
-        IVA_DEVOLUTION("Devolucion de iva"), GROUPON("Groupon"), XD_APPS("XD Apps");
-        private String label;
-
-        Concept(String labels) {
-            label = labels;
-        }
-
-        public String getLabel() {
-            return label;
-        }
-    }
 
     public static void centerFrame(JFrame frame) {
         frame.pack();
@@ -71,13 +26,13 @@ public class Util {
     }
 
     public static Box.Filler getBoxFiller() {
-        Dimension filler = new Dimension(GAP, GAP);
+        Dimension filler = new Dimension(Constants.GAP, Constants.GAP);
         Box.Filler boxFiller = new Box.Filler(filler, filler, filler);
         return boxFiller;
     }
 
-    public static String getCurrencyValue(double value) {
-        return NumberFormat.getCurrencyInstance(new Locale("es", "CO")).format(value);
+    public static String getCurrencyValue(Account account, double value) {
+        return account.getCurrencyFormat().format(value);
     }
 
     public static String getFormattedDate(Date date) {
