@@ -1,8 +1,8 @@
 package co.earcos.budget.control;
 
-import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.model.MovementVO;
-import java.util.HashMap;
+import co.earcos.budget.util.Constants.Account;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +13,9 @@ public class DayResumeData {
     private Map<Account, Double> newAccountVariation;
 
     public DayResumeData(MonthData monthData) {
-        accountTotal = new HashMap<Account, Double>();
-        regAccountVariation = new HashMap<Account, Double>();
-        newAccountVariation = new HashMap<Account, Double>();
+        accountTotal = new EnumMap<Account, Double>(Account.class);
+        regAccountVariation = new EnumMap<Account, Double>(Account.class);
+        newAccountVariation = new EnumMap<Account, Double>(Account.class);
 
         for (Account account : Account.values()) {
             accountTotal.put(account, monthData.getAccountTotal(account));

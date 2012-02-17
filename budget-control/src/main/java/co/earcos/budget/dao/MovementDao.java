@@ -55,7 +55,7 @@ public class MovementDao {
             if (rowcount != 1) {
                 throw new SQLException("PrimaryKey Error when updating DB!");
             }
-
+            conn.commit();
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -82,6 +82,7 @@ public class MovementDao {
             if (rowcount > 1) {
                 throw new SQLException("PrimaryKey Error when updating DB! (Many objects were deleted!)");
             }
+            conn.commit();
         } finally {
             if (stmt != null) {
                 stmt.close();

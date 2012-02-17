@@ -49,12 +49,14 @@ public class DateSelectionPanel extends JPanel implements ItemListener, ActionLi
         return new int[]{Integer.parseInt((String) yearCombo.getSelectedItem()), monthCombo.getSelectedIndex()};
     }
 
+  @Override
     public void itemStateChanged(ItemEvent event) {
         if (event.getStateChange() == ItemEvent.SELECTED) {
             ExpenseControlFrame.controlFrame.resetCalendarPanel();
         }
     }
 
+  @Override
     public void actionPerformed(ActionEvent event) {
         int month = monthCombo.getSelectedIndex();
         int year = yearCombo.getSelectedIndex();

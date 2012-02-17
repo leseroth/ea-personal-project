@@ -21,7 +21,7 @@ public class FieldValidator extends PlainDocument {
     @Override
     public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
         if (str != null && str.length() != 0) {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             char[] sarray = str.toCharArray();
 
             switch (validation) {
