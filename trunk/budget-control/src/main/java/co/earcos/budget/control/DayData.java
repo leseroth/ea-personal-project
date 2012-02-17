@@ -1,13 +1,8 @@
 package co.earcos.budget.control;
 
-import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.model.MovementVO;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import co.earcos.budget.util.Constants.Account;
+import java.util.*;
 
 public class DayData {
 
@@ -21,7 +16,7 @@ public class DayData {
         this.date = Calendar.getInstance();
         this.date.setTime(date);
 
-        accountDayTotal = new HashMap<Account, Double>();
+        accountDayTotal = new EnumMap<Account, Double>(Account.class);
         movementList = new ArrayList<MovementVO>();
         addedMovementList = new ArrayList<MovementVO>();
         removedMovementList = new ArrayList<MovementVO>();
