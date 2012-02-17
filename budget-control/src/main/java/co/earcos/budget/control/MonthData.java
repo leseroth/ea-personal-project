@@ -2,17 +2,12 @@ package co.earcos.budget.control;
 
 import co.earcos.budget.dao.ControlDao;
 import co.earcos.budget.dao.DBConnection;
-import co.earcos.budget.dao.MovementDao;
-import co.earcos.budget.util.Util.Account;
-import co.earcos.budget.util.Util.Concept;
-import co.earcos.budget.model.MovementVO;
+import co.earcos.budget.util.Constants.Account;
+import co.earcos.budget.util.Constants.Concept;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.EnumMap;
 import java.util.Map;
 
 /**
@@ -21,8 +16,6 @@ import java.util.Map;
  */
 public class MonthData {
 
-    private static final int ADVICE_DAYS = 3;
-    private static final double MAX_VARIATION = 100000.0 / 3;
     private int year;
     private int month;
     private int dayCount;
@@ -31,16 +24,15 @@ public class MonthData {
     private Map<Account, Double> accountInterest;
     private Map<Concept, Double> conceptTotal;
     private DayData[][] daysOfMonth;
-    private String movementAdvice;
 
     public MonthData(int year, int month) {
         this.year = year;
         this.month = month;
 
-        accountTotal = new HashMap<Account, Double>();
-        accountVariation = new HashMap<Account, Double>();
-        accountInterest = new HashMap<Account, Double>();
-        conceptTotal = new HashMap<Concept, Double>();
+        accountTotal = new EnumMap<Account, Double>(Account.class);
+        accountVariation = new EnumMap<Account, Double>(Account.class);
+        accountInterest = new EnumMap<Account, Double>(Account.class);
+        conceptTotal = new EnumMap<Concept, Double>(Concept.class);
 
         Connection conn = DBConnection.getConnection();
         ControlDao controlDao = new ControlDao();
@@ -50,7 +42,6 @@ public class MonthData {
         loadMonthInterest(controlDao, conn);
         controlDao.loadMonthConcept(conn, Concept.LOAN, this);
         controlDao.loadMonthConcept(conn, Concept.XD_APPS, this);
-        calculateAdvice(conn);
         DBConnection.closeConnection();
     }
 
@@ -88,7 +79,6 @@ public class MonthData {
         daysOfMonth = new DayData[(int) weekCount][7];
 
         calendar.setTime(startDate);
-        dayDuration = 0;
         weekLoop:
         for (int i = 0; i < weekCount; i++) {
             dayLoop:
@@ -108,50 +98,6 @@ public class MonthData {
         sb.append(year);
         sb.append(month < 9 ? "0" + (month + 1) : month + 1);
         return sb.toString();
-    }
-
-    private void calculateAdvice(Connection conn) {
-        movementAdvice = null;
-
-        try {
-            Calendar todayCalendar = Calendar.getInstance();
-            todayCalendar.add(Calendar.DATE, -15);
-            List<MovementVO> movementList = (new MovementDao()).loadAdviceInfo(conn);
-
-            int count = 0;
-            double variation = 0d;
-            boolean constantGrow = true;
-            boolean constantDecrease = true;
-            for (MovementVO mvo : movementList) {
-                count++;
-                variation += mvo.getValue();
-                constantGrow = constantGrow && mvo.getValue() > 0;
-                constantDecrease = constantDecrease && mvo.getValue() < 0;
-                if (Math.abs(variation) >= MAX_VARIATION
-                        || (count >= ADVICE_DAYS && (constantDecrease || constantGrow))) {
-                    break;
-                }
-            }
-
-            movementAdvice = "En los ultimos " + count + " dias " + Account.INDEACCION.getLabel();
-            NumberFormat nf = NumberFormat.getCurrencyInstance();
-
-            if (Math.abs(variation) >= MAX_VARIATION) {
-                movementAdvice += " ha variado " + nf.format(variation);
-            } else if (count >= ADVICE_DAYS && constantGrow) {
-                movementAdvice += " ha ganado " + nf.format(variation);
-            } else if (count >= ADVICE_DAYS && constantDecrease) {
-                movementAdvice += " ha perdido " + nf.format(variation);
-            } else {
-                movementAdvice = null;
-            }
-        } catch (SQLException ex) {
-            movementAdvice = "Error al calcular el consejo: " + ex;
-        }
-    }
-
-    public String getMovementAdvice() {
-        return movementAdvice;
     }
 
     public void setAccountTotal(Account account, double total) {

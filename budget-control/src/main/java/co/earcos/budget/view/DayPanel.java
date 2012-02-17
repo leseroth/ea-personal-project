@@ -1,8 +1,8 @@
 package co.earcos.budget.view;
 
 import co.earcos.budget.control.DayData;
+import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.util.Util;
-import co.earcos.budget.util.Util.Account;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
@@ -83,7 +83,7 @@ public class DayPanel extends JPanel implements MouseListener {
       label.setForeground(Color.white);
     } else {
       ImageIcon icon = createImageIcon(value > 0 ? INGRESO + account.getLabel() : EGRESO + account.getLabel());
-      label = new JLabel(Util.getCurrencyValue(value < 0 ? -value : value), icon, JLabel.LEADING);
+      label = new JLabel(Util.getCurrencyValue(account, value < 0 ? -value : value), icon, JLabel.LEADING);
       label.setForeground(value < 0 ? Color.red : Color.black);
       label.setAlignmentX(Component.RIGHT_ALIGNMENT);
     }

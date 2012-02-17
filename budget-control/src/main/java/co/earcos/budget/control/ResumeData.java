@@ -1,6 +1,6 @@
 package co.earcos.budget.control;
 
-import co.earcos.budget.util.Util.Account;
+import co.earcos.budget.util.Constants.Account;
 
 public class ResumeData {
 

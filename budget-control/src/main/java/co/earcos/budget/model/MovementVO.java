@@ -1,6 +1,6 @@
 package co.earcos.budget.model;
 
-import co.earcos.budget.util.Util.Account;
+import co.earcos.budget.util.Constants.Account;
 import java.util.Date;
 
 /**
