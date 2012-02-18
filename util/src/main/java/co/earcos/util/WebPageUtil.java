@@ -5,27 +5,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * This class allows to read a web page to search info in it
+ *
  * @author earcos
  */
-public class WebPageReader {
+public class WebPageUtil {
 
-    private static String WEBPAGE = "http://leseroth.blogspot.com";
+    private static Log log = LogFactory.getLog(WebPageUtil.class);
 
-    public static void main(String... args) {
-        readPage();
-    }
-
-    public static void readPage() {
+    public static List<String> readPage(String webpage) {
         InputStreamReader isReader = null;
         BufferedReader bReader = null;
+        List<String> webPageContent = new ArrayList<String>();
 
         try {
-            URL url = new URL(WEBPAGE);
+            URL url = new URL(webpage);
             isReader = new InputStreamReader(url.openStream());
             bReader = new BufferedReader(isReader);
 
@@ -35,14 +35,14 @@ public class WebPageReader {
                 if (line == null) {
                     break pageReader;
                 } else {
-                    System.out.println(line);
+                    webPageContent.add(line);
                 }
             }
 
         } catch (MalformedURLException ex) {
-            Logger.getLogger(WebPageReader.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("Url not valid: " + webpage, ex);
         } catch (IOException ex) {
-            Logger.getLogger(WebPageReader.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("IO error reading: " + webpage, ex);
         } finally {
             try {
                 if (bReader != null) {
@@ -52,10 +52,10 @@ public class WebPageReader {
                     isReader.close();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(WebPageReader.class.getName()).log(Level.SEVERE, null, ex);
+                log.error("IO error while trying to close the connection", ex);
             }
         }
 
-        System.out.println("***** FIN *****");
+        return webPageContent;
     }
 }

@@ -1,6 +1,8 @@
 package co.earcos.util;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.util.Date;
 
 /**
  *
@@ -8,16 +10,12 @@ import java.text.DecimalFormat;
  */
 public class FormattingTools {
 
-    public static void main(String... args) {
-        FormattingTools ft = new FormattingTools();
-        System.out.println(ft.formatDecimal("0000", 1));
-        System.out.println(ft.formatDecimal("0000", 123 % 10000));
-        System.out.println(ft.formatDecimal("0000", 123456 % 10000));
-        System.out.println(ft.formatDecimal("0000", -1));
-    }
-
-    public String formatDecimal(String format, int number) {
+    public static String formatDecimal(String format, int number) {
         DecimalFormat df = new DecimalFormat(format);
         return df.format(number);
+    }
+
+    public static String getFormattedDate(Date date) {
+        return DateFormat.getDateInstance(DateFormat.MEDIUM).format(date);
     }
 }
