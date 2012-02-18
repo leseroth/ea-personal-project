@@ -6,6 +6,7 @@ import co.earcos.budget.control.MonthData;
 import co.earcos.budget.util.Constants;
 import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.util.Util;
+import co.earcos.util.SwingUtil;
 import java.awt.Color;
 import javax.swing.*;
 
@@ -32,7 +33,7 @@ public class DayResumePanel extends JPanel {
       addEmptyRow();
     }
 
-    Util.makeCompactGrid(this, rowCount, 2, 6, 6, 6, 6);
+    SwingUtil.makeCompactGrid(this, rowCount, 2, 6, 6, 6, 6);
     setAlignmentX(CENTER_ALIGNMENT);
     setAlignmentY(BOTTOM_ALIGNMENT);
     setMaximumSize(getPreferredSize());

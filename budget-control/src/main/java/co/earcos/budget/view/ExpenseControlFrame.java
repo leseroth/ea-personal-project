@@ -1,7 +1,8 @@
 package co.earcos.budget.view;
 
 import co.earcos.budget.control.MonthData;
-import co.earcos.budget.util.Util;
+import co.earcos.budget.util.Constants;
+import co.earcos.util.SwingUtil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -50,8 +51,8 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
 
         Box calendarTabBox = Box.createHorizontalBox();
         calendarTabBox.add(calendarPanel);
-        calendarTabBox.add(Util.getBoxFiller());
-        calendarTabBox.add(Util.getBoxFiller());
+        calendarTabBox.add(SwingUtil.getBoxFiller(Constants.GAP));
+        calendarTabBox.add(SwingUtil.getBoxFiller(Constants.GAP));
         calendarTabBox.add(monthResumePanel);
         JPanel calendarTabPanel = new JPanel();
         calendarTabPanel.add(calendarTabBox);
@@ -74,7 +75,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         JFrame.setDefaultLookAndFeelDecorated(true);
         ExpenseControlFrame frame = new ExpenseControlFrame("Control de Gastos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Util.centerFrame(frame);
+        SwingUtil.centerFrame(frame);
     }
 
     @Override
@@ -98,7 +99,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         completeResumePanel.resetCompleteResumePanel();
 
         pack();
-        Util.centerFrame(this);
+        SwingUtil.centerFrame(this);
     }
 
     public DateSelectionPanel getDateSelectionPanel() {

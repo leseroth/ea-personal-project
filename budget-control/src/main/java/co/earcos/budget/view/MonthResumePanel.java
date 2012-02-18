@@ -5,6 +5,7 @@ import co.earcos.budget.util.Constants;
 import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.util.Constants.Concept;
 import co.earcos.budget.util.Util;
+import co.earcos.util.SwingUtil;
 import java.awt.Color;
 import javax.swing.*;
 
@@ -28,7 +29,7 @@ public class MonthResumePanel extends JPanel {
     addOthersSection(loanTotal, xdAppsTotal);
     addTotalSection(monthData, loanTotal, xdAppsTotal);
 
-    Util.makeCompactGrid(this, rowCount, colCount, 6, 6, Constants.GAP, Constants.GAP);
+    SwingUtil.makeCompactGrid(this, rowCount, colCount, 6, 6, Constants.GAP, Constants.GAP);
     setAlignmentY(BOTTOM_ALIGNMENT);
     setMaximumSize(getPreferredSize());
   }
