@@ -8,9 +8,9 @@ import co.earcos.budget.model.MovementVO;
 import co.earcos.budget.util.Constants;
 import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.util.Constants.Concept;
-import co.earcos.budget.util.Util;
 import co.earcos.budget.view.table.CurrencyCellRenderer;
 import co.earcos.budget.view.table.MovementTableDataModel;
+import co.earcos.util.SwingUtil;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -60,11 +60,11 @@ public class MovementFrame extends JFrame implements ActionListener {
         Box mainBox = Box.createHorizontalBox();
         Box box = Box.createVerticalBox();
         box.add(movementListPanel);
-        box.add(Util.getBoxFiller());
+        box.add(SwingUtil.getBoxFiller(Constants.GAP));
         box.add(movementPanel);
-        box.add(Util.getBoxFiller());
+        box.add(SwingUtil.getBoxFiller(Constants.GAP));
         box.add(controlPanel);
-        box.add(Util.getBoxFiller());
+        box.add(SwingUtil.getBoxFiller(Constants.GAP));
         box.setAlignmentY(BOTTOM_ALIGNMENT);
         mainBox.add(box);
         mainBox.add(dayResumePanel);
@@ -76,7 +76,7 @@ public class MovementFrame extends JFrame implements ActionListener {
         saved = false;
 
         addWindowListener(new MovementWindowAdapter(dayPanel));
-        Util.centerFrame(this);
+        SwingUtil.centerFrame(this);
     }
 
     private JScrollPane initMovementListPanel() {
@@ -114,7 +114,7 @@ public class MovementFrame extends JFrame implements ActionListener {
             accountCombo.addItem(account.getLabel());
         }
 
-        NumberFormat valueDisplayFormat = NumberFormat.getCurrencyInstance();
+        NumberFormat valueDisplayFormat = Constants.DEFAULT_CURRENCY;
         valueDisplayFormat.setMinimumFractionDigits(0);
         valueDisplayFormat.setMaximumFractionDigits(2);
 
@@ -142,7 +142,7 @@ public class MovementFrame extends JFrame implements ActionListener {
         movementPanel.add(new JLabel("Observacion", JLabel.TRAILING));
         movementPanel.add(observationField);
 
-        Util.makeCompactGrid(movementPanel, 5, 2, 6, 6, 6, 6);
+        SwingUtil.makeCompactGrid(movementPanel, 5, 2, 6, 6, 6, 6);
         movementPanel.setAlignmentX(CENTER_ALIGNMENT);
         movementPanel.setMaximumSize(movementPanel.getPreferredSize());
 
@@ -176,7 +176,7 @@ public class MovementFrame extends JFrame implements ActionListener {
         return !valueField.getText().isEmpty();
     }
 
-  @Override
+    @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource().equals(addMovement)) {
             actionAddMovement();

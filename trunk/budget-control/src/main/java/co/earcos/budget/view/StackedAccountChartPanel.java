@@ -4,7 +4,7 @@ import co.earcos.budget.dao.ControlDao;
 import co.earcos.budget.dao.DBConnection;
 import co.earcos.budget.util.Constants;
 import co.earcos.budget.util.Constants.Account;
-import co.earcos.budget.util.Util;
+import co.earcos.util.SwingUtil;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -52,7 +52,7 @@ public class StackedAccountChartPanel extends JPanel implements ActionListener {
     buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
     buttonPanel.setMaximumSize(buttonPanel.getPreferredSize());
     mainBox.add(buttonPanel);
-    mainBox.add(Util.getBoxFiller());
+    mainBox.add(SwingUtil.getBoxFiller(Constants.GAP));
 
     add(mainBox);
   }

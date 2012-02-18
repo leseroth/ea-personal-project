@@ -1,25 +1,30 @@
 package co.earcos.budget.dao;
 
+import co.earcos.budget.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.h2.jdbcx.JdbcConnectionPool;
 
 public class DBConnection {
 
     private static Connection conn;
     private static JdbcConnectionPool connPool;
-    private static final String DB_URL = "jdbc:h2:file:D:/ErikArcos/Dropbox/Docs/db/budget;MODE=Oracle;AUTO_SERVER=TRUE";
-    private static final String DB_USER = "earcos";
-    private static final String DB_PASS = "earcos";
+    private static Log log = LogFactory.getLog(DBConnection.class);
 
     public static Connection getConnection() {
         try {
+            String dbUrl = Util.getProperty("h2.database.url");
+            String dbUser = Util.getProperty("h2.database.user");
+            String dbPass = Util.getProperty("h2.database.pass");
+            
             if (connPool == null) {
-                connPool = JdbcConnectionPool.create(DB_URL, DB_USER, DB_PASS);
+                connPool = JdbcConnectionPool.create(dbUrl, dbUser, dbPass);
             }
             conn = connPool.getConnection();
         } catch (SQLException e) {
-            System.out.println("SQL Exception: " + e.toString());
+            log.error("SQL Exception", e);
         }
         return conn;
     }
@@ -31,7 +36,7 @@ public class DBConnection {
             }
             conn = null;
         } catch (SQLException e) {
-            System.out.println("SQLException " + e.toString());
+            log.error("SQL Exception", e);
         }
     }
 }

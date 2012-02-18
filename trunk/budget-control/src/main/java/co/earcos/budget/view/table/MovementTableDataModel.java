@@ -2,6 +2,7 @@ package co.earcos.budget.view.table;
 
 import co.earcos.budget.model.MovementVO;
 import co.earcos.budget.util.Util;
+import co.earcos.util.FormattingTools;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -49,7 +50,7 @@ public class MovementTableDataModel extends AbstractTableModel {
 
     if (complete) {
       col--;
-      value = Util.getFormattedDate(movementData.getDate());
+      value = FormattingTools.getFormattedDate(movementData.getDate());
     }
 
     switch (col) {
