@@ -11,8 +11,8 @@ import java.util.logging.Logger;
  */
 public class MusicFileSync {
 
-    private static final String FROM_DIR = "H:\\Musica\\Inglés\\";
-    private static final String TO_DIR = "F:\\Musica\\Inglés\\";
+    private static final String FROM_DIR = "/Volumes/EA External HD/Musica/Inglés/";
+    private static final String TO_DIR = "/Volumes/Datos/Musica/Inglés/";
     private TreeMap<String, File> fromMap;
     private TreeMap<String, File> toMap;
 
