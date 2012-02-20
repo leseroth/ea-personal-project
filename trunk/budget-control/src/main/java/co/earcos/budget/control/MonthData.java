@@ -18,7 +18,6 @@ public class MonthData {
 
     private int year;
     private int month;
-    private int dayCount;
     private Map<Account, Double> accountTotal;
     private Map<Account, Double> accountVariation;
     private Map<Account, Double> accountInterest;
@@ -55,15 +54,8 @@ public class MonthData {
 
     private void getCalendarDayData(Connection conn, ControlDao controlDao) {
         Calendar calendar = Calendar.getInstance();
-
-        if (calendar.get(Calendar.YEAR) == year && calendar.get(Calendar.MONTH) == month) {
-            dayCount = calendar.get(Calendar.DATE);
-            calendar.set(year, month, 1, 0, 0, 0);
-        } else {
-            calendar.set(year, month, 1, 0, 0, 0);
-            dayCount = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-        }
-
+        calendar.set(year, month, 1, 0, 0, 0);
+        
         int startDay = calendar.get(Calendar.DAY_OF_WEEK);
         calendar.set(year, month, 2 - startDay);
         Date startDate = calendar.getTime();
@@ -164,9 +156,5 @@ public class MonthData {
 
     public DayData[][] getDaysOfMonth() {
         return daysOfMonth;
-    }
-
-    public int getDayCount() {
-        return dayCount;
     }
 }
