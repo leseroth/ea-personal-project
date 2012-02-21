@@ -49,7 +49,7 @@ class FileTreeModel implements TreeModel {
     if ((children == null) || (index >= children.length)) {
       return null;
     }
-    return (new File((File) parent, children[index])).getName();
+    return new File((File) parent, children[index]);
   }
 
   // Figure out a child's position in its parent node.
