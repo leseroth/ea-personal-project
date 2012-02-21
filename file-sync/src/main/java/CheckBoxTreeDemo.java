@@ -4,10 +4,15 @@
  * Copyright 2002 - 2005 JIDE Software Inc. All rights reserved.
  */
 
-import com.jidesoft.icons.IconsFactory;
 import com.jidesoft.plaf.LookAndFeelFactory;
 import com.jidesoft.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -15,10 +20,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * Demoed Component: {@link com.jidesoft.swing.CheckBoxTree} <br> Required jar files: jide-common.jar, jide-grids.jar
@@ -35,10 +36,12 @@ public class CheckBoxTreeDemo extends AbstractDemo {
     public CheckBoxTreeDemo() {
     }
 
+  @Override
     public String getName() {
         return "CheckBoxTree Demo";
     }
 
+  @Override
     public String getProduct() {
         return PRODUCT_NAME_COMMON;
     }
@@ -59,6 +62,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         final JButton selectAll = new JButton(new AbstractAction("Select All") {
             private static final long serialVersionUID = -5580913906799074020L;
 
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (_tree.getCheckBoxTreeSelectionModel().isDigIn()) {
                     _tree.getCheckBoxTreeSelectionModel().setSelectionPath(new TreePath(_tree.getModel().getRoot()));
@@ -68,6 +72,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         JButton clearAll = new JButton(new AbstractAction("Clear All") {
             private static final long serialVersionUID = -2500587806953898010L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.getCheckBoxTreeSelectionModel().clearSelection();
             }
@@ -77,6 +82,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         digIn.addActionListener(new AbstractAction() {
             private static final long serialVersionUID = 3184279982208173561L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.getCheckBoxTreeSelectionModel().setDigIn(digIn.isSelected());
                 selectAll.setEnabled(digIn.isSelected());
@@ -88,6 +94,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         checkBoxEnabled.addActionListener(new AbstractAction() {
             private static final long serialVersionUID = 7752042312121853308L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.setCheckBoxEnabled(checkBoxEnabled.isSelected());
             }
@@ -98,6 +105,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         clickInCheckBoxOnly.addActionListener(new AbstractAction() {
             private static final long serialVersionUID = 5234198740430142668L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.setClickInCheckBoxOnly(clickInCheckBoxOnly.isSelected());
             }
@@ -108,6 +116,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         treeEnabled.addActionListener(new AbstractAction() {
             private static final long serialVersionUID = -1027526532901305794L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.setEnabled(treeEnabled.isSelected());
             }
@@ -132,6 +141,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
 
         JComboBox comboBox = new JComboBox(selectionModes);
         comboBox.addItemListener(new ItemListener() {
+      @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED && e.getItem() instanceof String) {
                     if ((e.getItem()).equals(CheckBoxTreeDemo.SINGLE_SELECTION)) {
@@ -163,6 +173,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         singleEventMode.addActionListener(new AbstractAction() {
             private static final long serialVersionUID = -8967823755465307651L;
 
+      @Override
             public void actionPerformed(ActionEvent e) {
                 _tree.getCheckBoxTreeSelectionModel().setSingleEventMode(singleEventMode.isSelected());
             }
@@ -187,6 +198,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         return panel;
     }
 
+  @Override
     public Component getDemoPanel() {
         JPanel panel = new JPanel(new BorderLayout(6, 6));
 
@@ -218,6 +230,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
         final JList eventsList = new JList();
         final DefaultListModel eventsModel = new DefaultListModel();
         _tree.getCheckBoxTreeSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
+      @Override
             public void valueChanged(TreeSelectionEvent e) {
                 TreePath[] paths = e.getPaths();
                 for (TreePath path : paths) {
@@ -267,6 +280,7 @@ public class CheckBoxTreeDemo extends AbstractDemo {
 
     static public void main(String[] s) {
         SwingUtilities.invokeLater(new Runnable() {
+      @Override
             public void run() {
                 LookAndFeelFactory.installDefaultLookAndFeelAndExtension();
                 showAsFrame(new CheckBoxTreeDemo());
