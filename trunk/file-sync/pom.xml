@@ -13,7 +13,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.9</junit.version>
-    <jide.version>2.10.2</jide.version>
+    <jide.version>3.3.5</jide.version>
   </properties>
 
   <dependencies>
