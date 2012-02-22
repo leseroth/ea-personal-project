@@ -12,10 +12,10 @@ import javax.swing.tree.TreePath;
 class FileTreeModel implements TreeModel {
   // We specify the root directory when we create the model.
 
-  protected File root;
+  protected FileTree root;
 
   public FileTreeModel(File root) {
-    this.root = root;
+    this.root = new FileTree(root);
   }
 
   // The model knows how to return the root object of the tree
@@ -27,13 +27,13 @@ class FileTreeModel implements TreeModel {
   // Tell JTree whether an object in the tree is a leaf
   @Override
   public boolean isLeaf(Object node) {
-    return ((File) node).isFile();
+    return ((FileTree) node).getFile().isFile();
   }
 
   // Tell JTree how many children a node has
   @Override
   public int getChildCount(Object parent) {
-    String[] children = ((File) parent).list();
+    String[] children = ((FileTree) parent).getFile().list();
     if (children == null) {
       return 0;
     }
@@ -45,21 +45,24 @@ class FileTreeModel implements TreeModel {
   // JTree displays these by calling the File.toString() method.
   @Override
   public Object getChild(Object parent, int index) {
-    String[] children = ((File) parent).list();
+    File parentFile = ((FileTree) parent).getFile();
+    String[] children = parentFile.list();
     if ((children == null) || (index >= children.length)) {
       return null;
     }
-    return new File((File) parent, children[index]);
+    return new FileTree(new File(parentFile, children[index]));
   }
 
   // Figure out a child's position in its parent node.
   @Override
   public int getIndexOfChild(Object parent, Object child) {
-    String[] children = ((File) parent).list();
+    File parentFile = ((FileTree) parent).getFile();
+    File childFile = ((FileTree) child).getFile();
+    String[] children = parentFile.list();
     if (children == null) {
       return -1;
     }
-    String childname = ((File) child).getName();
+    String childname = childFile.getName();
     for (int i = 0; i < children.length; i++) {
       if (childname.equals(children[i])) {
         return i;

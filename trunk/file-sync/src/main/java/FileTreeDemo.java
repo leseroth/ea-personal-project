@@ -2,12 +2,8 @@
 import com.jidesoft.plaf.LookAndFeelFactory;
 import com.jidesoft.swing.CheckBoxTree;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.TreeSelectionModel;
 
 public class FileTreeDemo {
