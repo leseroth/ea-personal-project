@@ -19,7 +19,6 @@ public class MonthData {
     private int year;
     private int month;
     private Map<Account, Double> accountTotal;
-    private Map<Account, Double> accountVariation;
     private Map<Account, Double> accountInterest;
     private Map<Concept, Double> conceptTotal;
     private DayData[][] daysOfMonth;
@@ -29,7 +28,6 @@ public class MonthData {
         this.month = month;
 
         accountTotal = new EnumMap<Account, Double>(Account.class);
-        accountVariation = new EnumMap<Account, Double>(Account.class);
         accountInterest = new EnumMap<Account, Double>(Account.class);
         conceptTotal = new EnumMap<Concept, Double>(Concept.class);
 
@@ -37,7 +35,6 @@ public class MonthData {
         ControlDao controlDao = new ControlDao();
         getCalendarDayData(conn, controlDao);
         controlDao.loadMonthTotal(conn, this);
-        controlDao.loadMonthVariation(conn, this);
         loadMonthInterest(controlDao, conn);
         controlDao.loadMonthConcept(conn, Concept.LOAN, this);
         controlDao.loadMonthConcept(conn, Concept.XD_APPS, this);
@@ -55,7 +52,7 @@ public class MonthData {
     private void getCalendarDayData(Connection conn, ControlDao controlDao) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, 1, 0, 0, 0);
-        
+
         int startDay = calendar.get(Calendar.DAY_OF_WEEK);
         calendar.set(year, month, 2 - startDay);
         Date startDate = calendar.getTime();
@@ -96,10 +93,6 @@ public class MonthData {
         accountTotal.put(account, total);
     }
 
-    public void setAccountVariation(Account account, double variation) {
-        accountVariation.put(account, variation);
-    }
-
     public void setAccountInterest(Account account, double variation) {
         accountInterest.put(account, variation);
     }
@@ -110,11 +103,6 @@ public class MonthData {
 
     public double getAccountTotal(Account account) {
         Double total = accountTotal.get(account);
-        return total == null ? 0.0 : total;
-    }
-
-    public double getAccountVariation(Account account) {
-        Double total = accountVariation.get(account);
         return total == null ? 0.0 : total;
     }
 

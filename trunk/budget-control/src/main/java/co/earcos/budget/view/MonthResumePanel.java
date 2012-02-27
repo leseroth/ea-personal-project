@@ -24,7 +24,6 @@ public class MonthResumePanel extends JPanel {
         double xdAppsTotal = monthData.getConceptTotal(Concept.XD_APPS);
 
         addInterestSection(monthData);
-        addVariationSection(monthData);
         addBalanceSection(monthData);
         addOthersSection(loanTotal, xdAppsTotal);
         addTotalSection(monthData, loanTotal, xdAppsTotal);
@@ -39,17 +38,6 @@ public class MonthResumePanel extends JPanel {
         for (Account account : Account.values()) {
             if (!account.isCreditCard() && account != Account.CASH) {
                 double value = monthData.getAccountInterest(account);
-                addRow(new JLabel(account.getLabel(), JLabel.TRAILING),
-                        initValueLabel(account, value));
-            }
-        }
-    }
-
-    private void addVariationSection(MonthData monthData) {
-        addTitleRow("Variación");
-        for (Account account : Account.values()) {
-            if (!account.isCreditCard()) {
-                double value = monthData.getAccountVariation(account);
                 addRow(new JLabel(account.getLabel(), JLabel.TRAILING),
                         initValueLabel(account, value));
             }
