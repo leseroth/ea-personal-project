@@ -55,32 +55,6 @@ public class ControlDao {
         }
     }
 
-    public void loadMonthVariation(Connection conn, MonthData monthData) {
-
-        try {
-            String sql = "select mov.cuenta, sum(valor) variacion from TBL_MOVIMIENTO mov "
-                    + "where formatdatetime(mov.fecha,'yyyyMM') = ? group by mov.cuenta";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, monthData.getFixedMonth());
-            ResultSet result = stmt.executeQuery();
-
-            while (result.next()) {
-                String account = result.getString("cuenta");
-                monthData.setAccountVariation(Util.getAccountById(account), result.getDouble("variacion"));
-            }
-
-            if (result != null) {
-                result.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
-
-        } catch (SQLException e) {
-            log.error("SQL Exception", e);
-        }
-    }
-
     public void loadMonthConcept(Connection conn, Concept concept, MonthData monthData) {
         try {
             String sql = "select sum(valor) total from TBL_MOVIMIENTO mov "
