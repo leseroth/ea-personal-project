@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -13,6 +14,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <junit.version>4.9</junit.version>
     <jmimemagic.version>0.1.2</jmimemagic.version>
+    <commons-codec.version>1.5</commons-codec.version>
+    <bouncycastle.version>1.46</bouncycastle.version>
   </properties>
 
   <dependencies>
@@ -26,6 +29,16 @@
       <groupId>jmimemagic</groupId>
       <artifactId>jmimemagic</artifactId>
       <version>${jmimemagic.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons-codec.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk16</artifactId>
+      <version>${bouncycastle.version}</version>
     </dependency>
   </dependencies>
 
