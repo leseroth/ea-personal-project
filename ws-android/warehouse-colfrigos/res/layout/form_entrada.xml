@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dip"
+    android:weightSum="0" >
+
+    <TextView
+        android:id="@+id/label_entrada_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/label_op_entrada"
+        android:layout_margin="10dip" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip" >
+
+        <TextView
+            android:id="@+id/f_in_label_client"
+            android:gravity="left"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:text="@string/label_client" />
+
+        <EditText
+            android:id="@+id/f_in_textbox_client"
+            android:layout_width="250dip"
+            android:layout_height="wrap_content"
+            android:ems="25"
+            android:inputType="text" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip" >
+
+        <TextView
+            android:id="@+id/f_in_label_weight"
+            android:gravity="left"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:text="@string/label_weight" />
+
+        <EditText
+            android:id="@+id/f_in_textbox_weight"
+            android:layout_width="250dip"
+            android:layout_height="wrap_content"
+            android:ems="25"
+            android:inputType="text" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/f_in_button_confirm"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:text="@string/label_confirm" />
+
+        <Button
+            android:id="@+id/f_in_button_back"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:text="@string/label_back" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,8 +3,8 @@
     android:layout_height="fill_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="150dip"
-    android:paddingRight="150dip" >
+    android:paddingLeft="130dip"
+    android:paddingRight="130dip" >
 
     <Button
         android:id="@+id/sm_button_op_entrada"

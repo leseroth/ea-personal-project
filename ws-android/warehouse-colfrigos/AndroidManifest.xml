@@ -25,6 +25,18 @@
         <activity
             android:name=".WarehouseActivity"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".FormInActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".FormOutActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".FormInOutActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".FormEstivaActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
