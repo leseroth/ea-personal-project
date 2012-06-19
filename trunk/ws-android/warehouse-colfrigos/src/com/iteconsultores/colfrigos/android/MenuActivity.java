@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.iteconsultores.colfrigos.control.Constants.MenuOption;
+import com.iteconsultores.colfrigos.control.Control;
+
 public class MenuActivity extends Activity implements OnClickListener {
 
 	private Button buttonOpEntrada;
@@ -34,13 +37,24 @@ public class MenuActivity extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View view) {
+		Intent selectedIntent = null;
 
 		if (view.equals(buttonExit)) {
-			finish();
-		} else {
-			Intent intentMenu = new Intent(this, WarehouseActivity.class);
-			startActivity(intentMenu);
+			selectedIntent = new Intent(this, LoginActivity.class);
+			this.finish();
+		} else if (view.equals(buttonOpEntrada)) {
+			selectedIntent = new Intent(this, FormInActivity.class);
+		} else if (view.equals(buttonOpSalida)) {
+			Control.setSelectedOption(MenuOption.Salida);
+			selectedIntent = new Intent(this, FormOutActivity.class);
+		} else if (view.equals(buttonOpEntradaSalida)) {
+			selectedIntent = new Intent(this, FormInOutActivity.class);
+		} else if (view.equals(buttonOpEstiva)) {
+			selectedIntent = new Intent(this, FormEstivaActivity.class);
+		}
+
+		if (selectedIntent != null) {
+			startActivity(selectedIntent);
 		}
 	}
-
 }

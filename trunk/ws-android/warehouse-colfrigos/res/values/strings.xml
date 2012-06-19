@@ -6,11 +6,23 @@
     <string name="label_username">Usuario:</string>
 
     <string name="label_password">Password:</string>
+    
+    <string name="label_client">Cliente:</string>
+
+    <string name="label_weight">Peso:</string>
+    
+    <string name="label_position">Posicion:</string>
+
+    <string name="label_basket">Canastas:</string>
+       
+    <string name="label_box">Cajas:</string>
 
     <string name="label_login">Login</string>
 
     <string name="label_exit">Salir</string>
 
+    <string name="label_screen_application">Colfrigos</string>
+    
     <string name="label_op_entrada">Entrada</string>
 
     <string name="label_op_salida">Salida</string>
@@ -28,5 +40,7 @@
     <string name="label_pos_entrada">Posición a Ingresar</string>
       
     <string name="label_confirm">Confirmar</string>
+    
+    <string name="label_back">Regresar</string>
 
 </resources>
