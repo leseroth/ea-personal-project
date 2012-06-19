@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">warehouse-colfrigos-1.0.1-SNAPSHOT</string>
+
+    <string name="label_username">Usuario:</string>
+
+    <string name="label_password">Password:</string>
+
+    <string name="label_login">Login</string>
+
+    <string name="label_exit">Salir</string>
+
+    <string name="label_op_entrada">Entrada</string>
+
+    <string name="label_op_salida">Salida</string>
+
+    <string name="label_op_entrada_salida">Entrada - Salida</string>
+
+    <string name="label_op_estiva">Calculo de Estiva</string>
+
+    <string name="label_pos_disponible">Posición Disponible</string>
+
+    <string name="label_pos_ocupada">Posición Ocupada</string>
+      
+    <string name="label_pos_salida">Posición a Desocupar</string>
+      
+    <string name="label_pos_entrada">Posición a Ingresar</string>
+      
+    <string name="label_confirm">Confirmar</string>
+
+</resources>
