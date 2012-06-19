@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="150dip"
+    android:paddingRight="150dip" >
+
+    <Button
+        android:id="@+id/sm_button_op_entrada"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_entrada" />
+
+    <Button
+        android:id="@+id/sm_button_op_salida"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_salida" />
+
+    <Button
+        android:id="@+id/sm_button_op_entrada_salida"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_entrada_salida" />
+
+    <Button
+        android:id="@+id/sm_button_op_estiva"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_estiva" />
+
+    <Button
+        android:id="@+id/sm_button_menu_exit"
+        android:layout_width="250dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dip"
+        android:text="@string/label_exit" />
+
+</LinearLayout>
