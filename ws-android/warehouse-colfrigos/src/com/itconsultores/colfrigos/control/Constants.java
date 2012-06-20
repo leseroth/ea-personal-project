@@ -1,6 +1,6 @@
-package com.iteconsultores.colfrigos.control;
+package com.itconsultores.colfrigos.control;
 
-import com.iteconsultores.colfrigos.android.R;
+import com.itconsultores.colfrigos.android.R;
 
 public class Constants {
 	public enum MenuOption {

@@ -1,4 +1,4 @@
-package com.iteconsultores.colfrigos.android;
+package com.itconsultores.colfrigos.android;
 
 import android.app.Activity;
 import android.content.Intent;
