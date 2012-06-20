@@ -1,6 +1,6 @@
-package com.iteconsultores.colfrigos.control;
+package com.itconsultores.colfrigos.control;
 
-import com.iteconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Constants.MenuOption;
 
 public class Control {
 	private static MenuOption selectedOption;

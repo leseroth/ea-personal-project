@@ -1,4 +1,4 @@
-package com.iteconsultores.colfrigos.android;
+package com.itconsultores.colfrigos.android;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.iteconsultores.colfrigos.control.Constants.MenuOption;
-import com.iteconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Control;
 
 public class WarehouseActivity extends Activity implements OnClickListener {
 
