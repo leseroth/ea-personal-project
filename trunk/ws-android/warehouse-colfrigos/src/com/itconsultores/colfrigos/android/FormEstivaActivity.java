@@ -1,45 +1,72 @@
 package com.itconsultores.colfrigos.android;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 
-public class FormEstivaActivity extends Activity implements OnClickListener {
+public class FormEstivaActivity extends AbstractForm {
 
 	private Button buttonOk;
 	private Button buttonBack;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.form_estiva);
+	private TextView basketTextView;
+	private TextView boxTextView;
 
-		buttonOk = (Button) findViewById(R.id.f_est_button_confirm);
-		buttonBack = (Button) findViewById(R.id.f_est_button_back);
-		buttonOk.setOnClickListener(this);
-		buttonBack.setOnClickListener(this);
+	public FormEstivaActivity() {
+		super(R.layout.form_estiva);
+	}
+
+	@Override
+	protected void initForm() {
+		// Botones
+		buttonOk = initButton(R.id.f_est_button_confirm);
+		buttonBack = initButton(R.id.f_est_button_back);
+
+		// Formulario
+		basketTextView = (TextView) findViewById(R.id.f_est_textbox_basket);
+		boxTextView = (TextView) findViewById(R.id.f_est_textbox_box);
 	}
 
 	@Override
 	public void onClick(View view) {
-		Intent selectedIntent = null;
-
 		if (view.equals(buttonBack)) {
-			selectedIntent = new Intent(this, MenuActivity.class);
+			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
-			Control.setSelectedOption(MenuOption.Entrada);
-			selectedIntent = new Intent(this, FormInActivity.class);
-		}
+			if (isInfoComplete()) {
+				final int total = Integer.parseInt(basketTextView.getText()
+						.toString())
+						* Integer.parseInt(boxTextView.getText().toString());
 
-		if (selectedIntent != null) {
-			startActivity(selectedIntent);
+				AlertDialog.Builder confirmWeight = new AlertDialog.Builder(
+						this);
+				confirmWeight.setIcon(android.R.drawable.ic_dialog_alert);
+				confirmWeight.setTitle(R.string.label_screen_application);
+				confirmWeight.setMessage("Total: " + total + ", "
+						+ res.getString(R.string.label_ask_entrada));
+				confirmWeight.setPositiveButton(R.string.label_yes,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Control.setSelectedOption(MenuOption.Entrada);
+								Control.calculatedWeight = total;
+								goTo(FormInActivity.class);
+							}
+						});
+				confirmWeight.setNegativeButton(R.string.label_no, null);
+				confirmWeight.show();
+			}
 		}
 	}
 
+	@Override
+	protected boolean isInfoComplete() {
+		return basketTextView.getText().toString().length() != 0
+				&& boxTextView.getText().toString().length() != 0;
+	}
 }
