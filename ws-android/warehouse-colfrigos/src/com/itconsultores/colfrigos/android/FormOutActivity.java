@@ -1,29 +1,25 @@
 package com.itconsultores.colfrigos.android;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 
-public class FormOutActivity extends Activity implements OnClickListener {
+public class FormOutActivity extends AbstractForm {
 
 	private Button buttonOk;
 	private Button buttonBack;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.form_salida);
+	public FormOutActivity() {
+		super(R.layout.form_salida);
+	}
 
-		buttonOk = (Button) findViewById(R.id.f_out_button_confirm);
-		buttonBack = (Button) findViewById(R.id.f_out_button_back);
-		buttonOk.setOnClickListener(this);
-		buttonBack.setOnClickListener(this);
+	@Override
+	protected void initForm() {
+		buttonOk = initButton(R.id.f_out_button_confirm);
+		buttonBack = initButton(R.id.f_out_button_back);
 	}
 
 	@Override
@@ -42,4 +38,9 @@ public class FormOutActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	@Override
+	protected boolean isInfoComplete() {
+		// TODO Validar Informacion
+		return true;
+	}
 }

@@ -20,6 +20,12 @@
     <string name="label_login">Login</string>
 
     <string name="label_exit">Salir</string>
+    
+    <string name="label_yes">Si</string>
+    
+    <string name="label_no">No</string>
+    
+    <string name="label_ask_entrada">Ir a la pantalla de entrada?</string>
 
     <string name="label_screen_application">Colfrigos</string>
     

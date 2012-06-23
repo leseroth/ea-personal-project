@@ -25,13 +25,13 @@
             android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:text="@string/label_basket" />
-
+
         <EditText
             android:id="@+id/f_est_textbox_basket"
             android:layout_width="250dip"
             android:layout_height="wrap_content"
             android:ems="25"
-            android:inputType="text" >
+            android:inputType="number" >
 
             <requestFocus />
         </EditText>
@@ -48,13 +48,14 @@
             android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:text="@string/label_box" />
-
+
         <EditText
             android:id="@+id/f_est_textbox_box"
             android:layout_width="250dip"
             android:layout_height="wrap_content"
             android:ems="25"
-            android:inputType="text" >
+            android:inputType="number" >
+
         </EditText>
     </LinearLayout>
 

@@ -26,15 +26,11 @@
             android:layout_height="wrap_content"
             android:text="@string/label_client" />
 
-        <EditText
-            android:id="@+id/f_in_textbox_client"
-            android:layout_width="250dip"
+        <Spinner
+            android:id="@+id/f_in_spinner_client"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:ems="25"
-            android:inputType="text" >
-
-            <requestFocus />
-        </EditText>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -48,13 +44,14 @@
             android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:text="@string/label_weight" />
-
+
         <EditText
             android:id="@+id/f_in_textbox_weight"
             android:layout_width="250dip"
             android:layout_height="wrap_content"
             android:ems="25"
-            android:inputType="text" >
+            android:inputType="number" >
+
         </EditText>
     </LinearLayout>
 

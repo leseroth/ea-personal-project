@@ -1,29 +1,54 @@
 package com.itconsultores.colfrigos.android;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 
-public class FormInActivity extends Activity implements OnClickListener {
+public class FormInActivity extends AbstractForm {
 
 	private Button buttonOk;
 	private Button buttonBack;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.form_entrada);
+	private TextView weightTextView;
+	private Spinner clientSpinner;
 
-		buttonOk = (Button) findViewById(R.id.f_in_button_confirm);
-		buttonBack = (Button) findViewById(R.id.f_in_button_back);
-		buttonOk.setOnClickListener(this);
-		buttonBack.setOnClickListener(this);
+	private String[] clientArray;
+
+	public FormInActivity() {
+		super(R.layout.form_entrada);
+	}
+
+	@Override
+	protected void initForm() {
+		// Botones
+		buttonOk = initButton(R.id.f_in_button_confirm);
+		buttonBack = initButton(R.id.f_in_button_back);
+
+		// Peso
+		weightTextView = (TextView) findViewById(R.id.f_in_textbox_weight);
+		if (Control.calculatedWeight == -1) {
+			weightTextView.setText("");
+		} else {
+			weightTextView.setText("" + Control.calculatedWeight);
+			Control.calculatedWeight = -1;
+		}
+
+		// Clientes
+		clientSpinner = (Spinner) findViewById(R.id.f_in_spinner_client);
+		clientArray = new String[] { "Selecione Cliente", "Cliente 1",
+				"Cliente A", "Cliente Z" };
+
+		ArrayAdapter<String> clientArrayAdapter = new ArrayAdapter<String>(
+				this, android.R.layout.simple_spinner_item, clientArray);
+		clientArrayAdapter
+				.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+		clientSpinner.setAdapter(clientArrayAdapter);
 	}
 
 	@Override
@@ -42,4 +67,9 @@ public class FormInActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	@Override
+	protected boolean isInfoComplete() {
+		// TODO Validar Informacion
+		return true;
+	}
 }
