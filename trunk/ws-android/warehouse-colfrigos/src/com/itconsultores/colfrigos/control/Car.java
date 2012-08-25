@@ -1,22 +1,28 @@
 package com.itconsultores.colfrigos.control;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Car {
 
 	private String name;
-	private ArrayList<Position> positions;
+	private List<Position> sideA;
+	private List<Position> sideB;
+
+	public Car(String name, List<Position> sideA, List<Position> sideB) {
+		this.name = name;
+		this.sideA = sideA;
+		this.sideB = sideB;
+	}
+
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public List<Position> getSideA() {
+		return sideA;
 	}
-	public ArrayList<Position> getPositions() {
-		return positions;
+
+	public List<Position> getSideB() {
+		return sideB;
 	}
-	public void setPositions(ArrayList<Position> positions) {
-		this.positions = positions;
-	}
-	
 }

@@ -1,11 +1,20 @@
 package com.itconsultores.colfrigos.android;
 
+import java.util.List;
+
+import org.w3c.dom.Document;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.itconsultores.colfrigos.control.Car;
+import com.itconsultores.colfrigos.control.Constants;
+import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.XMLParser;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -31,6 +40,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 
 		if (view.equals(buttonLogin)) {
+			String xml = XMLParser.getXMLFromUrl(Constants.URL); // getting XML
+			Document doc = XMLParser.XMLfromString(xml);
+
+			// Cargar el lsitado de carros
+			List<Car> carList = Control.getCarList(doc);
+
 			Intent intentMenu = new Intent(this, MenuActivity.class);
 			startActivity(intentMenu);
 		} else if (view.equals(buttonExit)) {
