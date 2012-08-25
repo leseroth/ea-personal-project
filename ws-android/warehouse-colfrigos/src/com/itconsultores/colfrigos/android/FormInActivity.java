@@ -1,13 +1,9 @@
 package com.itconsultores.colfrigos.android;
 
-import java.util.ArrayList;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,13 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.itconsultores.colfrigos.control.Car;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
-import com.itconsultores.colfrigos.control.Movement;
-import com.itconsultores.colfrigos.control.MovementDetail;
-import com.itconsultores.colfrigos.control.Position;
 import com.itconsultores.colfrigos.control.XMLParser;
 
 public class FormInActivity extends AbstractForm {
@@ -87,48 +78,20 @@ public class FormInActivity extends AbstractForm {
 		clientArrayAdapter
 				.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		clientSpinner.setAdapter(clientArrayAdapter);
+
+		String xml = XMLParser.getXMLFromUrl(URL); // getting XML
+		System.err.println(xml);
+		Toast.makeText(FormInActivity.this, xml, Toast.LENGTH_LONG).show();
+		Document doc = XMLParser.XMLfromString(xml);
+
+		NodeList nodes = doc.getElementsByTagName("posiciones");
+		for (int i = 0; i < nodes.getLength(); i++) {
+			Element e = (Element) nodes.item(i);
+			Toast.makeText(FormInActivity.this, XMLParser.getValue(e, "lado"),
+					Toast.LENGTH_LONG).show();
+		}
 		
-		
-		  XMLParser parser = new XMLParser();
-	        String xml = parser.getXmlFromUrl(URL); // getting XML
-	        if (xml==null){
-	          	Toast.makeText(this, "Problema al cargar el archivo", Toast.LENGTH_SHORT);
-	        }
-	        Document doc = parser.getDomElement(xml); // getting DOM element
-	        if (doc==null){
-	          	Toast.makeText(this, "Problema en el archivo", Toast.LENGTH_SHORT);
-	        }
-	        NodeList nodePositions = doc.getElementsByTagName(KEY_POSITIONS);
-	        Car myCar=new Car();
-	        //Only One car
-	        Element elementPosition=(Element) nodePositions.item(0);
-	        
-	       if (elementPosition.hasChildNodes()){
-	        NodeList otherNodes=elementPosition.getChildNodes();
-	        
-	       String content1= otherNodes.item(0).getTextContent();
-	       String content2= otherNodes.item(1).getTextContent();
-	       String content3= otherNodes.item(2).getTextContent();
-	       String content4= otherNodes.item(3).getTextContent();
-	       String content5= otherNodes.item(4).getTextContent();
-	       
-	       if(otherNodes.item(3).hasChildNodes()){
-	    	   
-	    	   NodeList carNodes=otherNodes.item(3).getChildNodes();
-		       String content6= carNodes.item(0).getTextContent();
-		       String content7= carNodes.item(1).getTextContent();
-
-
-	    	   
-	    	   
-	       }
-
-	        
-	        NodeList nodeCars= elementPosition.getElementsByTagName(KEY_CAR);
-	        Element elementCar=(Element) nodeCars.item(1);
-	        String scar= elementCar.toString();
-	       }
-//	        myCar.setName(elementCar.getAttribute(KEY_NAME));
+		//	        myCar.setName(elementCar.getAttribute(KEY_NAME));
 //	        
 //	        ArrayList<Position> positions=new ArrayList<Position>();
 //	        NodeList positionNodes=  elementCar.getChildNodes();
@@ -171,8 +134,6 @@ public class FormInActivity extends AbstractForm {
 //
 //	        
 //	        Toast.makeText(this, "Car:" +myCar.getName()+" Positions:"+myCar.getPositions().size()+" Movements:"+movements.size(), Toast.LENGTH_SHORT);
-
-		
 	}
 
 	@Override
