@@ -35,8 +35,8 @@ public class FormInActivity extends AbstractForm {
 
 	private String[] clientArray;
 
- //   static final String URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
-    static final String URL ="http://api.androidhive.info/pizza/?format=xml";
+    static final String URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
+  //  static final String URL ="http://api.androidhive.info/pizza/?format=xml";
     // XML node keys
     static final String KEY_POSITIONS = "posiciones";
     static final String KEY_CAR = "carro ";
