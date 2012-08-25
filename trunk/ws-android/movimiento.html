@@ -1,0 +1,54 @@
+ï»¿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <posiciones>
+        <!--Se entrega el estado de todas las posiciones en cada mensaje-->
+        <carro name="1">
+          <posicion>
+            <lado>A</lado>  
+            <coordenada>11</coordenada>
+            <estado>I</estado>        
+          </posicion>
+        </carro>
+    </posiciones>
+    <movimientos>
+        <!--Si hay mas de un movimiento, el tablet de forzar la ejecuci—n de todos los movimientos-->
+        <movimiento>
+            <id>7</id>
+            <tipo>entrada</tipo>
+            <carro>1A</carro>
+            <coordenada>721</coordenada>
+            <etiqueta>LL2r657</etiqueta>
+            <peso>675</peso>
+            <!--Si balanceo es igual a NO, el tablet debe mostrar un mesaje indicando que no se puede mover el carro-->
+            <balanceo>SI</balanceo>
+        </movimiento>
+        <movimiento>
+            <id>4</id>
+            <tipo>salida</tipo>
+            <carro>7</carro>
+            <coordenada>4K</coordenada>
+            <etiqueta>LL234657</etiqueta>
+            <peso>675</peso>
+            <balanceo>NO</balanceo>
+        </movimiento>
+        <movimiento>
+            <tipo>salida-entrada</tipo>
+               <sale>
+                   <id>9</id>
+                   <carro>4</carro>
+                   <coordenada>4K</coordenada>
+                   <etiqueta>LL234657</etiqueta>
+                   <peso>675</peso>
+                   <balanceo>NO</balanceo>
+               </sale>
+               <entra>
+                   <id>10</id>
+                   <carro>2</carro>
+                   <coordenada>8J</coordenada>
+                   <etiqueta>L789657</etiqueta>
+                   <peso>675</peso>
+                   <balanceo>SI</balanceo>
+               </entra> 
+        </movimiento>
+    </movimientos>
+</root>
