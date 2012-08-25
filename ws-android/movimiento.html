@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
     <posiciones>
-        <!--Se entrega el estado de todas las posiciones en cada mensaje-->
         <carro name="1">
           <posicion>
             <lado>A</lado>  
             <coordenada>11</coordenada>
             <estado>I</estado>        
           </posicion>
+          <posicion>
+            <lado>A</lado>  
+            <coordenada>12</coordenada>
+            <estado>O</estado>        
+          </posicion>
+          <posicion>
+            <lado>B</lado>  
+            <coordenada>11</coordenada>
+            <estado>V</estado>        
+          </posicion>
+        </carro>
+        <carro name="2">
+          <posicion>
+            <lado>A</lado>  
+            <coordenada>31</coordenada>
+            <estado>V</estado>        
+          </posicion>
+          <posicion>
+            <lado>A</lado>  
+            <coordenada>32</coordenada>
+            <estado>O</estado>        
+          </posicion>
+          <posicion>
+            <lado>B</lado>  
+            <coordenada>31</coordenada>
+            <estado>I</estado>        
+          </posicion>
         </carro>
     </posiciones>
     <movimientos>
-        <!--Si hay mas de un movimiento, el tablet de forzar la ejecuci? de todos los movimientos-->
         <movimiento>
             <id>7</id>
             <tipo>entrada</tipo>
@@ -19,7 +44,6 @@
             <coordenada>721</coordenada>
             <etiqueta>LL2r657</etiqueta>
             <peso>675</peso>
-            <!--Si balanceo es igual a NO, el tablet debe mostrar un mesaje indicando que no se puede mover el carro-->
             <balanceo>SI</balanceo>
         </movimiento>
         <movimiento>
