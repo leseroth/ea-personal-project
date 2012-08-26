@@ -41,8 +41,7 @@ public class FormInActivity extends AbstractForm {
 
 		// Clientes
 		clientSpinner = (Spinner) findViewById(R.id.f_in_spinner_client);
-		clientArray = new String[] { "Selecione Cliente", "Cliente 1",
-				"Cliente A", "Cliente Z" };
+		clientArray = Control.getClientArray();
 
 		ArrayAdapter<String> clientArrayAdapter = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, clientArray);
