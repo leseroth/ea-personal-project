@@ -1,21 +1,60 @@
 package com.itconsultores.colfrigos.control;
 
+
 public class MovementDetail {
 
-	private String subtype;
+	enum MovementDetailType {
+		IN("entrada"), OUT("salida");
+
+		private String movementDetailType;
+
+		private MovementDetailType(String c) {
+			movementDetailType = c;
+		}
+
+		public String getMovementDetailType() {
+			return movementDetailType;
+		}
+	}
 	private String id;
 	private String car;
 	private String coordinate;
 	private String label;
 	private String weight;
 	private String rolling;
+	private MovementDetailType movementDetailType;
 
-	public String getSubtype() {
-		return subtype;
+	public MovementDetail(String id, String car, String coordinate,
+			String label, String weight, String rolling,
+			String movementDetailType)throws IllegalArgumentException {
+		if (id == null || car == null || coordinate==null || label == null 
+				|| weight==null || rolling == null || movementDetailType==null) {
+			throw new IllegalArgumentException();
+		}				
+		movementDetailTypeLoop: for (MovementDetailType md : MovementDetailType.values()) {
+			if (md.getMovementDetailType().equals(movementDetailType)) {
+				this.movementDetailType = md;
+				break movementDetailTypeLoop;
+			}
+		}
+		if (this.movementDetailType == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		this.id = id;
+		this.car = car;
+		this.coordinate = coordinate;
+		this.label = label;
+		this.weight = weight;
+		this.rolling = rolling;
 	}
 
-	public void setSubtype(String subtype) {
-		this.subtype = subtype;
+	public MovementDetailType getMovementDetailType() {
+		return movementDetailType;
+	}
+
+	public void setMovementDetailType(MovementDetailType movementDetailType) {
+		this.movementDetailType = movementDetailType;
 	}
 
 	public String getId() {
