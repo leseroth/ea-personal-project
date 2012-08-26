@@ -228,6 +228,16 @@ public class Control {
 		return;
 	}
 
+	public static String[] getClientArray() {
+		String[] clientArray = new String[clientList.size() + 1];
+		clientArray[0] = "Seleccione el cliente";
+		int index = 0;
+		for (Client client : clientList) {
+			clientArray[++index] = client.getName();
+		}
+		return clientArray;
+	}
+
 	public static int getCalculatedWeight() {
 		return calculatedWeight;
 	}
