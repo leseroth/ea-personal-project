@@ -13,9 +13,9 @@ public class Position {
 			throw new IllegalArgumentException();
 		}
 
-		row = Integer.parseInt(coordinate.substring(0, 1));
+		row = Integer.parseInt(coordinate.substring(0, 1)) - 1;
 		side = coordinate.substring(1, 2);
-		column = Integer.parseInt(coordinate.substring(2, coordinate.length()));
+		column = Integer.parseInt(coordinate.substring(2, coordinate.length())) - 1;
 
 		if ("S".equals(status) || "N".equals(status)) {
 			full = "S".equals(status);

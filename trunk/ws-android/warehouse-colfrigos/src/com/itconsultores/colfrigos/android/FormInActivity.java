@@ -32,11 +32,11 @@ public class FormInActivity extends AbstractForm {
 
 		// Peso
 		weightTextView = (TextView) findViewById(R.id.f_in_textbox_weight);
-		if (Control.calculatedWeight == -1) {
+		if (Control.getCalculatedWeight() == -1) {
 			weightTextView.setText("");
 		} else {
-			weightTextView.setText("" + Control.calculatedWeight);
-			Control.calculatedWeight = -1;
+			weightTextView.setText("" + Control.getCalculatedWeight());
+			Control.resetCalculatedWeight();
 		}
 
 		// Clientes
@@ -50,7 +50,7 @@ public class FormInActivity extends AbstractForm {
 				.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		clientSpinner.setAdapter(clientArrayAdapter);
 
-		}
+	}
 
 	@Override
 	public void onClick(View view) {

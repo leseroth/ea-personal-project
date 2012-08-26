@@ -93,4 +93,22 @@ public class Constants {
 			return type;
 		}
 	}
+
+	public enum StatusColor {
+		INEXISTENT("#000000"), //
+		FREE("#9bd69b"), //
+		FILLED("#b9cde5"), //
+		IN("#ff6600"), //
+		OUT("#ffff00");
+
+		private String color;
+
+		private StatusColor(String c) {
+			color = c;
+		}
+
+		public String getColor() {
+			return color;
+		}
+	}
 }

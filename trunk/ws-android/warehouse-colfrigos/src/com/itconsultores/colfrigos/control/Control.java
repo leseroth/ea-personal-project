@@ -44,7 +44,12 @@ import com.itconsultores.colfrigos.dto.Position;
 public class Control {
 
 	private static MenuOption selectedOption;
-	public static int calculatedWeight = -1;
+	private static int calculatedWeight = -1;
+	private static String user;
+	private static String pass;
+	private static List<Car> carList;
+	private static List<Movement> movementList;
+	private static List<Client> clientList;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;
@@ -54,20 +59,31 @@ public class Control {
 		selectedOption = selected;
 	}
 
-	public static String doLogin(Document doc, String user, String pass) {
+	public static void resetCalculatedWeight() {
+		calculatedWeight = -1;
+	}
+
+	public static void setCalculatedWeight(int basket, int box) {
+		calculatedWeight = basket * box;
+	}
+
+	public static String doLogin(Document doc, String username, String password) {
+		user = username;
+		pass = password;
+
 		Log.i(LOG_DEBUG, "Realizando login");
 		NodeList error = doc.getElementsByTagName(KEY_ERROR);
 		return XMLParser.getElementValue(error.item(0));
 	}
 
 	@SuppressWarnings("unused")
-	public static List<Car> getCarList(Document doc) {
-		List<Car> carList = new ArrayList<Car>();
+	public static void setCarList(Document doc) {
+		carList = new ArrayList<Car>();
 
 		Node positions = doc.getElementsByTagName(KEY_POSITIONS).item(0);
 		if (positions == null) {
 			Log.i(LOG_DEBUG, "No hay posiciones para leer");
-			return carList;
+			return;
 		}
 
 		NodeList NodeListCar = ((Element) positions)
@@ -109,17 +125,17 @@ public class Control {
 			carList.add(car);
 		}
 
-		return carList;
+		return;
 	}
 
 	@SuppressWarnings("unused")
-	public static List<Movement> getMovementsList(Document doc) {
-		List<Movement> movementList = new ArrayList<Movement>();
+	public static void setMovementsList(Document doc) {
+		movementList = new ArrayList<Movement>();
 
 		Node movements = doc.getElementsByTagName(KEY_MOVEMENTS).item(0);
 		if (movements == null) {
 			Log.i(LOG_DEBUG, "No hay movimientos para leer");
-			return movementList;
+			return;
 		}
 
 		NodeList NodeListMovement = ((Element) movements)
@@ -163,7 +179,7 @@ public class Control {
 			movementList.add(movement);
 		}
 
-		return movementList;
+		return;
 	}
 
 	private static MovementDetail initMovementDetail(String id, Node node,
@@ -184,13 +200,13 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static List<Client> getClientList(Document doc) {
-		List<Client> clientList = new ArrayList<Client>();
+	public static void setClientList(Document doc) {
+		clientList = new ArrayList<Client>();
 
 		Node clients = doc.getElementsByTagName(KEY_CLIENTS).item(0);
 		if (clients == null) {
 			Log.i(LOG_DEBUG, "No hay clientes para leer");
-			return clientList;
+			return;
 		}
 
 		NodeList NodeListClient = ((Element) clients)
@@ -209,6 +225,30 @@ public class Control {
 			clientList.add(client);
 		}
 
+		return;
+	}
+
+	public static int getCalculatedWeight() {
+		return calculatedWeight;
+	}
+
+	public static String getUser() {
+		return user;
+	}
+
+	public static String getPass() {
+		return pass;
+	}
+
+	public static List<Car> getCarList() {
+		return carList;
+	}
+
+	public static List<Movement> getMovementList() {
+		return movementList;
+	}
+
+	public static List<Client> getClientList() {
 		return clientList;
 	}
 }

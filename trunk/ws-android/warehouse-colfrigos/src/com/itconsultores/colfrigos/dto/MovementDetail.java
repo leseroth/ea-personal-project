@@ -21,9 +21,9 @@ public class MovementDetail {
 			throw new IllegalArgumentException();
 		}
 
-		row = Integer.parseInt(coordinate.substring(0, 1));
+		row = Integer.parseInt(coordinate.substring(0, 1)) - 1;
 		carSide = coordinate.substring(1, 2);
-		column = Integer.parseInt(coordinate.substring(2, coordinate.length()));
+		column = Integer.parseInt(coordinate.substring(2, coordinate.length())) - 1;
 		carNumber = Integer.parseInt(car);
 		this.label = label;
 		this.weight = Double.parseDouble(weight);
