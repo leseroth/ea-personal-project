@@ -2,6 +2,10 @@ package com.itconsultores.colfrigos.control;
 
 import static com.itconsultores.colfrigos.control.Constants.KEY_CAR;
 import static com.itconsultores.colfrigos.control.Constants.KEY_CAR_NAME;
+import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT;
+import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENTS;
+import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_ID;
+import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_NAME;
 import static com.itconsultores.colfrigos.control.Constants.KEY_COORDINATE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_ID;
 import static com.itconsultores.colfrigos.control.Constants.KEY_IN;
@@ -31,6 +35,7 @@ import android.util.Log;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.dto.Car;
+import com.itconsultores.colfrigos.dto.Client;
 import com.itconsultores.colfrigos.dto.Movement;
 import com.itconsultores.colfrigos.dto.MovementDetail;
 import com.itconsultores.colfrigos.dto.Position;
@@ -50,9 +55,14 @@ public class Control {
 
 	@SuppressWarnings("unused")
 	public static List<Car> getCarList(Document doc) {
-		List<Car> carSet = new ArrayList<Car>();
+		List<Car> carList = new ArrayList<Car>();
 
 		Node positions = doc.getElementsByTagName(KEY_POSITIONS).item(0);
+		if (positions == null) {
+			Log.i(LOG_DEBUG, "No hay posiciones para leer");
+			return carList;
+		}
+
 		NodeList NodeListCar = ((Element) positions)
 				.getElementsByTagName(KEY_CAR);
 
@@ -89,10 +99,10 @@ public class Control {
 			}
 
 			Car car = new Car(carNumber, sideA, sideB);
-			carSet.add(car);
+			carList.add(car);
 		}
 
-		return carSet;
+		return carList;
 	}
 
 	@SuppressWarnings("unused")
@@ -100,6 +110,11 @@ public class Control {
 		List<Movement> movementList = new ArrayList<Movement>();
 
 		Node movements = doc.getElementsByTagName(KEY_MOVEMENTS).item(0);
+		if (movements == null) {
+			Log.i(LOG_DEBUG, "No hay movimientos para leer");
+			return movementList;
+		}
+
 		NodeList NodeListMovement = ((Element) movements)
 				.getElementsByTagName(KEY_MOVEMENT);
 
@@ -159,5 +174,34 @@ public class Control {
 				mvType);
 
 		return md;
+	}
+
+	@SuppressWarnings("unused")
+	public static List<Client> getClientList(Document doc) {
+		List<Client> clientList = new ArrayList<Client>();
+
+		Node clients = doc.getElementsByTagName(KEY_CLIENTS).item(0);
+		if (clients == null) {
+			Log.i(LOG_DEBUG, "No hay clientes para leer");
+			return clientList;
+		}
+
+		NodeList NodeListClient = ((Element) clients)
+				.getElementsByTagName(KEY_CLIENT);
+
+		clientLoop: for (int i = 0; i < NodeListClient.getLength(); i++) {
+			Node clientNode = NodeListClient.item(i);
+
+			String id = XMLParser.getValue((Element) clientNode, KEY_CLIENT_ID);
+			String name = XMLParser.getValue((Element) clientNode,
+					KEY_CLIENT_NAME);
+
+			Log.i(LOG_DEBUG, "Loaded Client " + id + " " + name);
+
+			Client client = new Client(id, name);
+			clientList.add(client);
+		}
+
+		return clientList;
 	}
 }
