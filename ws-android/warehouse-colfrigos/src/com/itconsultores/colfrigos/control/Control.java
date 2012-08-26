@@ -7,6 +7,7 @@ import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENTS;
 import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_ID;
 import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_NAME;
 import static com.itconsultores.colfrigos.control.Constants.KEY_COORDINATE;
+import static com.itconsultores.colfrigos.control.Constants.KEY_ERROR;
 import static com.itconsultores.colfrigos.control.Constants.KEY_ID;
 import static com.itconsultores.colfrigos.control.Constants.KEY_IN;
 import static com.itconsultores.colfrigos.control.Constants.KEY_LABEL;
@@ -51,6 +52,12 @@ public class Control {
 
 	public static void setSelectedOption(MenuOption selected) {
 		selectedOption = selected;
+	}
+
+	public static String doLogin(Document doc, String user, String pass) {
+		Log.i(LOG_DEBUG, "Realizando login");
+		NodeList error = doc.getElementsByTagName(KEY_ERROR);
+		return XMLParser.getElementValue(error.item(0));
 	}
 
 	@SuppressWarnings("unused")
