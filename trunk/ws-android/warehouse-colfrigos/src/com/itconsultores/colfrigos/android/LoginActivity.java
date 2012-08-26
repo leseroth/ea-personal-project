@@ -7,15 +7,16 @@ import org.w3c.dom.Document;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.itconsultores.colfrigos.control.Car;
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
-import com.itconsultores.colfrigos.control.Movement;
 import com.itconsultores.colfrigos.control.XMLParser;
+import com.itconsultores.colfrigos.dto.Car;
+import com.itconsultores.colfrigos.dto.Movement;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -45,11 +46,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 			Document doc = XMLParser.XMLfromString(xml);
 
 			// Cargar el lsitado de carros
-			//List<Car> carList = Control.getCarList(doc);
+			List<Car> carList = Control.getCarList(doc);
 			// Cargar el lsitado de movimientos
 			List<Movement> movementList = Control.getMovementsList(doc);
-			
-			System.out.println(movementList.size());
+
+			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
+			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
 
 			Intent intentMenu = new Intent(this, MenuActivity.class);
 			startActivity(intentMenu);

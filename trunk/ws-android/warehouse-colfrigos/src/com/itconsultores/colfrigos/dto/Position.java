@@ -1,20 +1,8 @@
-package com.itconsultores.colfrigos.control;
+package com.itconsultores.colfrigos.dto;
+
+import com.itconsultores.colfrigos.control.Constants.PositionStatus;
 
 public class Position {
-
-	enum PositionStatus {
-		NON_EXISTENT("I"), FULL("O"), EMPTY("V");
-
-		private String code;
-
-		private PositionStatus(String c) {
-			code = c;
-		}
-
-		public String getCode() {
-			return code;
-		}
-	}
 
 	private int row;
 	private int column;
