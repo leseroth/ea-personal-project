@@ -14,6 +14,7 @@ import android.widget.Button;
 import com.itconsultores.colfrigos.control.Car;
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Movement;
 import com.itconsultores.colfrigos.control.XMLParser;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -44,7 +45,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 			Document doc = XMLParser.XMLfromString(xml);
 
 			// Cargar el lsitado de carros
-			List<Car> carList = Control.getCarList(doc);
+			//List<Car> carList = Control.getCarList(doc);
+			// Cargar el lsitado de movimientos
+			List<Movement> movementList = Control.getMovementsList(doc);
+			
+			System.out.println(movementList.size());
 
 			Intent intentMenu = new Intent(this, MenuActivity.class);
 			startActivity(intentMenu);
