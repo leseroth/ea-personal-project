@@ -1,6 +1,6 @@
 package com.itconsultores.colfrigos.android;
 
-import java.util.List;
+import java.util.TreeSet;
 
 import org.w3c.dom.Document;
 
@@ -46,12 +46,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 			Document doc = XMLParser.XMLfromString(xml);
 
 			// Cargar el lsitado de carros
-			List<Car> carList = Control.getCarList(doc);
+			TreeSet<Car> carSet = Control.getCarSet(doc);
 			// Cargar el lsitado de movimientos
-			List<Movement> movementList = Control.getMovementsList(doc);
+			TreeSet<Movement> movementSet = Control.getMovementsSet(doc);
 
-			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
-			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
+			Log.i(Constants.LOG_DEBUG, "Car Total " + carSet.size());
+			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementSet.size());
 
 			Intent intentMenu = new Intent(this, MenuActivity.class);
 			startActivity(intentMenu);

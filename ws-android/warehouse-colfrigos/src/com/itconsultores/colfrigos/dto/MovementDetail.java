@@ -1,8 +1,12 @@
 package com.itconsultores.colfrigos.dto;
 
+import java.io.Serializable;
+
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 
-public class MovementDetail {
+public class MovementDetail implements Serializable, Comparable<MovementDetail> {
+
+	private static final long serialVersionUID = -2887249023386364494L;
 
 	private int id;
 	private int row;
@@ -74,5 +78,17 @@ public class MovementDetail {
 
 	public MovementType getMovementType() {
 		return movementType;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		return other == null ? false : other instanceof MovementDetail ? //
+		id == ((MovementDetail) other).id
+				: false;
+	}
+
+	@Override
+	public int compareTo(MovementDetail other) {
+		return other == null ? -1 : id - other.getId();
 	}
 }

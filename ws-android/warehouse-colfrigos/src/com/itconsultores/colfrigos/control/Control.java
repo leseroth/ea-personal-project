@@ -18,8 +18,7 @@ import static com.itconsultores.colfrigos.control.Constants.KEY_TYPE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_WEIGHT;
 import static com.itconsultores.colfrigos.control.Constants.LOG_DEBUG;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeSet;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -49,24 +48,24 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static List<Car> getCarList(Document doc) {
-		List<Car> carList = new ArrayList<Car>();
+	public static TreeSet<Car> getCarSet(Document doc) {
+		TreeSet<Car> carSet = new TreeSet<Car>();
 
 		Node positions = doc.getElementsByTagName(KEY_POSITIONS).item(0);
-		NodeList nodeListCar = ((Element) positions)
+		NodeList NodeListCar = ((Element) positions)
 				.getElementsByTagName(KEY_CAR);
 
-		carLoop: for (int i = 0; i < nodeListCar.getLength(); i++) {
-			Node carNode = nodeListCar.item(i);
+		carLoop: for (int i = 0; i < NodeListCar.getLength(); i++) {
+			Node carNode = NodeListCar.item(i);
 
 			String number = ((Element) carNode).getAttribute(KEY_CAR_NAME);
-			List<Position> sideA = new ArrayList<Position>();
-			List<Position> sideB = new ArrayList<Position>();
+			TreeSet<Position> sideA = new TreeSet<Position>();
+			TreeSet<Position> sideB = new TreeSet<Position>();
 
-			NodeList nodeListPosition = ((Element) carNode)
+			NodeList NodeListPosition = ((Element) carNode)
 					.getElementsByTagName(KEY_POSITION);
-			positionLoop: for (int j = 0; j < nodeListPosition.getLength(); j++) {
-				Node positionNode = nodeListPosition.item(j);
+			positionLoop: for (int j = 0; j < NodeListPosition.getLength(); j++) {
+				Node positionNode = NodeListPosition.item(j);
 
 				String coordinate = XMLParser.getValue((Element) positionNode,
 						KEY_COORDINATE);
@@ -79,67 +78,80 @@ public class Control {
 						+ coordinate + " " + status);
 
 				Position position = new Position(coordinate, status);
+				boolean newPosition;
 				if ("A".equals(side)) {
-					sideA.add(position);
+					newPosition = sideA.add(position);
 				} else if ("B".equals(side)) {
-					sideB.add(position);
+					newPosition = sideB.add(position);
 				} else {
-					// Solo puede ser carro A o B
+					Log.i(LOG_DEBUG, "El lado solo puede ser A o B : " + side);
+					throw new IllegalArgumentException();
+				}
+
+				if (!newPosition) {
+					Log.i(LOG_DEBUG, "Posición duplicada");
 					throw new IllegalArgumentException();
 				}
 			}
 
 			Car car = new Car(number, sideA, sideB);
-			carList.add(car);
+			carSet.add(car);
 		}
 
-		return carList;
+		return carSet;
 	}
 
 	@SuppressWarnings("unused")
-	public static List<Movement> getMovementsList(Document doc) {
-		List<Movement> movementList = new ArrayList<Movement>();
+	public static TreeSet<Movement> getMovementsSet(Document doc) {
+		TreeSet<Movement> movementSet = new TreeSet<Movement>();
 
 		Node movements = doc.getElementsByTagName(KEY_MOVEMENTS).item(0);
-		NodeList nodeListMovement = ((Element) movements)
+		NodeList NodeListMovement = ((Element) movements)
 				.getElementsByTagName(KEY_MOVEMENT);
 
-		movementLoop: for (int i = 0; i < nodeListMovement.getLength(); i++) {
-			Node movementNode = nodeListMovement.item(i);
+		movementLoop: for (int i = 0; i < NodeListMovement.getLength(); i++) {
+			Node movementNode = NodeListMovement.item(i);
 
 			String rawMovementType = XMLParser.getValue((Element) movementNode,
 					KEY_TYPE);
 			MovementType movementType = MovementType.getType(rawMovementType);
 
-			ArrayList<MovementDetail> movementDetails = new ArrayList<MovementDetail>();
+			TreeSet<MovementDetail> movementDetails = new TreeSet<MovementDetail>();
 
+			boolean newMovement = true;
 			switch (movementType) {
 			case IN_OUT:
 				Node inMovement = ((Element) movementNode)
 						.getElementsByTagName(KEY_IN).item(0);
 				MovementDetail imdt = initMovementDetail(inMovement,
 						MovementType.IN);
-				movementDetails.add(imdt);
+				newMovement = newMovement && movementDetails.add(imdt);
 
 				Node outMovement = ((Element) movementNode)
 						.getElementsByTagName(KEY_OUT).item(0);
 				MovementDetail omdt = initMovementDetail(outMovement,
 						MovementType.OUT);
-				movementDetails.add(omdt);
+				newMovement = newMovement && movementDetails.add(omdt);
 				break;
 			case IN:
 			case OUT:
 				MovementDetail movementDetail = initMovementDetail(
 						movementNode, movementType);
-				movementDetails.add(movementDetail);
+				newMovement = newMovement
+						&& movementDetails.add(movementDetail);
 				break;
 			}
 
+			if (!newMovement) {
+				Log.i(LOG_DEBUG, "Movimiento duplicada");
+				throw new IllegalArgumentException();
+			}
+
 			Movement movement = new Movement(movementType, movementDetails);
-			movementList.add(movement);
+			movementSet.add(movement);
 		}
 
-		return movementList;
+		return movementSet;
 	}
 
 	private static MovementDetail initMovementDetail(Node node,
