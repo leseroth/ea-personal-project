@@ -1,8 +1,12 @@
 package com.itconsultores.colfrigos.dto;
 
+import java.io.Serializable;
+
 import com.itconsultores.colfrigos.control.Constants.PositionStatus;
 
-public class Position {
+public class Position implements Serializable, Comparable<Position> {
+
+	private static final long serialVersionUID = -8370711078180239596L;
 
 	private int row;
 	private int column;
@@ -39,5 +43,22 @@ public class Position {
 
 	public PositionStatus getPositionStatus() {
 		return positionStatus;
+	}
+
+	private int getCoordinate() {
+		return row * 100 + column;
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		return other == null ? false : //
+				other instanceof Position ? //
+				getCoordinate() == ((Position) other).getCoordinate()
+						: false;
+	}
+
+	@Override
+	public int compareTo(Position other) {
+		return other == null ? -1 : getCoordinate() - other.getCoordinate();
 	}
 }

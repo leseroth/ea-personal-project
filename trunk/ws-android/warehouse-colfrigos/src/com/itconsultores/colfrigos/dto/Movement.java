@@ -1,16 +1,19 @@
 package com.itconsultores.colfrigos.dto;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.TreeSet;
 
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 
-public class Movement {
+public class Movement implements Serializable, Comparable<Movement> {
+
+	private static final long serialVersionUID = 1672409454486753561L;
 
 	private MovementType movementType;
-	private ArrayList<MovementDetail> movementDetails;
+	private TreeSet<MovementDetail> movementDetails;
 
 	public Movement(MovementType movementType,
-			ArrayList<MovementDetail> movementDetails)
+			TreeSet<MovementDetail> movementDetails)
 			throws IllegalArgumentException {
 		if (movementType == null || movementDetails == null
 				|| movementDetails.isEmpty()) {
@@ -25,7 +28,14 @@ public class Movement {
 		return movementType;
 	}
 
-	public ArrayList<MovementDetail> getMovementDetails() {
+	public TreeSet<MovementDetail> getMovementDetails() {
 		return movementDetails;
+	}
+
+	@Override
+	public int compareTo(Movement other) {
+		return other == null ? -1 : //
+				getMovementDetails().first().getId()
+						- other.getMovementDetails().first().getId();
 	}
 }
