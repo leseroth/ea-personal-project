@@ -13,7 +13,7 @@ public class Constants {
 	protected static final String KEY_STATUS = "o";
 
 	protected static final String KEY_MOVEMENTS = "movimientos";
-	protected static final String KEY_MOVEMENT = "mo";
+	protected static final String KEY_MOVEMENT = "movimiento";
 	protected static final String KEY_ID = "id";
 	protected static final String KEY_TYPE = "ti";
 	protected static final String KEY_MOVEMENT_CAR = "ca";
@@ -23,6 +23,11 @@ public class Constants {
 
 	protected static final String KEY_IN = "entra";
 	protected static final String KEY_OUT = "sale";
+
+	protected static final String KEY_CLIENTS = "clientes";
+	protected static final String KEY_CLIENT = "cli";
+	protected static final String KEY_CLIENT_ID = "id";
+	protected static final String KEY_CLIENT_NAME = "na";
 
 	public static final String LOG_DEBUG = "debug info";
 

@@ -16,6 +16,7 @@ import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.XMLParser;
 import com.itconsultores.colfrigos.dto.Car;
+import com.itconsultores.colfrigos.dto.Client;
 import com.itconsultores.colfrigos.dto.Movement;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -45,13 +46,16 @@ public class LoginActivity extends Activity implements OnClickListener {
 			String xml = XMLParser.getXMLFromUrl(Constants.URL); // getting XML
 			Document doc = XMLParser.XMLfromString(xml);
 
-			// Cargar el lsitado de carros
+			// Cargar el listado de carros
 			List<Car> carSet = Control.getCarList(doc);
-			// Cargar el lsitado de movimientos
+			// Cargar el listado de movimientos
 			List<Movement> movementList = Control.getMovementsList(doc);
+			// Cargar el listado de clientes
+			List<Client> clientList = Control.getClientList(doc);
 
 			Log.i(Constants.LOG_DEBUG, "Car Total " + carSet.size());
 			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
+			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
 
 			Intent intentMenu = new Intent(this, MenuActivity.class);
 			startActivity(intentMenu);
