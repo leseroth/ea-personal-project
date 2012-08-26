@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
@@ -28,10 +29,8 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	private Button buttonBack;
 	private int maxRow = 0;
 	private int maxColumn = 0;
-	private int row = 0;
-	private int column = 0;
 	private LinearLayout warehouseGrid;
-	private transient Movement movement;
+	private transient Movement currentMovement;
 	private String carSide;
 	private int carNumber;
 
@@ -94,12 +93,12 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	}
 
 	private void setWarehouseStatus() {
-		movement = Control.getMovementList().get(0);
+		currentMovement = Control.getMovementList().get(0);
 		List<Position> side = null;
 
 		Car car = null;
-		carNumber = movement.getMovementDetails().get(0).getCarNumber();
-		carSide = movement.getMovementDetails().get(0).getCarSide();
+		carNumber = currentMovement.getMovementDetails().get(0).getCarNumber();
+		carSide = currentMovement.getMovementDetails().get(0).getCarSide();
 
 		carLoop: for (Car c : Control.getCarList()) {
 			if (c.getNumber() == carNumber) {
@@ -129,29 +128,38 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View view) {
+		Intent selectedIntent = null;
 
 		// Acciones al confirmar
 		if (view.equals(buttonConfirm)) {
-			TextView text = (TextView) ((LinearLayout) warehouseGrid
-					.getChildAt(row)).getChildAt(column);
-			text.setBackgroundColor(Color.GRAY);
+			MenuOption nextMenu = Control.confirmMovement(currentMovement);
 
-			column++;
-			if (column >= maxColumn) {
-				column = 0;
-				row++;
-				if (row >= maxRow) {
-					row = 0;
-				}
+			if (nextMenu == null) {
+				selectedIntent = new Intent(this, MenuActivity.class);
+			} else {
+				Toast toast = Toast.makeText(this, "Todavia quedan "
+						+ Control.getMovementList().size() + " Movimientos",
+						Toast.LENGTH_LONG);
+				toast.show();
+
+				Control.setSelectedOption(nextMenu);
+				selectedIntent = new Intent(this, WarehouseActivity.class);
 			}
-
 		}
 
-		// Regresar
-		// TODO Verificar si esta bien que se regrese hasta el menu
 		else if (view.equals(buttonBack)) {
-			Intent menuIntent = new Intent(this, MenuActivity.class);
-			startActivity(menuIntent);
+			if (Control.getMovementList().isEmpty()) {
+				selectedIntent = new Intent(this, MenuActivity.class);
+			} else {
+				Toast toast = Toast.makeText(this,
+						"Debe finalizar el movimeinto actual",
+						Toast.LENGTH_LONG);
+				toast.show();
+			}
+		}
+
+		if (selectedIntent != null) {
+			startActivity(selectedIntent);
 		}
 	}
 }

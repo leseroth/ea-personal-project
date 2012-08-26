@@ -70,16 +70,24 @@ public class Constants {
 	}
 
 	public enum MovementType {
-		IN_OUT("SE"), IN("E"), OUT("S");
+		IN_OUT("SE", MenuOption.Salida), //
+		IN("E", MenuOption.Entrada), //
+		OUT("S", MenuOption.Salida);
 
 		private String movementType;
+		private MenuOption menuOption;
 
-		private MovementType(String c) {
+		private MovementType(String c, MenuOption me) {
 			movementType = c;
+			menuOption = me;
 		}
 
 		public String getMovementType() {
 			return movementType;
+		}
+
+		public MenuOption getMenuOption() {
+			return menuOption;
 		}
 
 		public static MovementType getType(String str) {
