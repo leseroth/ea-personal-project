@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 		MenuOption selected = Control.getSelectedOption();
 		TextView titleText = (TextView) findViewById(R.id.label_warehouse_title);
+		TextView subTitleText = (TextView) findViewById(R.id.label_warehouse_subtitle);
 		TextView inText = (TextView) findViewById(R.id.warehouseInText);
 		TextView inColor = (TextView) findViewById(R.id.warehouseInColor);
 		TextView outText = (TextView) findViewById(R.id.warehouseOutText);
@@ -84,6 +86,11 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 
 		setWarehouseStatus();
+		
+		//Ajustar subtitulo
+		Resources res = getResources();
+		subTitleText.setText(res.getString(R.string.label_car)+" "+carNumber+" - "
+		+res.getString(R.string.label_side)+" "+carSide);
 	}
 
 	private void setWarehouseStatus() {
