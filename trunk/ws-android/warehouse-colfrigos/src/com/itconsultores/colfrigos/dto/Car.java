@@ -1,17 +1,17 @@
 package com.itconsultores.colfrigos.dto;
 
 import java.io.Serializable;
-import java.util.TreeSet;
+import java.util.List;
 
 public class Car implements Serializable, Comparable<Car> {
 
 	private static final long serialVersionUID = 1226259901086750247L;
 
 	private int number;
-	private TreeSet<Position> sideA;
-	private TreeSet<Position> sideB;
+	private List<Position> sideA;
+	private List<Position> sideB;
 
-	public Car(String number, TreeSet<Position> sideA, TreeSet<Position> sideB)
+	public Car(String number, List<Position> sideA, List<Position> sideB)
 			throws NumberFormatException {
 		this.number = Integer.parseInt(number);
 		this.sideA = sideA;
@@ -22,11 +22,11 @@ public class Car implements Serializable, Comparable<Car> {
 		return number;
 	}
 
-	public TreeSet<Position> getSideA() {
+	public List<Position> getSideA() {
 		return sideA;
 	}
 
-	public TreeSet<Position> getSideB() {
+	public List<Position> getSideB() {
 		return sideB;
 	}
 

@@ -1,5 +1,6 @@
 package com.itconsultores.colfrigos.android;
 
+import java.util.List;
 import java.util.TreeSet;
 
 import org.w3c.dom.Document;
@@ -46,7 +47,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 			Document doc = XMLParser.XMLfromString(xml);
 
 			// Cargar el lsitado de carros
-			TreeSet<Car> carSet = Control.getCarSet(doc);
+			List<Car> carSet = Control.getCarList(doc);
 			// Cargar el lsitado de movimientos
 			TreeSet<Movement> movementSet = Control.getMovementsSet(doc);
 
