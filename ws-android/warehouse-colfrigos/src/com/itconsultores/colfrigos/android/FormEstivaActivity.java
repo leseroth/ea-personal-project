@@ -38,15 +38,16 @@ public class FormEstivaActivity extends AbstractForm {
 			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
 			if (isInfoComplete()) {
-				final int total = Integer.parseInt(basketTextView.getText()
-						.toString())
-						* Integer.parseInt(boxTextView.getText().toString());
+				Control.setCalculatedWeight(
+						Integer.parseInt(basketTextView.getText().toString()),
+						Integer.parseInt(boxTextView.getText().toString()));
 
 				AlertDialog.Builder confirmWeight = new AlertDialog.Builder(
 						this);
 				confirmWeight.setIcon(android.R.drawable.ic_dialog_alert);
 				confirmWeight.setTitle(R.string.label_screen_application);
-				confirmWeight.setMessage("Total: " + total + ", "
+				confirmWeight.setMessage("Total: "
+						+ Control.getCalculatedWeight() + ", "
 						+ res.getString(R.string.label_ask_entrada));
 				confirmWeight.setPositiveButton(R.string.label_yes,
 						new DialogInterface.OnClickListener() {
@@ -54,7 +55,6 @@ public class FormEstivaActivity extends AbstractForm {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								Control.setSelectedOption(MenuOption.Entrada);
-								Control.calculatedWeight = total;
 								goTo(FormInActivity.class);
 							}
 						});

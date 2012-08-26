@@ -1,17 +1,25 @@
 package com.itconsultores.colfrigos.android;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Constants.StatusColor;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.dto.Car;
+import com.itconsultores.colfrigos.dto.Movement;
+import com.itconsultores.colfrigos.dto.Position;
 
 public class WarehouseActivity extends Activity implements OnClickListener {
 
@@ -22,6 +30,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	private int row = 0;
 	private int column = 0;
 	private LinearLayout warehouseGrid;
+	private transient Movement movement;
+	private String carSide;
+	private int carNumber;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +81,43 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		} else {
 			outText.setVisibility(TextView.INVISIBLE);
 			outColor.setVisibility(TextView.INVISIBLE);
+		}
+
+		setWarehouseStatus();
+	}
+
+	private void setWarehouseStatus() {
+		movement = Control.getMovementList().get(0);
+		List<Position> side = null;
+
+		Car car = null;
+		carNumber = movement.getMovementDetails().get(0).getCarNumber();
+		carSide = movement.getMovementDetails().get(0).getCarSide();
+
+		carLoop: for (Car c : Control.getCarList()) {
+			if (c.getNumber() == carNumber) {
+				car = c;
+				break carLoop;
+			}
+		}
+
+		if ("A".equals(carSide)) {
+			side = car.getSideA();
+		} else if ("B".equals(carSide)) {
+			side = car.getSideB();
+		}
+
+		for (Position p : side) {
+			TextView text = (TextView) ((LinearLayout) warehouseGrid
+					.getChildAt(p.getRow())).getChildAt(p.getColumn());
+			if (text == null) {
+				Log.e(Constants.LOG_DEBUG, "No se encuentra " + p.getRow()
+						+ " " + p.getColumn());
+			} else {
+				text.setBackgroundColor(p.isFull() ? Color
+						.parseColor(StatusColor.FILLED.getColor()) : Color
+						.parseColor(StatusColor.FREE.getColor()));
+			}
 		}
 	}
 

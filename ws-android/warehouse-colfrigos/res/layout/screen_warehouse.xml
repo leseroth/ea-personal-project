@@ -20,7 +20,7 @@
         android:id="@+id/warehouse_grid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -37,31 +37,13 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
                 style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -79,87 +61,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
                 style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:weightSum="0" >
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_free"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -195,7 +97,55 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -233,19 +183,13 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -263,7 +207,13 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -281,19 +231,67 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -325,37 +323,13 @@
             android:weightSum="0" >
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
                 style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_out"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -373,7 +347,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -385,13 +359,382 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="0" >
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="0" >
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -453,25 +796,19 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_in"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -495,13 +832,68 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -533,25 +925,13 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                style="@style/style_warehouse_cell_filled"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" />
-
-            <TextView
                 style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -575,7 +955,13 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -593,13 +979,68 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -609,6 +1050,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -631,19 +1073,31 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -679,7 +1133,32 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />
@@ -697,7 +1176,19 @@
                 android:layout_weight="1" />
 
             <TextView
-                style="@style/style_warehouse_cell_filled"
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/style_warehouse_cell_free"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1" />

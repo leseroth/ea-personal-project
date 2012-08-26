@@ -1,7 +1,5 @@
 package com.itconsultores.colfrigos.android;
 
-import java.util.List;
-
 import org.w3c.dom.Document;
 
 import android.app.Activity;
@@ -17,9 +15,6 @@ import android.widget.Toast;
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.XMLParser;
-import com.itconsultores.colfrigos.dto.Car;
-import com.itconsultores.colfrigos.dto.Client;
-import com.itconsultores.colfrigos.dto.Movement;
 
 public class LoginActivity extends Activity implements OnClickListener {
 
@@ -63,16 +58,18 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			if ("".equals(login)) {
 				// Cargar el listado de carros
-				List<Car> carSet = Control.getCarList(doc);
+				Control.setCarList(doc);
 				// Cargar el listado de movimientos
-				List<Movement> movementList = Control.getMovementsList(doc);
+				Control.setMovementsList(doc);
 				// Cargar el listado de clientes
-				List<Client> clientList = Control.getClientList(doc);
+				Control.setClientList(doc);
 
-				Log.i(Constants.LOG_DEBUG, "Car Total " + carSet.size());
-				Log.i(Constants.LOG_DEBUG,
-						"Movement Total " + movementList.size());
-				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+				Log.i(Constants.LOG_DEBUG, "Car Total "
+						+ Control.getCarList().size());
+				Log.i(Constants.LOG_DEBUG, "Movement Total "
+						+ Control.getMovementList().size());
+				Log.i(Constants.LOG_DEBUG, "Client Total "
+						+ Control.getClientList().size());
 
 				Intent intentMenu = new Intent(this, MenuActivity.class);
 				startActivity(intentMenu);
