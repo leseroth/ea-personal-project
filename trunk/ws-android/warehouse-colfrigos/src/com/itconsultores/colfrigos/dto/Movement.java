@@ -1,41 +1,37 @@
 package com.itconsultores.colfrigos.dto;
 
-import java.io.Serializable;
-import java.util.TreeSet;
+import java.util.List;
 
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 
-public class Movement implements Serializable, Comparable<Movement> {
+public class Movement {
 
-	private static final long serialVersionUID = 1672409454486753561L;
-
+	private int id;
 	private MovementType movementType;
-	private TreeSet<MovementDetail> movementDetails;
+	private List<MovementDetail> movementDetails;
 
-	public Movement(MovementType movementType,
-			TreeSet<MovementDetail> movementDetails)
-			throws IllegalArgumentException {
-		if (movementType == null || movementDetails == null
+	public Movement(String id, MovementType movementType,
+			List<MovementDetail> movementDetails) throws NumberFormatException,
+			IllegalArgumentException {
+		if (id == null || movementType == null || movementDetails == null
 				|| movementDetails.isEmpty()) {
 			throw new IllegalArgumentException();
 		}
 
+		this.id = Integer.parseInt(id);
 		this.movementType = movementType;
 		this.movementDetails = movementDetails;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public MovementType getMovementType() {
 		return movementType;
 	}
 
-	public TreeSet<MovementDetail> getMovementDetails() {
+	public List<MovementDetail> getMovementDetails() {
 		return movementDetails;
-	}
-
-	@Override
-	public int compareTo(Movement other) {
-		return other == null ? -1 : //
-				getMovementDetails().first().getId()
-						- other.getMovementDetails().first().getId();
 	}
 }

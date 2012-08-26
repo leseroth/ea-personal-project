@@ -1,16 +1,11 @@
 package com.itconsultores.colfrigos.dto;
 
-import java.io.Serializable;
-
-import com.itconsultores.colfrigos.control.Constants.PositionStatus;
-
-public class Position implements Serializable, Comparable<Position> {
-
-	private static final long serialVersionUID = -8370711078180239596L;
+public class Position {
 
 	private int row;
 	private int column;
-	private PositionStatus positionStatus;
+	private boolean full;
+	private transient String side;
 
 	public Position(String coordinate, String status)
 			throws NumberFormatException, IllegalArgumentException {
@@ -19,16 +14,12 @@ public class Position implements Serializable, Comparable<Position> {
 		}
 
 		row = Integer.parseInt(coordinate.substring(0, 1));
-		column = Integer.parseInt(coordinate.substring(1, coordinate.length()));
+		side = coordinate.substring(1, 2);
+		column = Integer.parseInt(coordinate.substring(2, coordinate.length()));
 
-		statusLoop: for (PositionStatus ps : PositionStatus.values()) {
-			if (ps.getCode().equals(status)) {
-				positionStatus = ps;
-				break statusLoop;
-			}
-		}
-
-		if (positionStatus == null) {
+		if ("S".equals(status) || "N".equals(status)) {
+			full = "S".equals(status);
+		} else {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -41,24 +32,11 @@ public class Position implements Serializable, Comparable<Position> {
 		return column;
 	}
 
-	public PositionStatus getPositionStatus() {
-		return positionStatus;
+	public boolean isFull() {
+		return full;
 	}
 
-	private int getCoordinate() {
-		return row * 100 + column;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		return other == null ? false : //
-				other instanceof Position ? //
-				getCoordinate() == ((Position) other).getCoordinate()
-						: false;
-	}
-
-	@Override
-	public int compareTo(Position other) {
-		return other == null ? -1 : getCoordinate() - other.getCoordinate();
+	public String getSide() {
+		return side;
 	}
 }

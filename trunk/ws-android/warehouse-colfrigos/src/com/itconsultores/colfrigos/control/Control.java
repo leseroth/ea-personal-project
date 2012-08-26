@@ -8,11 +8,11 @@ import static com.itconsultores.colfrigos.control.Constants.KEY_IN;
 import static com.itconsultores.colfrigos.control.Constants.KEY_LABEL;
 import static com.itconsultores.colfrigos.control.Constants.KEY_MOVEMENT;
 import static com.itconsultores.colfrigos.control.Constants.KEY_MOVEMENTS;
+import static com.itconsultores.colfrigos.control.Constants.KEY_MOVEMENT_CAR;
+import static com.itconsultores.colfrigos.control.Constants.KEY_MOVEMENT_COORDINATE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_OUT;
 import static com.itconsultores.colfrigos.control.Constants.KEY_POSITION;
 import static com.itconsultores.colfrigos.control.Constants.KEY_POSITIONS;
-import static com.itconsultores.colfrigos.control.Constants.KEY_ROLLING;
-import static com.itconsultores.colfrigos.control.Constants.KEY_SIDE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_STATUS;
 import static com.itconsultores.colfrigos.control.Constants.KEY_TYPE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_WEIGHT;
@@ -20,7 +20,6 @@ import static com.itconsultores.colfrigos.control.Constants.LOG_DEBUG;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -60,7 +59,7 @@ public class Control {
 		carLoop: for (int i = 0; i < NodeListCar.getLength(); i++) {
 			Node carNode = NodeListCar.item(i);
 
-			String number = ((Element) carNode).getAttribute(KEY_CAR_NAME);
+			String carNumber = ((Element) carNode).getAttribute(KEY_CAR_NAME);
 			List<Position> sideA = new ArrayList<Position>();
 			List<Position> sideB = new ArrayList<Position>();
 
@@ -71,26 +70,25 @@ public class Control {
 
 				String coordinate = XMLParser.getValue((Element) positionNode,
 						KEY_COORDINATE);
-				String side = XMLParser.getValue((Element) positionNode,
-						KEY_SIDE);
 				String status = XMLParser.getValue((Element) positionNode,
 						KEY_STATUS);
 
-				Log.i(LOG_DEBUG, "Loaded Position " + number + " " + side + " "
+				Log.i(LOG_DEBUG, "Loaded Position " + carNumber + " "
 						+ coordinate + " " + status);
 
 				Position position = new Position(coordinate, status);
-				if ("A".equals(side)) {
+				if ("A".equals(position.getSide())) {
 					sideA.add(position);
-				} else if ("B".equals(side)) {
+				} else if ("B".equals(position.getSide())) {
 					sideB.add(position);
 				} else {
-					Log.i(LOG_DEBUG, "El lado solo puede ser A o B : " + side);
+					Log.i(LOG_DEBUG, "El lado solo puede ser A o B : "
+							+ position.getSide());
 					throw new IllegalArgumentException();
 				}
 			}
 
-			Car car = new Car(number, sideA, sideB);
+			Car car = new Car(carNumber, sideA, sideB);
 			carSet.add(car);
 		}
 
@@ -98,8 +96,8 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static TreeSet<Movement> getMovementsSet(Document doc) {
-		TreeSet<Movement> movementSet = new TreeSet<Movement>();
+	public static List<Movement> getMovementsList(Document doc) {
+		List<Movement> movementList = new ArrayList<Movement>();
 
 		Node movements = doc.getElementsByTagName(KEY_MOVEMENTS).item(0);
 		NodeList NodeListMovement = ((Element) movements)
@@ -108,62 +106,57 @@ public class Control {
 		movementLoop: for (int i = 0; i < NodeListMovement.getLength(); i++) {
 			Node movementNode = NodeListMovement.item(i);
 
+			String id = null;
 			String rawMovementType = XMLParser.getValue((Element) movementNode,
 					KEY_TYPE);
 			MovementType movementType = MovementType.getType(rawMovementType);
 
-			TreeSet<MovementDetail> movementDetails = new TreeSet<MovementDetail>();
+			List<MovementDetail> movementDetails = new ArrayList<MovementDetail>();
 
-			boolean newMovement = true;
 			switch (movementType) {
 			case IN_OUT:
 				Node inMovement = ((Element) movementNode)
 						.getElementsByTagName(KEY_IN).item(0);
-				MovementDetail imdt = initMovementDetail(inMovement,
+				id = XMLParser.getValue((Element) inMovement, KEY_ID);
+				MovementDetail imdt = initMovementDetail(id, inMovement,
 						MovementType.IN);
-				newMovement = newMovement && movementDetails.add(imdt);
+				movementDetails.add(imdt);
 
 				Node outMovement = ((Element) movementNode)
 						.getElementsByTagName(KEY_OUT).item(0);
-				MovementDetail omdt = initMovementDetail(outMovement,
+				MovementDetail omdt = initMovementDetail(id, outMovement,
 						MovementType.OUT);
-				newMovement = newMovement && movementDetails.add(omdt);
+				movementDetails.add(omdt);
 				break;
 			case IN:
 			case OUT:
-				MovementDetail movementDetail = initMovementDetail(
+				id = XMLParser.getValue((Element) movementNode, KEY_ID);
+				MovementDetail movementDetail = initMovementDetail(id,
 						movementNode, movementType);
-				newMovement = newMovement
-						&& movementDetails.add(movementDetail);
+				movementDetails.add(movementDetail);
 				break;
 			}
 
-			if (!newMovement) {
-				Log.i(LOG_DEBUG, "Movimiento duplicada");
-				throw new IllegalArgumentException();
-			}
-
-			Movement movement = new Movement(movementType, movementDetails);
-			movementSet.add(movement);
+			Movement movement = new Movement(id, movementType, movementDetails);
+			movementList.add(movement);
 		}
 
-		return movementSet;
+		return movementList;
 	}
 
-	private static MovementDetail initMovementDetail(Node node,
+	private static MovementDetail initMovementDetail(String id, Node node,
 			MovementType mvType) {
 
-		String id = XMLParser.getValue((Element) node, KEY_ID);
-		String car = XMLParser.getValue((Element) node, KEY_CAR);
-		String coordinate = XMLParser.getValue((Element) node, KEY_COORDINATE);
+		String car = XMLParser.getValue((Element) node, KEY_MOVEMENT_CAR);
+		String coordinate = XMLParser.getValue((Element) node,
+				KEY_MOVEMENT_COORDINATE);
 		String label = XMLParser.getValue((Element) node, KEY_LABEL);
-		String rolling = XMLParser.getValue((Element) node, KEY_ROLLING);
 		String weight = XMLParser.getValue((Element) node, KEY_WEIGHT);
 
 		Log.i(LOG_DEBUG, "Loaded Movement " + id + " " + car + " " + coordinate
-				+ " " + label + " " + rolling + " " + weight + " " + mvType);
-		MovementDetail md = new MovementDetail(id, car, coordinate, label,
-				weight, rolling, mvType);
+				+ " " + label + " " + weight + " " + mvType);
+		MovementDetail md = new MovementDetail(car, coordinate, label, weight,
+				mvType);
 
 		return md;
 	}
