@@ -67,13 +67,48 @@ public class Control {
 		calculatedWeight = basket * box;
 	}
 
-	public static String doLogin(Document doc, String username, String password) {
+	public static String doLogin(String username, String password) {
+		String xml = XMLParser.getXMLFromUrl(Constants.URL);
+		Document doc = XMLParser.XMLfromString(xml);
+
 		user = username;
 		pass = password;
 
 		Log.i(LOG_DEBUG, "Realizando login");
 		NodeList error = doc.getElementsByTagName(KEY_ERROR);
-		return XMLParser.getElementValue(error.item(0));
+		String result = XMLParser.getElementValue(error.item(0));
+
+		if ("".equals(result)) {
+			// Cargar el listado de carros
+			setCarList(doc);
+			// Cargar el listado de movimientos
+			setMovementsList(doc);
+			// Cargar el listado de clientes
+			setClientList(doc);
+
+			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
+			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
+			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+		}
+
+		return result;
+	}
+
+	public static MenuOption getNextMovementMenu() {
+		MenuOption nextMenu = null;
+
+		if (!movementList.isEmpty()) {
+			nextMenu = movementList.get(0).getMovementType().getMenuOption();
+		}
+
+		return nextMenu;
+	}
+
+	public static MenuOption confirmMovement(Movement movement) {
+		movementList.remove(movement);
+		// TODO Hernan LLamar a la url que confirma movimientos
+
+		return getNextMovementMenu();
 	}
 
 	@SuppressWarnings("unused")
