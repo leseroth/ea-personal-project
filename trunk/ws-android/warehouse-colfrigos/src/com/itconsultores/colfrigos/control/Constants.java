@@ -29,6 +29,8 @@ public class Constants {
 	protected static final String KEY_CLIENT_ID = "id";
 	protected static final String KEY_CLIENT_NAME = "na";
 
+	protected static final String KEY_ERROR = "error";
+
 	public static final String LOG_DEBUG = "debug info";
 
 	public enum MenuOption {

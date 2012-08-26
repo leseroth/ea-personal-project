@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
@@ -24,15 +26,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 	private Button buttonLogin;
 	private Button buttonExit;
 
+	private TextView userTextView;
+	private TextView passTextView;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.screen_login);
 
+		// Botones
 		buttonLogin = (Button) findViewById(R.id.sl_button_login);
 		buttonExit = (Button) findViewById(R.id.sl_button_exit);
+
 		buttonLogin.setOnClickListener(this);
 		buttonExit.setOnClickListener(this);
+
+		// Formulario
+		userTextView = (TextView) findViewById(R.id.sl_textbox_username);
+		passTextView = (TextView) findViewById(R.id.sl_textbox_password);
 	}
 
 	@Override
@@ -43,22 +54,32 @@ public class LoginActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 
 		if (view.equals(buttonLogin)) {
-			String xml = XMLParser.getXMLFromUrl(Constants.URL); // getting XML
+			String xml = XMLParser.getXMLFromUrl(Constants.URL);
 			Document doc = XMLParser.XMLfromString(xml);
 
-			// Cargar el listado de carros
-			List<Car> carSet = Control.getCarList(doc);
-			// Cargar el listado de movimientos
-			List<Movement> movementList = Control.getMovementsList(doc);
-			// Cargar el listado de clientes
-			List<Client> clientList = Control.getClientList(doc);
+			String user = userTextView.getText().toString();
+			String pass = passTextView.getText().toString();
+			String login = Control.doLogin(doc, user, pass);
 
-			Log.i(Constants.LOG_DEBUG, "Car Total " + carSet.size());
-			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
-			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+			if ("".equals(login)) {
+				// Cargar el listado de carros
+				List<Car> carSet = Control.getCarList(doc);
+				// Cargar el listado de movimientos
+				List<Movement> movementList = Control.getMovementsList(doc);
+				// Cargar el listado de clientes
+				List<Client> clientList = Control.getClientList(doc);
 
-			Intent intentMenu = new Intent(this, MenuActivity.class);
-			startActivity(intentMenu);
+				Log.i(Constants.LOG_DEBUG, "Car Total " + carSet.size());
+				Log.i(Constants.LOG_DEBUG,
+						"Movement Total " + movementList.size());
+				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+
+				Intent intentMenu = new Intent(this, MenuActivity.class);
+				startActivity(intentMenu);
+			} else {
+				Toast toast = Toast.makeText(this, login, Toast.LENGTH_LONG);
+				toast.show();
+			}
 		} else if (view.equals(buttonExit)) {
 			finish();
 		}
