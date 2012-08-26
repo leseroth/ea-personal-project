@@ -18,6 +18,8 @@ import static com.itconsultores.colfrigos.control.Constants.KEY_TYPE;
 import static com.itconsultores.colfrigos.control.Constants.KEY_WEIGHT;
 import static com.itconsultores.colfrigos.control.Constants.LOG_DEBUG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.w3c.dom.Document;
@@ -48,8 +50,8 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static TreeSet<Car> getCarSet(Document doc) {
-		TreeSet<Car> carSet = new TreeSet<Car>();
+	public static List<Car> getCarList(Document doc) {
+		List<Car> carSet = new ArrayList<Car>();
 
 		Node positions = doc.getElementsByTagName(KEY_POSITIONS).item(0);
 		NodeList NodeListCar = ((Element) positions)
@@ -59,8 +61,8 @@ public class Control {
 			Node carNode = NodeListCar.item(i);
 
 			String number = ((Element) carNode).getAttribute(KEY_CAR_NAME);
-			TreeSet<Position> sideA = new TreeSet<Position>();
-			TreeSet<Position> sideB = new TreeSet<Position>();
+			List<Position> sideA = new ArrayList<Position>();
+			List<Position> sideB = new ArrayList<Position>();
 
 			NodeList NodeListPosition = ((Element) carNode)
 					.getElementsByTagName(KEY_POSITION);
@@ -78,18 +80,12 @@ public class Control {
 						+ coordinate + " " + status);
 
 				Position position = new Position(coordinate, status);
-				boolean newPosition;
 				if ("A".equals(side)) {
-					newPosition = sideA.add(position);
+					sideA.add(position);
 				} else if ("B".equals(side)) {
-					newPosition = sideB.add(position);
+					sideB.add(position);
 				} else {
 					Log.i(LOG_DEBUG, "El lado solo puede ser A o B : " + side);
-					throw new IllegalArgumentException();
-				}
-
-				if (!newPosition) {
-					Log.i(LOG_DEBUG, "Posición duplicada");
 					throw new IllegalArgumentException();
 				}
 			}
