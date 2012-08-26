@@ -1,21 +1,22 @@
-package com.itconsultores.colfrigos.control;
+package com.itconsultores.colfrigos.dto;
 
 import java.util.List;
 
 public class Car {
 
-	private String name;
+	private int number;
 	private List<Position> sideA;
 	private List<Position> sideB;
 
-	public Car(String name, List<Position> sideA, List<Position> sideB) {
-		this.name = name;
+	public Car(String number, List<Position> sideA, List<Position> sideB)
+			throws NumberFormatException {
+		this.number = Integer.parseInt(number);
 		this.sideA = sideA;
 		this.sideB = sideB;
 	}
 
-	public String getName() {
-		return name;
+	public int getNumber() {
+		return number;
 	}
 
 	public List<Position> getSideA() {
