@@ -5,10 +5,10 @@ import android.graphics.Color;
 import com.itconsultores.colfrigos.android.R;
 
 public class Constants {
-	public static final String DEBUG_URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
-	public static final String LOGIN_URL="http://localhost:8081/temperaturas/mobileLogin.seam?";
-	public static final String MOVEMENT_URL="http://localhost:8081/temperaturas/movement.seam?";
 
+	public static final String DEBUG_URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
+	public static final String LOGIN_URL = "http://192.168.1.17:8081/temperaturas/mobileLogin.seam?";
+	public static final String MOVEMENT_URL = "http://192.168.1.17:8081/temperaturas/movement.seam?";
 
 	protected static final String KEY_POSITIONS = "posiciones";
 	protected static final String KEY_CAR = "carro";
