@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,10 +16,11 @@ import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
-import com.itconsultores.colfrigos.control.Constants.StatusColor;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.dto.AbstractCell;
 import com.itconsultores.colfrigos.dto.Car;
 import com.itconsultores.colfrigos.dto.Movement;
+import com.itconsultores.colfrigos.dto.MovementDetail;
 import com.itconsultores.colfrigos.dto.Position;
 
 public class WarehouseActivity extends Activity implements OnClickListener {
@@ -49,6 +49,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		maxRow = warehouseGrid.getChildCount();
 		LinearLayout firstRow = (LinearLayout) warehouseGrid.getChildAt(0);
 		maxColumn = firstRow.getChildCount();
+
+		Log.i(Constants.LOG_DEBUG, "Max rows : " + maxRow);
+		Log.i(Constants.LOG_DEBUG, "Max column : " + maxColumn);
 	}
 
 	@Override
@@ -85,11 +88,12 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 
 		setWarehouseStatus();
-		
-		//Ajustar subtitulo
+
+		// Ajustar subtitulo
 		Resources res = getResources();
-		subTitleText.setText(res.getString(R.string.label_car)+" "+carNumber+" - "
-		+res.getString(R.string.label_side)+" "+carSide);
+		subTitleText.setText(res.getString(R.string.label_car) + " "
+				+ carNumber + " - " + res.getString(R.string.label_side) + " "
+				+ carSide);
 	}
 
 	private void setWarehouseStatus() {
@@ -114,16 +118,22 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 
 		for (Position p : side) {
-			TextView text = (TextView) ((LinearLayout) warehouseGrid
-					.getChildAt(p.getRow())).getChildAt(p.getColumn());
-			if (text == null) {
-				Log.e(Constants.LOG_DEBUG, "No se encuentra " + p.getRow()
-						+ " " + p.getColumn());
-			} else {
-				text.setBackgroundColor(p.isFull() ? Color
-						.parseColor(StatusColor.FILLED.getColor()) : Color
-						.parseColor(StatusColor.FREE.getColor()));
-			}
+			paintCell(p);
+		}
+
+		for (MovementDetail md : currentMovement.getMovementDetails()) {
+			paintCell(md);
+		}
+	}
+
+	private void paintCell(AbstractCell ac) {
+		TextView text = (TextView) ((LinearLayout) warehouseGrid.getChildAt(ac
+				.getRow())).getChildAt(ac.getColumn());
+		if (text == null) {
+			Log.e(Constants.LOG_DEBUG, "No se encuentra " + ac.getRow() + " "
+					+ ac.getColumn());
+		} else {
+			text.setBackgroundColor(ac.getColor());
 		}
 	}
 
@@ -152,7 +162,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 				selectedIntent = new Intent(this, MenuActivity.class);
 			} else {
 				Toast toast = Toast.makeText(this,
-						"Debe finalizar el movimeinto actual",
+						"Debe finalizar el movimiento actual",
 						Toast.LENGTH_LONG);
 				toast.show();
 			}

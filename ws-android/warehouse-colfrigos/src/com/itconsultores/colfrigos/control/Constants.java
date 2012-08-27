@@ -1,5 +1,7 @@
 package com.itconsultores.colfrigos.control;
 
+import android.graphics.Color;
+
 import com.itconsultores.colfrigos.android.R;
 
 public class Constants {
@@ -70,16 +72,18 @@ public class Constants {
 	}
 
 	public enum MovementType {
-		IN_OUT("SE", MenuOption.Salida), //
-		IN("E", MenuOption.Entrada), //
-		OUT("S", MenuOption.Salida);
+		IN_OUT("SE", MenuOption.EntradaSalida, StatusColor.INEXISTENT), //
+		IN("E", MenuOption.Entrada, StatusColor.IN), //
+		OUT("S", MenuOption.Salida, StatusColor.OUT);
 
 		private String movementType;
 		private MenuOption menuOption;
+		private StatusColor statusColor;
 
-		private MovementType(String c, MenuOption me) {
+		private MovementType(String c, MenuOption me, StatusColor sc) {
 			movementType = c;
 			menuOption = me;
+			statusColor = sc;
 		}
 
 		public String getMovementType() {
@@ -88,6 +92,10 @@ public class Constants {
 
 		public MenuOption getMenuOption() {
 			return menuOption;
+		}
+
+		public StatusColor getStatusColor() {
+			return statusColor;
 		}
 
 		public static MovementType getType(String str) {
@@ -109,13 +117,13 @@ public class Constants {
 		IN("#ff6600"), //
 		OUT("#ffff00");
 
-		private String color;
+		private int color;
 
-		private StatusColor(String c) {
-			color = c;
+		private StatusColor(String colorString) {
+			color = Color.parseColor(colorString);
 		}
 
-		public String getColor() {
+		public int getColor() {
 			return color;
 		}
 	}

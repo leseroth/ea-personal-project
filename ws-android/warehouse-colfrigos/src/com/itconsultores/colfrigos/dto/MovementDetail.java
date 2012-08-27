@@ -2,10 +2,8 @@ package com.itconsultores.colfrigos.dto;
 
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 
-public class MovementDetail {
+public class MovementDetail extends AbstractCell {
 
-	private int row;
-	private int column;
 	private int carNumber;
 	private String carSide;
 	private String label;
@@ -35,14 +33,6 @@ public class MovementDetail {
 		}
 	}
 
-	public int getRow() {
-		return row;
-	}
-
-	public int getColumn() {
-		return column;
-	}
-
 	public int getCarNumber() {
 		return carNumber;
 	}
@@ -61,5 +51,10 @@ public class MovementDetail {
 
 	public MovementType getMovementType() {
 		return movementType;
+	}
+
+	@Override
+	public int getColor() {
+		return movementType.getStatusColor().getColor();
 	}
 }

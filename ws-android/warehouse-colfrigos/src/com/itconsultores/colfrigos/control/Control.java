@@ -99,6 +99,7 @@ public class Control {
 
 		if (!movementList.isEmpty()) {
 			nextMenu = movementList.get(0).getMovementType().getMenuOption();
+			Log.i(LOG_DEBUG, "Next Menu " + nextMenu);
 		}
 
 		return nextMenu;
