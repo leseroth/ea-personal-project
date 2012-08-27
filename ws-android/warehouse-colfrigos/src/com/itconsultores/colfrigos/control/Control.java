@@ -50,6 +50,7 @@ public class Control {
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
+	private static boolean debug =true;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;
@@ -68,11 +69,64 @@ public class Control {
 	}
 
 	public static String doLogin(String username, String password) {
-		String xml = XMLParser.getXMLFromUrl(Constants.URL);
+		String url=Constants.LOGIN_URL+"login="+username+"&password="+password;
+		
+		String xml =null;
+		if(debug){
+			xml=XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+		}
+		else{
+			xml=XMLParser.getXMLFromUrl(url);
+		}
+		
 		Document doc = XMLParser.XMLfromString(xml);
 
 		user = username;
 		pass = password;
+
+		Log.i(LOG_DEBUG, "Realizando login");
+		NodeList error = doc.getElementsByTagName(KEY_ERROR);
+		String result = XMLParser.getElementValue(error.item(0));
+
+		if ("".equals(result)) {
+			// Cargar el listado de carros
+			setCarList(doc);
+			// Cargar el listado de movimientos
+			setMovementsList(doc);
+			// Cargar el listado de clientes
+			setClientList(doc);
+
+			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
+			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
+			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+		}
+
+		return result;
+	}
+	
+	public static String doMovement(String weight, Long clientId, String tag,MovementType movementType) {
+		String url=Constants.MOVEMENT_URL+"login="+user+"&password="+pass+"&type="+movementType.getMovementType();
+		
+		switch (movementType) {
+		case IN:
+				url+="&weight="+weight+"&clientId="+clientId;
+			
+			break;
+			
+		case OUT:
+				url+="&tag="+tag;
+			break;
+		}
+		
+		String xml =null;
+		if(debug){
+			xml=XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+		}
+		else{
+			xml=XMLParser.getXMLFromUrl(url);
+		}
+		
+		Document doc = XMLParser.XMLfromString(xml);
 
 		Log.i(LOG_DEBUG, "Realizando login");
 		NodeList error = doc.getElementsByTagName(KEY_ERROR);
