@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.dto.Client;
 
 public class FormInActivity extends AbstractForm {
 
@@ -60,9 +61,14 @@ public class FormInActivity extends AbstractForm {
 			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
 			String weight = weightTextView.getText().toString();
-			Long clientId = clientSpinner.getSelectedItemId();
-			String in = Control.doMovement(weight, clientId, null,
-					MovementType.IN);
+			
+			int clientId=clientSpinner.getSelectedItemPosition();
+			if(clientId!=0){
+			Client client = Control.getClientList().get(clientId-1);
+			clientId=client.getId();
+			}
+			
+			String in = Control.doMovement(weight, clientId, null,MovementType.IN);
 			if ("".equals(in)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
