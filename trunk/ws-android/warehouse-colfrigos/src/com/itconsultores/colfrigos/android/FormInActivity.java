@@ -6,8 +6,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
 
 public class FormInActivity extends AbstractForm {
@@ -58,8 +60,25 @@ public class FormInActivity extends AbstractForm {
 		if (view.equals(buttonBack)) {
 			selectedIntent = new Intent(this, MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
-			Control.setSelectedOption(MenuOption.Entrada);
-			selectedIntent = new Intent(this, WarehouseActivity.class);
+			String weight = weightTextView.getText().toString();
+			Long clientId = clientSpinner.getSelectedItemId();
+			String in = Control.doMovement(weight, clientId, null,MovementType.IN);
+			if ("".equals(in)) {
+				MenuOption menuOption = Control.getNextMovementMenu();
+
+				if (menuOption == null) {
+					Intent intentMenu = new Intent(this, MenuActivity.class);
+					startActivity(intentMenu);
+				} else {
+					Control.setSelectedOption(menuOption);
+					 selectedIntent = new Intent(this,
+							WarehouseActivity.class);
+				}
+			} else {
+				Toast toast = Toast.makeText(this, in, Toast.LENGTH_LONG);
+				toast.show();
+			}
+
 		}
 
 		if (selectedIntent != null) {

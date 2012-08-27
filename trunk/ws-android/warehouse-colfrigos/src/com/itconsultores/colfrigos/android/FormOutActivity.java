@@ -3,14 +3,18 @@ package com.itconsultores.colfrigos.android;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
 
 public class FormOutActivity extends AbstractForm {
 
 	private Button buttonOk;
 	private Button buttonBack;
+	private TextView positionTextView;
+
 
 	public FormOutActivity() {
 		super(R.layout.form_salida);
@@ -20,6 +24,9 @@ public class FormOutActivity extends AbstractForm {
 	protected void initForm() {
 		buttonOk = initButton(R.id.f_out_button_confirm);
 		buttonBack = initButton(R.id.f_out_button_back);
+		
+		// Formulario
+		positionTextView = (TextView) findViewById(R.id.f_out_textbox_position);
 	}
 
 	@Override
@@ -29,13 +36,26 @@ public class FormOutActivity extends AbstractForm {
 		if (view.equals(buttonBack)) {
 			selectedIntent = new Intent(this, MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
-			Control.setSelectedOption(MenuOption.Salida);
-			selectedIntent = new Intent(this, WarehouseActivity.class);
-		}
 
+			String position = positionTextView.getText().toString();
+			String out = Control.doMovement(null, null, position,MovementType.OUT);
+			if ("".equals(out)) {
+				MenuOption menuOption = Control.getNextMovementMenu();
+
+				if (menuOption == null) {
+					Intent intentMenu = new Intent(this, MenuActivity.class);
+					startActivity(intentMenu);
+				} else {
+					Control.setSelectedOption(menuOption);
+					 selectedIntent = new Intent(this,
+							WarehouseActivity.class);
+				}
+			}
+		}
 		if (selectedIntent != null) {
 			startActivity(selectedIntent);
 		}
+	
 	}
 
 	@Override
