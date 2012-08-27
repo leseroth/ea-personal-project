@@ -69,8 +69,10 @@ public class Control {
 	}
 
 	public static String doLogin(String username, String password) {
+		String result = "Error de comunicacion con el servidor";
 		String url = Constants.LOGIN_URL + "login=" + username + "&password="
 				+ password;
+		Log.i(LOG_DEBUG, url);
 
 		String xml = null;
 		if (debug) {
@@ -79,14 +81,20 @@ public class Control {
 			xml = XMLParser.getXMLFromUrl(url);
 		}
 
+		if (xml == null) {
+			return result;
+		}
 		Document doc = XMLParser.XMLfromString(xml);
+		if (doc == null) {
+			return result;
+		}
 
 		user = username;
 		pass = password;
 
 		Log.i(LOG_DEBUG, "Realizando login");
 		NodeList error = doc.getElementsByTagName(KEY_ERROR);
-		String result = XMLParser.getElementValue(error.item(0));
+		result = XMLParser.getElementValue(error.item(0));
 
 		if ("".equals(result)) {
 			// Cargar el listado de carros
@@ -106,8 +114,10 @@ public class Control {
 
 	public static String doMovement(String weight, int clientId, String tag,
 			MovementType movementType) {
-		String url = Constants.MOVEMENT_URL + "login=" + user + "&password="
-				+ pass + "&type=" + movementType.getMovementType();
+		String result = "Error de comunicacion";
+
+		String url = Constants.MOVEMENT_URL + "login=" + user + "&pwd=" + pass
+				+ "&type=" + movementType.getMovementType();
 
 		switch (movementType) {
 		case IN:
@@ -118,6 +128,7 @@ public class Control {
 			url += "&tag=" + tag + "&weight=0&clientId=0";
 			break;
 		}
+		Log.i(LOG_DEBUG, url);
 
 		String xml = null;
 		if (debug) {
@@ -126,11 +137,17 @@ public class Control {
 			xml = XMLParser.getXMLFromUrl(url);
 		}
 
+		if (xml == null) {
+			return result;
+		}
 		Document doc = XMLParser.XMLfromString(xml);
+		if (doc == null) {
+			return result;
+		}
 
 		Log.i(LOG_DEBUG, "Realizando login");
 		NodeList error = doc.getElementsByTagName(KEY_ERROR);
-		String result = XMLParser.getElementValue(error.item(0));
+		result = XMLParser.getElementValue(error.item(0));
 
 		if ("".equals(result)) {
 			// Cargar el listado de carros
