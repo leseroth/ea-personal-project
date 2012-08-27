@@ -36,7 +36,7 @@ public class FormOutActivity extends AbstractForm {
 		} else if (view.equals(buttonOk)) {
 
 			String position = positionTextView.getText().toString();
-			String out = Control.doMovement(null, null, position,
+			String out = Control.doMovement(null, 0, position,
 					MovementType.OUT);
 			if ("".equals(out)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
