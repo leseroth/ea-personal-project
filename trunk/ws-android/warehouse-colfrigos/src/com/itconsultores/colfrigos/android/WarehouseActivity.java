@@ -130,11 +130,13 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	}
 
 	private void paintCell(AbstractCell ac) {
-		TextView text = (TextView) ((LinearLayout) warehouseGrid.getChildAt(ac
-				.getRow())).getChildAt(ac.getColumn());
+		TextView text = (TextView) ((LinearLayout) warehouseGrid
+				.getChildAt(maxRow - 1 - ac.getRow())).getChildAt(ac
+				.getColumn());
 		if (text == null) {
-			Log.e(Constants.LOG_DEBUG, "No se encuentra " + ac.getRow() + " "
-					+ ac.getColumn());
+			Log.e(Constants.LOG_DEBUG,
+					"No se encuentra " + (maxRow - 1 - ac.getRow()) + " "
+							+ ac.getColumn());
 		} else {
 			text.setBackgroundColor(ac.getColor());
 		}

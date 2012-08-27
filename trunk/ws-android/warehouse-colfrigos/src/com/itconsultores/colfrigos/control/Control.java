@@ -50,7 +50,7 @@ public class Control {
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
-	private static boolean debug =true;
+	private static boolean debug = false;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;
@@ -69,16 +69,16 @@ public class Control {
 	}
 
 	public static String doLogin(String username, String password) {
-		String url=Constants.LOGIN_URL+"login="+username+"&password="+password;
-		
-		String xml =null;
-		if(debug){
-			xml=XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+		String url = Constants.LOGIN_URL + "login=" + username + "&password="
+				+ password;
+
+		String xml = null;
+		if (debug) {
+			xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+		} else {
+			xml = XMLParser.getXMLFromUrl(url);
 		}
-		else{
-			xml=XMLParser.getXMLFromUrl(url);
-		}
-		
+
 		Document doc = XMLParser.XMLfromString(xml);
 
 		user = username;
@@ -103,29 +103,29 @@ public class Control {
 
 		return result;
 	}
-	
-	public static String doMovement(String weight, int clientId, String tag,MovementType movementType) {
-		String url=Constants.MOVEMENT_URL+"login="+user+"&password="+pass+"&type="+movementType.getMovementType();
-		
+
+	public static String doMovement(String weight, int clientId, String tag,
+			MovementType movementType) {
+		String url = Constants.MOVEMENT_URL + "login=" + user + "&password="
+				+ pass + "&type=" + movementType.getMovementType();
+
 		switch (movementType) {
 		case IN:
-				url+="&weight="+weight+"&clientId="+clientId+"&tag=0";
-			
+			url += "&weight=" + weight + "&clientId=" + clientId + "&tag=0";
 			break;
-			
+
 		case OUT:
-				url+="&tag="+tag+"&weight=0&clientId=0";
+			url += "&tag=" + tag + "&weight=0&clientId=0";
 			break;
 		}
-		
-		String xml =null;
-		if(debug){
-			xml=XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+
+		String xml = null;
+		if (debug) {
+			xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+		} else {
+			xml = XMLParser.getXMLFromUrl(url);
 		}
-		else{
-			xml=XMLParser.getXMLFromUrl(url);
-		}
-		
+
 		Document doc = XMLParser.XMLfromString(xml);
 
 		Log.i(LOG_DEBUG, "Realizando login");
