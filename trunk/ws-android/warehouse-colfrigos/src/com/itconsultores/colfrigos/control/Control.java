@@ -104,17 +104,17 @@ public class Control {
 		return result;
 	}
 	
-	public static String doMovement(String weight, Long clientId, String tag,MovementType movementType) {
+	public static String doMovement(String weight, int clientId, String tag,MovementType movementType) {
 		String url=Constants.MOVEMENT_URL+"login="+user+"&password="+pass+"&type="+movementType.getMovementType();
 		
 		switch (movementType) {
 		case IN:
-				url+="&weight="+weight+"&clientId="+clientId;
+				url+="&weight="+weight+"&clientId="+clientId+"&tag=0";
 			
 			break;
 			
 		case OUT:
-				url+="&tag="+tag;
+				url+="&tag="+tag+"&weight=0&clientId=0";
 			break;
 		}
 		
