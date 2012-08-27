@@ -51,16 +51,17 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 			if ("".equals(login)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
+				Intent selectedIntent = null;
 
 				if (menuOption == null) {
-					Intent intentMenu = new Intent(this, MenuActivity.class);
-					startActivity(intentMenu);
+					selectedIntent = new Intent(this, MenuActivity.class);
 				} else {
 					Control.setSelectedOption(menuOption);
-					Intent selectedIntent = new Intent(this,
-							WarehouseActivity.class);
-					startActivity(selectedIntent);
+					selectedIntent = new Intent(this, WarehouseActivity.class);
 				}
+
+				finish();
+				startActivity(selectedIntent);
 			} else {
 				Toast toast = Toast.makeText(this, login, Toast.LENGTH_LONG);
 				toast.show();

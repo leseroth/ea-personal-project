@@ -41,7 +41,6 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 		if (view.equals(buttonExit)) {
 			selectedIntent = new Intent(this, LoginActivity.class);
-			this.finish();
 		} else if (view.equals(buttonOpEntrada)) {
 			selectedIntent = new Intent(this, FormInActivity.class);
 		} else if (view.equals(buttonOpSalida)) {
@@ -54,6 +53,7 @@ public class MenuActivity extends Activity implements OnClickListener {
 		}
 
 		if (selectedIntent != null) {
+			finish();
 			startActivity(selectedIntent);
 		}
 	}

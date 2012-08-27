@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
+import com.itconsultores.colfrigos.control.Constants.StatusColor;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.dto.AbstractCell;
 import com.itconsultores.colfrigos.dto.Car;
@@ -73,15 +74,17 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		if (selected.isMostrarIngresar()) {
 			inText.setVisibility(TextView.VISIBLE);
 			inColor.setVisibility(TextView.VISIBLE);
+			inColor.setBackgroundColor(StatusColor.IN.getColor());
 		} else {
 			inText.setVisibility(TextView.INVISIBLE);
 			inColor.setVisibility(TextView.INVISIBLE);
 		}
 
-		// Mosatrar Salir
+		// Mostrar Salir
 		if (selected.isMostrarSalida()) {
 			outText.setVisibility(TextView.VISIBLE);
 			outColor.setVisibility(TextView.VISIBLE);
+			outColor.setBackgroundColor(StatusColor.OUT.getColor());
 		} else {
 			outText.setVisibility(TextView.INVISIBLE);
 			outColor.setVisibility(TextView.INVISIBLE);
@@ -169,6 +172,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 
 		if (selectedIntent != null) {
+			finish();
 			startActivity(selectedIntent);
 		}
 	}
