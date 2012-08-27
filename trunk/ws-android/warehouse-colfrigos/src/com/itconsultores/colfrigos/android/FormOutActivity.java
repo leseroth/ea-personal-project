@@ -15,7 +15,6 @@ public class FormOutActivity extends AbstractForm {
 	private Button buttonBack;
 	private TextView positionTextView;
 
-
 	public FormOutActivity() {
 		super(R.layout.form_salida);
 	}
@@ -24,21 +23,21 @@ public class FormOutActivity extends AbstractForm {
 	protected void initForm() {
 		buttonOk = initButton(R.id.f_out_button_confirm);
 		buttonBack = initButton(R.id.f_out_button_back);
-		
+
 		// Formulario
 		positionTextView = (TextView) findViewById(R.id.f_out_textbox_position);
 	}
 
 	@Override
 	public void onClick(View view) {
-		Intent selectedIntent = null;
 
 		if (view.equals(buttonBack)) {
-			selectedIntent = new Intent(this, MenuActivity.class);
+			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
 
 			String position = positionTextView.getText().toString();
-			String out = Control.doMovement(null, null, position,MovementType.OUT);
+			String out = Control.doMovement(null, null, position,
+					MovementType.OUT);
 			if ("".equals(out)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
@@ -47,15 +46,10 @@ public class FormOutActivity extends AbstractForm {
 					startActivity(intentMenu);
 				} else {
 					Control.setSelectedOption(menuOption);
-					 selectedIntent = new Intent(this,
-							WarehouseActivity.class);
+					goTo(WarehouseActivity.class);
 				}
 			}
 		}
-		if (selectedIntent != null) {
-			startActivity(selectedIntent);
-		}
-	
 	}
 
 	@Override

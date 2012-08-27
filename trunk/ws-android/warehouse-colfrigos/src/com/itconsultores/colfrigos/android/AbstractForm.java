@@ -22,6 +22,7 @@ public abstract class AbstractForm extends Activity implements OnClickListener {
 	@SuppressWarnings("rawtypes")
 	protected void goTo(Class activity) {
 		Intent selectedIntent = new Intent(this, activity);
+		finish();
 		startActivity(selectedIntent);
 	}
 

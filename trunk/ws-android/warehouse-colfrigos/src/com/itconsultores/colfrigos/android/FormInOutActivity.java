@@ -1,6 +1,5 @@
 package com.itconsultores.colfrigos.android;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,17 +23,11 @@ public class FormInOutActivity extends AbstractForm {
 
 	@Override
 	public void onClick(View view) {
-		Intent selectedIntent = null;
-
 		if (view.equals(buttonBack)) {
-			selectedIntent = new Intent(this, MenuActivity.class);
+			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
 			Control.setSelectedOption(MenuOption.EntradaSalida);
-			selectedIntent = new Intent(this, WarehouseActivity.class);
-		}
-
-		if (selectedIntent != null) {
-			startActivity(selectedIntent);
+			goTo(WarehouseActivity.class);
 		}
 	}
 

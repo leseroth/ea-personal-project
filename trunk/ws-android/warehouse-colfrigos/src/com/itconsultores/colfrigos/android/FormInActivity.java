@@ -55,14 +55,14 @@ public class FormInActivity extends AbstractForm {
 
 	@Override
 	public void onClick(View view) {
-		Intent selectedIntent = null;
 
 		if (view.equals(buttonBack)) {
-			selectedIntent = new Intent(this, MenuActivity.class);
+			goTo(MenuActivity.class);
 		} else if (view.equals(buttonOk)) {
 			String weight = weightTextView.getText().toString();
 			Long clientId = clientSpinner.getSelectedItemId();
-			String in = Control.doMovement(weight, clientId, null,MovementType.IN);
+			String in = Control.doMovement(weight, clientId, null,
+					MovementType.IN);
 			if ("".equals(in)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
@@ -71,18 +71,13 @@ public class FormInActivity extends AbstractForm {
 					startActivity(intentMenu);
 				} else {
 					Control.setSelectedOption(menuOption);
-					 selectedIntent = new Intent(this,
-							WarehouseActivity.class);
+					goTo(WarehouseActivity.class);
 				}
 			} else {
 				Toast toast = Toast.makeText(this, in, Toast.LENGTH_LONG);
 				toast.show();
 			}
 
-		}
-
-		if (selectedIntent != null) {
-			startActivity(selectedIntent);
 		}
 	}
 
