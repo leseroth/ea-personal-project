@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
@@ -36,8 +37,8 @@ public class FormOutActivity extends AbstractForm {
 		} else if (view.equals(buttonOk)) {
 
 			String position = positionTextView.getText().toString();
-			String out = Control.doMovement(null, 0, position,
-					MovementType.OUT);
+			String out = Control
+					.doMovement(null, 0, position, MovementType.OUT);
 			if ("".equals(out)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
@@ -48,6 +49,9 @@ public class FormOutActivity extends AbstractForm {
 					Control.setSelectedOption(menuOption);
 					goTo(WarehouseActivity.class);
 				}
+			} else {
+				Toast toast = Toast.makeText(this, out, Toast.LENGTH_LONG);
+				toast.show();
 			}
 		}
 	}
