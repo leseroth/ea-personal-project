@@ -1,9 +1,9 @@
 package com.itconsultores.colfrigos.dto;
 
-public class Position {
+import com.itconsultores.colfrigos.control.Constants.StatusColor;
 
-	private int row;
-	private int column;
+public class Position extends AbstractCell {
+
 	private boolean full;
 	private transient String side;
 
@@ -24,19 +24,17 @@ public class Position {
 		}
 	}
 
-	public int getRow() {
-		return row;
-	}
-
-	public int getColumn() {
-		return column;
-	}
-
 	public boolean isFull() {
 		return full;
 	}
 
 	public String getSide() {
 		return side;
+	}
+
+	@Override
+	public int getColor() {
+		return full ? StatusColor.FILLED.getColor() : StatusColor.FREE
+				.getColor();
 	}
 }
