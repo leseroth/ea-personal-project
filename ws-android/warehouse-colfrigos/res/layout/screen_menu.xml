@@ -5,28 +5,28 @@
     android:orientation="vertical"
     android:paddingLeft="130dip"
     android:paddingRight="130dip" >
-
+
     <Button
         android:id="@+id/sm_button_op_entrada"
         style="@style/style_button_text_size"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_op_entrada" />
-
+
     <Button
         android:id="@+id/sm_button_op_salida"
         style="@style/style_button_text_size"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_op_salida" />
-
+
     <Button
         android:id="@+id/sm_button_op_estiva"
         style="@style/style_button_text_size"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_op_estiva" />
-
+
     <Button
         android:id="@+id/sm_button_menu_exit"
         style="@style/style_button_text_size"

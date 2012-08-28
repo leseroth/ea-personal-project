@@ -1,14 +1,13 @@
 package com.itconsultores.colfrigos.android;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Util;
 
 public class FormOutActivity extends AbstractForm {
 
@@ -43,15 +42,14 @@ public class FormOutActivity extends AbstractForm {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
 				if (menuOption == null) {
-					Intent intentMenu = new Intent(this, MenuActivity.class);
-					startActivity(intentMenu);
+					Util.showMessage(this, R.string.label_info,
+							"No se encontraron movimientos");
 				} else {
 					Control.setSelectedOption(menuOption);
 					goTo(WarehouseActivity.class);
 				}
 			} else {
-				Toast toast = Toast.makeText(this, out, Toast.LENGTH_LONG);
-				toast.show();
+				Util.showMessage(this, R.string.label_error, out);
 			}
 		}
 	}

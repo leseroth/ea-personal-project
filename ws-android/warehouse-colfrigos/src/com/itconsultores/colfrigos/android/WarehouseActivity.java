@@ -12,11 +12,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Util;
 import com.itconsultores.colfrigos.dto.AbstractCell;
 import com.itconsultores.colfrigos.dto.Car;
 import com.itconsultores.colfrigos.dto.Movement;
@@ -35,6 +35,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	private int carNumber;
 	private TextView inColor;
 	private TextView outColor;
+	private Resources res;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,13 +71,17 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		// Ajustar el titulo
 		titleText.setText(selected.getTextId());
 
+		// Pintar la bodega
 		setWarehouseStatus();
 
 		// Ajustar subtitulo
-		Resources res = getResources();
+		res = getResources();
 		subTitleText.setText(res.getString(R.string.label_car) + " "
 				+ carNumber + " - " + res.getString(R.string.label_side) + " "
 				+ carSide);
+
+		Util.showMessage(this, R.string.label_info, "Debe realizar "
+				+ Control.getMovementList().size() + " Movimientos");
 	}
 
 	private void setWarehouseStatus() {
@@ -106,6 +111,15 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 		for (MovementDetail md : currentMovement.getMovementDetails()) {
 			paintCell(md);
+
+			switch (md.getMovementType()) {
+			case IN:
+				inColor.setText(md.getLabel());
+				break;
+			case OUT:
+				outColor.setText(md.getLabel());
+				break;
+			}
 		}
 	}
 
@@ -132,11 +146,6 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 			if (nextMenu == null) {
 				selectedIntent = new Intent(this, MenuActivity.class);
 			} else {
-				Toast toast = Toast.makeText(this, "Todavia quedan "
-						+ Control.getMovementList().size() + " Movimientos",
-						Toast.LENGTH_LONG);
-				toast.show();
-
 				Control.setSelectedOption(nextMenu);
 				selectedIntent = new Intent(this, WarehouseActivity.class);
 			}
@@ -146,10 +155,8 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 			if (Control.getMovementList().isEmpty()) {
 				selectedIntent = new Intent(this, MenuActivity.class);
 			} else {
-				Toast toast = Toast.makeText(this,
-						"Debe finalizar el movimiento actual",
-						Toast.LENGTH_LONG);
-				toast.show();
+				Util.showMessage(this, R.string.label_info,
+						"Debe finalizar el movimiento actual");
 			}
 		}
 

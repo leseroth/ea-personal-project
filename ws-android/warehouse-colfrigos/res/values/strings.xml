@@ -25,6 +25,12 @@
     
     <string name="label_no">No</string>
     
+    <string name="label_ok">OK</string>
+    
+    <string name="label_info">Atención</string>
+    
+    <string name="label_error">Error</string>
+    
     <string name="label_ask_entrada">Ir a la pantalla de entrada?</string>
 
     <string name="label_screen_application">Colfrigos</string>
