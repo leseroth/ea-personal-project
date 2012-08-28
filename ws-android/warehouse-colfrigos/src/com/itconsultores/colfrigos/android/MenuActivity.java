@@ -14,7 +14,6 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 	private Button buttonOpEntrada;
 	private Button buttonOpSalida;
-	private Button buttonOpEntradaSalida;
 	private Button buttonOpEstiva;
 	private Button buttonExit;
 
@@ -25,13 +24,11 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 		buttonOpEntrada = (Button) findViewById(R.id.sm_button_op_entrada);
 		buttonOpSalida = (Button) findViewById(R.id.sm_button_op_salida);
-		buttonOpEntradaSalida = (Button) findViewById(R.id.sm_button_op_entrada_salida);
 		buttonOpEstiva = (Button) findViewById(R.id.sm_button_op_estiva);
 		buttonExit = (Button) findViewById(R.id.sm_button_menu_exit);
 
 		buttonOpEntrada.setOnClickListener(this);
 		buttonOpSalida.setOnClickListener(this);
-		buttonOpEntradaSalida.setOnClickListener(this);
 		buttonOpEstiva.setOnClickListener(this);
 		buttonExit.setOnClickListener(this);
 	}
@@ -46,8 +43,6 @@ public class MenuActivity extends Activity implements OnClickListener {
 		} else if (view.equals(buttonOpSalida)) {
 			Control.setSelectedOption(MenuOption.Salida);
 			selectedIntent = new Intent(this, FormOutActivity.class);
-		} else if (view.equals(buttonOpEntradaSalida)) {
-			selectedIntent = new Intent(this, FormInOutActivity.class);
 		} else if (view.equals(buttonOpEstiva)) {
 			selectedIntent = new Intent(this, FormEstivaActivity.class);
 		}

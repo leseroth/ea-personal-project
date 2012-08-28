@@ -8,23 +8,26 @@
 
     <TextView
         android:id="@+id/label_entrada_salida_title"
+        style="@style/style_label_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/label_op_entrada_salida"
-        android:layout_margin="10dip" />
+        android:layout_margin="10dip"
+        android:text="@string/label_op_entrada_salida" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dip" >
-
+
         <TextView
             android:id="@+id/f_inout_label_position"
-            android:gravity="left"
-            android:layout_width="100dip"
+            style="@style/style_label_text_size"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_position" />
+            android:gravity="left"
+            android:text="@string/label_position"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/f_inout_textbox_position"
@@ -44,15 +47,19 @@
 
         <Button
             android:id="@+id/f_inout_button_confirm"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_confirm" />
+            android:text="@string/label_confirm"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/f_inout_button_back"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_back" />
+            android:text="@string/label_back"
+            android:textSize="20sp" />
     </LinearLayout>
 
 </LinearLayout>

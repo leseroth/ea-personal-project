@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
-import com.itconsultores.colfrigos.control.Constants.StatusColor;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.dto.AbstractCell;
 import com.itconsultores.colfrigos.dto.Car;
@@ -34,6 +33,8 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 	private transient Movement currentMovement;
 	private String carSide;
 	private int carNumber;
+	private TextView inColor;
+	private TextView outColor;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		LinearLayout firstRow = (LinearLayout) warehouseGrid.getChildAt(0);
 		maxColumn = firstRow.getChildCount();
 
+		inColor = (TextView) findViewById(R.id.warehouseInColor);
+		outColor = (TextView) findViewById(R.id.warehouseOutColor);
+
 		Log.i(Constants.LOG_DEBUG, "Max rows : " + maxRow);
 		Log.i(Constants.LOG_DEBUG, "Max column : " + maxColumn);
 	}
@@ -62,33 +66,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		MenuOption selected = Control.getSelectedOption();
 		TextView titleText = (TextView) findViewById(R.id.label_warehouse_title);
 		TextView subTitleText = (TextView) findViewById(R.id.label_warehouse_subtitle);
-		TextView inText = (TextView) findViewById(R.id.warehouseInText);
-		TextView inColor = (TextView) findViewById(R.id.warehouseInColor);
-		TextView outText = (TextView) findViewById(R.id.warehouseOutText);
-		TextView outColor = (TextView) findViewById(R.id.warehouseOutColor);
 
 		// Ajustar el titulo
 		titleText.setText(selected.getTextId());
-
-		// Mostrar Ingresar
-		if (selected.isMostrarIngresar()) {
-			inText.setVisibility(TextView.VISIBLE);
-			inColor.setVisibility(TextView.VISIBLE);
-			inColor.setBackgroundColor(StatusColor.IN.getColor());
-		} else {
-			inText.setVisibility(TextView.INVISIBLE);
-			inColor.setVisibility(TextView.INVISIBLE);
-		}
-
-		// Mostrar Salir
-		if (selected.isMostrarSalida()) {
-			outText.setVisibility(TextView.VISIBLE);
-			outColor.setVisibility(TextView.VISIBLE);
-			outColor.setBackgroundColor(StatusColor.OUT.getColor());
-		} else {
-			outText.setVisibility(TextView.INVISIBLE);
-			outColor.setVisibility(TextView.INVISIBLE);
-		}
 
 		setWarehouseStatus();
 
@@ -138,7 +118,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 					"No se encuentra " + (maxRow - 1 - ac.getRow()) + " "
 							+ ac.getColumn());
 		} else {
-			text.setBackgroundColor(ac.getColor());
+			text.setBackgroundResource(ac.getColor());
 		}
 	}
 
