@@ -55,6 +55,8 @@
     
     <string name="label_back">Regresar</string>
     
+    <string name="label_revalidate">Revalidar</string>
+    
     <string name="label_car">Carro</string>
     
     <string name="label_side">Lado</string>
