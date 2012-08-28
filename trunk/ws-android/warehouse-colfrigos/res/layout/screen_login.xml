@@ -8,11 +8,12 @@
 
     <TextView
         android:id="@+id/label_warehouse_title"
+        style="@style/style_label_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/label_screen_application"
-        android:layout_margin="10dip" />
+        android:layout_margin="10dip"
+        android:text="@string/label_screen_application" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -21,9 +22,10 @@
 
         <TextView
             android:id="@+id/sl_label_username"
-            android:gravity="left"
-            android:layout_width="100dip"
+            style="@style/style_label_text_size"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="@string/label_username" />
 
         <EditText
@@ -44,9 +46,10 @@
 
         <TextView
             android:id="@+id/sl_label_password"
-            android:gravity="left"
-            android:layout_width="100dip"
+            style="@style/style_label_text_size"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:text="@string/label_password" />
 
         <EditText
@@ -64,15 +67,18 @@
 
         <Button
             android:id="@+id/sl_button_login"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
             android:text="@string/label_login" />
 
         <Button
             android:id="@+id/sl_button_exit"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
             android:text="@string/label_exit" />
+
     </LinearLayout>
 
 </LinearLayout>

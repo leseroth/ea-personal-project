@@ -5,26 +5,30 @@
     android:orientation="vertical"
     android:padding="10dip"
     android:weightSum="0" >
-
+
     <TextView
         android:id="@+id/label_entrada_title"
+        style="@style/style_label_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="10dip"
         android:text="@string/label_op_entrada"
-        android:layout_margin="10dip" />
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dip" >
-
+
         <TextView
             android:id="@+id/f_in_label_client"
-            android:gravity="left"
-            android:layout_width="100dip"
+            style="@style/style_label_text_size"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_client" />
+            android:gravity="left"
+            android:text="@string/label_client"
+            android:textSize="25sp" />
 
         <Spinner
             android:id="@+id/f_in_spinner_client"
@@ -37,13 +41,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dip" >
-
+
         <TextView
             android:id="@+id/f_in_label_weight"
-            android:gravity="left"
+            style="@style/style_label_text_size"
             android:layout_width="100dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_weight" />
+            android:gravity="left"
+            android:text="@string/label_weight"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/f_in_textbox_weight"
@@ -59,18 +65,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center" >
-
+
         <Button
             android:id="@+id/f_in_button_confirm"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_confirm" />
-
+            android:text="@string/label_confirm"
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/f_in_button_back"
-            android:layout_width="150dip"
+            style="@style/style_button_text_size"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
-            android:text="@string/label_back" />
+            android:text="@string/label_back"
+            android:textSize="20sp" />
+
     </LinearLayout>
 
 </LinearLayout>

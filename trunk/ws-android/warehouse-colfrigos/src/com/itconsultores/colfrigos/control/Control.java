@@ -50,7 +50,7 @@ public class Control {
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
-	private static boolean debug = false;
+	private static boolean debug = true;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;

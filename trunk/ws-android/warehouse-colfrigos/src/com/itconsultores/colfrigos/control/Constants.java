@@ -1,7 +1,5 @@
 package com.itconsultores.colfrigos.control;
 
-import android.graphics.Color;
-
 import com.itconsultores.colfrigos.android.R;
 
 public class Constants {
@@ -39,33 +37,15 @@ public class Constants {
 	public static final String LOG_DEBUG = "debug info";
 
 	public enum MenuOption {
-		Entrada(R.string.label_op_entrada, true, false), //
-		Salida(R.string.label_op_salida, false, true), //
+		Entrada(R.string.label_op_entrada), //
+		Salida(R.string.label_op_salida), //
 		EntradaSalida(R.string.label_op_entrada_salida), //
 		Estiva(R.string.label_op_estiva); //
 
 		private int textId;
-		private boolean mostrarIngresar;
-		private boolean mostrarSalida;
 
 		private MenuOption(int text) {
 			textId = text;
-			mostrarIngresar = true;
-			mostrarSalida = true;
-		}
-
-		private MenuOption(int text, boolean ing, boolean sal) {
-			textId = text;
-			mostrarIngresar = ing;
-			mostrarSalida = sal;
-		}
-
-		public boolean isMostrarIngresar() {
-			return mostrarIngresar;
-		}
-
-		public boolean isMostrarSalida() {
-			return mostrarSalida;
 		}
 
 		public int getTextId() {
@@ -114,16 +94,16 @@ public class Constants {
 	}
 
 	public enum StatusColor {
-		INEXISTENT("#000000"), //
-		FREE("#9bd69b"), //
-		FILLED("#b9cde5"), //
-		IN("#ff6600"), //
-		OUT("#ffff00");
+		INEXISTENT(R.color.color_style_warehouse_cell), //
+		FREE(R.color.color_style_warehouse_cell_free), //
+		FILLED(R.color.color_style_warehouse_cell_filled), //
+		IN(R.color.color_style_warehouse_cell_in), //
+		OUT(R.color.color_style_warehouse_cell_out);
 
 		private int color;
 
-		private StatusColor(String colorString) {
-			color = Color.parseColor(colorString);
+		private StatusColor(int colorResource) {
+			color = colorResource;
 		}
 
 		public int getColor() {

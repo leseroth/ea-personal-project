@@ -53,4 +53,14 @@
     
     <string name="label_side">Lado</string>
     
+    <color name="color_style_warehouse_cell">#000000</color>
+    
+    <color name="color_style_warehouse_cell_free">#9bd69b</color>
+    
+    <color name="color_style_warehouse_cell_filled">#b9cde5</color>
+    
+    <color name="color_style_warehouse_cell_in">#ff6600</color>
+    
+    <color name="color_style_warehouse_cell_out">#ffff00</color>
+    
 </resources>

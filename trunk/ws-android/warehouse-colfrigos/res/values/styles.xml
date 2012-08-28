@@ -6,29 +6,12 @@
         <item name="android:layout_marginBottom">1dip</item>
         <item name="android:layout_marginRight">1dip</item>
     </style>
+
+    <style name="style_button_text_size" parent="android:Widget.Button">
+        <item name="android:textSize">20sp</item>
+    </style>
     
-    <style name="style_warehouse_cell_free" parent="android:Widget.TextView">
-        <item name="android:background">#9bd69b</item>
-        <item name="android:layout_marginBottom">1dip</item>
-        <item name="android:layout_marginRight">1dip</item>
+    <style name="style_label_text_size" parent="android:Widget.TextView">
+        <item name="android:textSize">25sp</item>
     </style>
-
-    <style name="style_warehouse_cell_filled" parent="android:Widget.TextView">
-        <item name="android:background">#b9cde5</item>
-        <item name="android:layout_marginBottom">1dip</item>
-        <item name="android:layout_marginRight">1dip</item>
-    </style>
-
-    <style name="style_warehouse_cell_in" parent="android:Widget.TextView">
-        <item name="android:background">#ff6600</item>
-        <item name="android:layout_marginBottom">1dip</item>
-        <item name="android:layout_marginRight">1dip</item>
-    </style>
-
-    <style name="style_warehouse_cell_out" parent="android:Widget.TextView">
-        <item name="android:background">#ffff00</item>
-        <item name="android:layout_marginBottom">1dip</item>
-        <item name="android:layout_marginRight">1dip</item>
-    </style>
-
 </resources>
