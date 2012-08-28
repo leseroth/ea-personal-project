@@ -27,6 +27,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 	private Button buttonConfirm;
 	private Button buttonBack;
+	private Button buttonRevalidate;
 	private int maxRow = 0;
 	private int maxColumn = 0;
 	private LinearLayout warehouseGrid;
@@ -48,6 +49,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		buttonBack = (Button) findViewById(R.id.button_warehouse_back);
 		buttonBack.setOnClickListener(this);
 
+		buttonRevalidate = (Button) findViewById(R.id.button_warehouse_back);
+		buttonRevalidate.setOnClickListener(this);
+		
 		warehouseGrid = (LinearLayout) findViewById(R.id.warehouse_grid);
 		maxRow = warehouseGrid.getChildCount();
 		LinearLayout firstRow = (LinearLayout) warehouseGrid.getChildAt(0);
@@ -157,6 +161,22 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 			} else {
 				Util.showMessage(this, R.string.label_info,
 						"Debe finalizar el movimiento actual");
+			}
+		}else if (view.equals(buttonRevalidate)) {
+			String login = Control.doLogin(Control.getUser(), Control.getPass());
+
+			if ("".equals(login)) {
+				MenuOption menuOption = Control.getNextMovementMenu();
+
+				if (menuOption == null) {
+					selectedIntent = new Intent(this,MenuActivity.class);
+				} else {
+					Control.setSelectedOption(menuOption);
+					selectedIntent = new Intent(this,WarehouseActivity.class);
+				}
+
+			} else {
+				Util.showMessage(this, R.string.label_login, login);
 			}
 		}
 
