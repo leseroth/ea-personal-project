@@ -1493,6 +1493,14 @@
                     android:layout_height="40dip"
                     android:gravity="center"
                     android:text="@string/label_back" />
+                
+                <Button
+                    android:id="@+id/button_warehouse_revalidate"
+                    style="@style/style_button_text_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dip"
+                    android:gravity="center"
+                    android:text="@string/label_revalidate" />
 
             </TableRow>
         </TableLayout>
