@@ -181,8 +181,29 @@ public class Control {
 
 	public static MenuOption confirmMovement(Movement movement) {
 		movementList.remove(movement);
-		// TODO Hernan LLamar a la url que confirma movimientos
 
+		String result = "Error de comunicacion con el servidor";
+
+		try {
+			String url = Constants.CONFIRM_URL + "login=" + user
+					+ "&pwd=" + pass+"&movementId="+movement.getId();
+			Log.i(LOG_DEBUG, url);
+
+			String xml = null;
+			if (debug) {
+				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+			} else {
+				xml = XMLParser.getXMLFromUrl(url);
+			}
+
+			
+		} catch (IllegalArgumentException e) {
+			result = "Error en los datos recibidos";
+		} catch (Exception e) {
+			result = "Error en la comunicacion";
+		}
+
+		
 		return getNextMovementMenu();
 	}
 
