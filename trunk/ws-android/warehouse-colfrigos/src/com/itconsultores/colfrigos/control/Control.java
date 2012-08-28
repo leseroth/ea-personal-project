@@ -70,43 +70,45 @@ public class Control {
 
 	public static String doLogin(String username, String password) {
 		String result = "Error de comunicacion con el servidor";
-		String url = Constants.LOGIN_URL + "login=" + username + "&password="
-				+ password;
-		Log.i(LOG_DEBUG, url);
 
-		String xml = null;
-		if (debug) {
-			xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
-		} else {
-			xml = XMLParser.getXMLFromUrl(url);
-		}
+		try {
+			String url = Constants.LOGIN_URL + "login=" + username
+					+ "&password=" + password;
+			Log.i(LOG_DEBUG, url);
 
-		if (xml == null) {
-			return result;
-		}
-		Document doc = XMLParser.XMLfromString(xml);
-		if (doc == null) {
-			return result;
-		}
+			String xml = null;
+			if (debug) {
+				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+			} else {
+				xml = XMLParser.getXMLFromUrl(url);
+			}
 
-		user = username;
-		pass = password;
+			Document doc = XMLParser.XMLfromString(xml);
 
-		Log.i(LOG_DEBUG, "Realizando login");
-		NodeList error = doc.getElementsByTagName(KEY_ERROR);
-		result = XMLParser.getElementValue(error.item(0));
+			user = username;
+			pass = password;
 
-		if ("".equals(result)) {
-			// Cargar el listado de carros
-			setCarList(doc);
-			// Cargar el listado de movimientos
-			setMovementsList(doc);
-			// Cargar el listado de clientes
-			setClientList(doc);
+			Log.i(LOG_DEBUG, "Realizando login");
+			NodeList error = doc.getElementsByTagName(KEY_ERROR);
+			result = XMLParser.getElementValue(error.item(0));
 
-			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
-			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
-			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+			if ("".equals(result)) {
+				// Cargar el listado de carros
+				setCarList(doc);
+				// Cargar el listado de movimientos
+				setMovementsList(doc);
+				// Cargar el listado de clientes
+				setClientList(doc);
+
+				Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
+				Log.i(Constants.LOG_DEBUG,
+						"Movement Total " + movementList.size());
+				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+			}
+		} catch (IllegalArgumentException e) {
+			result = "Error en los datos recibidos";
+		} catch (Exception e) {
+			result = "Error en la comunicacion";
 		}
 
 		return result;
@@ -116,50 +118,51 @@ public class Control {
 			MovementType movementType) {
 		String result = "Error de comunicacion";
 
-		String url = Constants.MOVEMENT_URL + "login=" + user + "&pwd=" + pass
-				+ "&type=" + movementType.getMovementType();
+		try {
+			String url = Constants.MOVEMENT_URL + "login=" + user + "&pwd="
+					+ pass + "&type=" + movementType.getMovementType();
 
-		switch (movementType) {
-		case IN:
-			url += "&weight=" + weight + "&clientId=" + clientId + "&tag=0";
-			break;
+			switch (movementType) {
+			case IN:
+				url += "&weight=" + weight + "&clientId=" + clientId + "&tag=0";
+				break;
 
-		case OUT:
-			url += "&tag=" + tag + "&weight=0&clientId=0";
-			break;
-		}
-		Log.i(LOG_DEBUG, url);
+			case OUT:
+				url += "&tag=" + tag + "&weight=0&clientId=0";
+				break;
+			}
+			Log.i(LOG_DEBUG, url);
 
-		String xml = null;
-		if (debug) {
-			xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
-		} else {
-			xml = XMLParser.getXMLFromUrl(url);
-		}
+			String xml = null;
+			if (debug) {
+				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+			} else {
+				xml = XMLParser.getXMLFromUrl(url);
+			}
 
-		if (xml == null) {
-			return result;
-		}
-		Document doc = XMLParser.XMLfromString(xml);
-		if (doc == null) {
-			return result;
-		}
+			Document doc = XMLParser.XMLfromString(xml);
 
-		Log.i(LOG_DEBUG, "Realizando login");
-		NodeList error = doc.getElementsByTagName(KEY_ERROR);
-		result = XMLParser.getElementValue(error.item(0));
+			Log.i(LOG_DEBUG, "Realizando login");
+			NodeList error = doc.getElementsByTagName(KEY_ERROR);
+			result = XMLParser.getElementValue(error.item(0));
 
-		if ("".equals(result)) {
-			// Cargar el listado de carros
-			setCarList(doc);
-			// Cargar el listado de movimientos
-			setMovementsList(doc);
-			// Cargar el listado de clientes
-			setClientList(doc);
+			if ("".equals(result)) {
+				// Cargar el listado de carros
+				setCarList(doc);
+				// Cargar el listado de movimientos
+				setMovementsList(doc);
+				// Cargar el listado de clientes
+				setClientList(doc);
 
-			Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
-			Log.i(Constants.LOG_DEBUG, "Movement Total " + movementList.size());
-			Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+				Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
+				Log.i(Constants.LOG_DEBUG,
+						"Movement Total " + movementList.size());
+				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
+			}
+		} catch (IllegalArgumentException e) {
+			result = "Error en los datos recibidos";
+		} catch (Exception e) {
+			result = "Error en la comunicacion";
 		}
 
 		return result;

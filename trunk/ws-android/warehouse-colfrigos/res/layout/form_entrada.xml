@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="10dip"
     android:weightSum="0" >
-
+
     <TextView
         android:id="@+id/label_entrada_title"
         style="@style/style_label_text_size"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dip" >
-
+
         <TextView
             android:id="@+id/f_in_label_client"
             style="@style/style_label_text_size"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dip" >
-
+
         <TextView
             android:id="@+id/f_in_label_weight"
             style="@style/style_label_text_size"
@@ -50,7 +50,7 @@
             android:gravity="left"
             android:text="@string/label_weight"
             android:textSize="25sp" />
-
+
         <EditText
             android:id="@+id/f_in_textbox_weight"
             android:layout_width="250dip"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center" >
-
+
         <Button
             android:id="@+id/f_in_button_confirm"
             style="@style/style_button_text_size"
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:text="@string/label_confirm"
             android:textSize="20sp" />
-
+
         <Button
             android:id="@+id/f_in_button_back"
             style="@style/style_button_text_size"
