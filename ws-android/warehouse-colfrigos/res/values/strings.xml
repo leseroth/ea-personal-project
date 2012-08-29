@@ -42,6 +42,8 @@
     <string name="label_op_entrada_salida">Entrada - Salida</string>
 
     <string name="label_op_estiva">Calculo de Estiva</string>
+    
+    <string name="label_op_buscar_programa">Buscar programaciones pendientes</string>
 
     <string name="label_pos_disponible">Posición Disponible</string>
 
