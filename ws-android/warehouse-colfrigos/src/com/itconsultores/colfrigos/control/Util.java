@@ -12,7 +12,7 @@ public class Util {
 		infoAlert.setIcon(android.R.drawable.ic_dialog_alert);
 		infoAlert.setTitle(title);
 		infoAlert.setMessage(message);
-		infoAlert.setPositiveButton(R.string.label_yes, null);
+		infoAlert.setPositiveButton(R.string.label_ok, null);
 		infoAlert.show();
 	}
 }

@@ -49,9 +49,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		buttonBack = (Button) findViewById(R.id.button_warehouse_back);
 		buttonBack.setOnClickListener(this);
 
-		buttonRevalidate = (Button) findViewById(R.id.button_warehouse_back);
+		buttonRevalidate = (Button) findViewById(R.id.button_warehouse_revalidate);
 		buttonRevalidate.setOnClickListener(this);
-		
+
 		warehouseGrid = (LinearLayout) findViewById(R.id.warehouse_grid);
 		maxRow = warehouseGrid.getChildCount();
 		LinearLayout firstRow = (LinearLayout) warehouseGrid.getChildAt(0);
@@ -145,13 +145,17 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 		// Acciones al confirmar
 		if (view.equals(buttonConfirm)) {
-			MenuOption nextMenu = Control.confirmMovement(currentMovement);
+			try {
+				MenuOption nextMenu = Control.confirmMovement(currentMovement);
 
-			if (nextMenu == null) {
+				if (nextMenu == null) {
+					selectedIntent = new Intent(this, MenuActivity.class);
+				} else {
+					Control.setSelectedOption(nextMenu);
+					selectedIntent = new Intent(this, WarehouseActivity.class);
+				}
+			} catch (Exception e) {
 				selectedIntent = new Intent(this, MenuActivity.class);
-			} else {
-				Control.setSelectedOption(nextMenu);
-				selectedIntent = new Intent(this, WarehouseActivity.class);
 			}
 		}
 
@@ -162,21 +166,24 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 				Util.showMessage(this, R.string.label_info,
 						"Debe finalizar el movimiento actual");
 			}
-		}else if (view.equals(buttonRevalidate)) {
-			String login = Control.doLogin(Control.getUser(), Control.getPass());
+		}
+
+		else if (view.equals(buttonRevalidate)) {
+			String login = Control
+					.doLogin(Control.getUser(), Control.getPass());
 
 			if ("".equals(login)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
 				if (menuOption == null) {
-					selectedIntent = new Intent(this,MenuActivity.class);
+					selectedIntent = new Intent(this, MenuActivity.class);
 				} else {
 					Control.setSelectedOption(menuOption);
-					selectedIntent = new Intent(this,WarehouseActivity.class);
+					selectedIntent = new Intent(this, WarehouseActivity.class);
 				}
-
 			} else {
-				Util.showMessage(this, R.string.label_login, login);
+				Control.errorMessage = login;
+				selectedIntent = new Intent(this, MenuActivity.class);
 			}
 		}
 

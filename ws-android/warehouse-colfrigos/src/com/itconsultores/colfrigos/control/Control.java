@@ -50,6 +50,7 @@ public class Control {
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
+	public static String errorMessage;
 	private static boolean debug = true;
 
 	public static MenuOption getSelectedOption() {
@@ -179,14 +180,15 @@ public class Control {
 		return nextMenu;
 	}
 
-	public static MenuOption confirmMovement(Movement movement) {
+	public static MenuOption confirmMovement(Movement movement)
+			throws Exception {
 		movementList.remove(movement);
 
-		String result = "Error de comunicacion con el servidor";
-
+		String result = null;
+		errorMessage = null;
 		try {
-			String url = Constants.CONFIRM_URL + "login=" + user
-					+ "&pwd=" + pass+"&movementId="+movement.getId();
+			String url = Constants.CONFIRM_URL + "login=" + user + "&pwd="
+					+ pass + "&movementId=" + movement.getId();
 			Log.i(LOG_DEBUG, url);
 
 			String xml = null;
@@ -196,14 +198,20 @@ public class Control {
 				xml = XMLParser.getXMLFromUrl(url);
 			}
 
-			
+			Document doc = XMLParser.XMLfromString(xml);
+			NodeList error = doc.getElementsByTagName(KEY_ERROR);
+			result = XMLParser.getElementValue(error.item(0));
 		} catch (IllegalArgumentException e) {
 			result = "Error en los datos recibidos";
 		} catch (Exception e) {
 			result = "Error en la comunicacion";
 		}
 
-		
+		if (!"".equals(result)) {
+			errorMessage = result;
+			throw new Exception(result);
+		}
+
 		return getNextMovementMenu();
 	}
 

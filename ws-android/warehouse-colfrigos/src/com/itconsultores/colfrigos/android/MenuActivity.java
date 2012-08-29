@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Util;
 
 public class MenuActivity extends Activity implements OnClickListener {
 
@@ -31,6 +32,11 @@ public class MenuActivity extends Activity implements OnClickListener {
 		buttonOpSalida.setOnClickListener(this);
 		buttonOpEstiva.setOnClickListener(this);
 		buttonExit.setOnClickListener(this);
+
+		if (Control.errorMessage != null) {
+			Util.showMessage(this, R.string.label_info, Control.errorMessage);
+			Control.errorMessage = null;
+		}
 	}
 
 	public void onClick(View view) {

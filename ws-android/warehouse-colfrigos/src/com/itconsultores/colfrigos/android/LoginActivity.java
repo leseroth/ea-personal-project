@@ -39,8 +39,9 @@ public class LoginActivity extends AbstractForm {
 
 	@Override
 	public void onClick(View view) {
-		if (isInfoComplete()) {
-			if (view.equals(buttonLogin)) {
+
+		if (view.equals(buttonLogin)) {
+			if (isInfoComplete()) {
 				String login = Control.doLogin(user, pass);
 
 				if ("".equals(login)) {
@@ -56,11 +57,13 @@ public class LoginActivity extends AbstractForm {
 				} else {
 					Util.showMessage(this, R.string.label_login, login);
 				}
-			} else if (view.equals(buttonExit)) {
-				finish();
+
+			} else {
+				Util.showMessage(this, R.string.label_login,
+						"Debe ingresar datos");
 			}
-		} else {
-			Util.showMessage(this, R.string.label_login, "Debe ingresar datos");
+		} else if (view.equals(buttonExit)) {
+			finish();
 		}
 	}
 
