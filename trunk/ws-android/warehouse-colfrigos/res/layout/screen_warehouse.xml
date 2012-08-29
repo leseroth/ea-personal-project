@@ -1413,37 +1413,39 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
-
+
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"
-                    android:text="@string/label_pos_disponible" />
+                    android:text="@string/label_pos_disponible"
+                    android:textSize="20sp" />
 
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="120dip"
                     android:layout_marginRight="20dip"
                     android:background="@color/color_style_warehouse_cell_free" />
-
+
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"
-                    android:text="@string/label_pos_ocupada" />
+                    android:text="@string/label_pos_ocupada"
+                    android:textSize="20sp" />
 
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="120dip"
                     android:layout_marginRight="20dip"
                     android:background="@color/color_style_warehouse_cell_filled" />
-
+
                 <Button
                     android:id="@+id/button_warehouse_confirm"
                     style="@style/style_button_text_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="40dip"
                     android:gravity="center"
                     android:text="@string/label_confirm" />
@@ -1453,13 +1455,14 @@
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
-
+
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"
-                    android:text="@string/label_pos_entrada" />
+                    android:text="@string/label_pos_entrada"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/warehouseInColor"
@@ -1469,13 +1472,14 @@
                     android:background="@color/color_style_warehouse_cell_in"
                     android:gravity="center"
                     android:textColor="@color/color_style_warehouse_cell" />
-
+
                 <TextView
                     style="@style/style_label_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"
-                    android:text="@string/label_pos_salida" />
+                    android:text="@string/label_pos_salida"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/warehouseOutColor"
@@ -1485,19 +1489,19 @@
                     android:background="@color/color_style_warehouse_cell_out"
                     android:gravity="center"
                     android:textColor="@color/color_style_warehouse_cell" />
-
+
                 <Button
                     android:id="@+id/button_warehouse_back"
                     style="@style/style_button_text_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="40dip"
                     android:gravity="center"
                     android:text="@string/label_back" />
-                
+                
                 <Button
                     android:id="@+id/button_warehouse_revalidate"
                     style="@style/style_button_text_size"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="40dip"
                     android:gravity="center"
                     android:text="@string/label_revalidate" />
