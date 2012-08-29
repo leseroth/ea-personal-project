@@ -20,12 +20,19 @@
         android:layout_height="wrap_content"
         android:text="@string/label_op_salida" />
 
-    <Button
+    <!-- Button
         android:id="@+id/sm_button_op_estiva"
         style="@style/style_button_text_size"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/label_op_estiva" />
+        android:text="@string/label_op_estiva" /-->
+        
+    <Button
+        android:id="@+id/sm_button_op_buscar_programa"
+        style="@style/style_button_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_buscar_programa" />
 
     <Button
         android:id="@+id/sm_button_menu_exit"

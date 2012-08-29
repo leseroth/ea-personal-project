@@ -50,8 +50,8 @@ public class Control {
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
-	public static String errorMessage;
-	private static boolean debug = true;
+	public static String message;
+	private static boolean debug = false;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;
@@ -185,7 +185,7 @@ public class Control {
 		movementList.remove(movement);
 
 		String result = null;
-		errorMessage = null;
+		message = null;
 		try {
 			String url = Constants.CONFIRM_URL + "login=" + user + "&pwd="
 					+ pass + "&movementId=" + movement.getId();
@@ -208,7 +208,7 @@ public class Control {
 		}
 
 		if (!"".equals(result)) {
-			errorMessage = result;
+			message = result;
 			throw new Exception(result);
 		}
 

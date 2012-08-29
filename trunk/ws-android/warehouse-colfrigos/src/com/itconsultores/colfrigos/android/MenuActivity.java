@@ -15,7 +15,7 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 	private Button buttonOpEntrada;
 	private Button buttonOpSalida;
-	private Button buttonOpEstiva;
+	private Button buttonOpPrograma;
 	private Button buttonExit;
 
 	@Override
@@ -25,17 +25,17 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 		buttonOpEntrada = (Button) findViewById(R.id.sm_button_op_entrada);
 		buttonOpSalida = (Button) findViewById(R.id.sm_button_op_salida);
-		buttonOpEstiva = (Button) findViewById(R.id.sm_button_op_estiva);
+		buttonOpPrograma = (Button) findViewById(R.id.sm_button_op_buscar_programa);
 		buttonExit = (Button) findViewById(R.id.sm_button_menu_exit);
 
 		buttonOpEntrada.setOnClickListener(this);
 		buttonOpSalida.setOnClickListener(this);
-		buttonOpEstiva.setOnClickListener(this);
+		buttonOpPrograma.setOnClickListener(this);
 		buttonExit.setOnClickListener(this);
 
-		if (Control.errorMessage != null) {
-			Util.showMessage(this, R.string.label_info, Control.errorMessage);
-			Control.errorMessage = null;
+		if (Control.message != null) {
+			Util.showMessage(this, R.string.label_info, Control.message);
+			Control.message = null;
 		}
 	}
 
@@ -49,8 +49,23 @@ public class MenuActivity extends Activity implements OnClickListener {
 		} else if (view.equals(buttonOpSalida)) {
 			Control.setSelectedOption(MenuOption.Salida);
 			selectedIntent = new Intent(this, FormOutActivity.class);
-		} else if (view.equals(buttonOpEstiva)) {
-			selectedIntent = new Intent(this, FormEstivaActivity.class);
+		} else if (view.equals(buttonOpPrograma)) {
+			String program = Control.doLogin(Control.getUser(),
+					Control.getPass());
+
+			if ("".equals(program)) {
+				MenuOption menuOption = Control.getNextMovementMenu();
+
+				if (menuOption == null) {
+					Util.showMessage(this, R.string.label_info,
+							"No hay nuevas programaciones");
+				} else {
+					Control.setSelectedOption(menuOption);
+					selectedIntent = new Intent(this, WarehouseActivity.class);
+				}
+			} else {
+				Util.showMessage(this, R.string.label_info, program);
+			}
 		}
 
 		if (selectedIntent != null) {

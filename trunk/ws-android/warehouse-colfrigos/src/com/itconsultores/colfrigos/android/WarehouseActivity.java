@@ -149,6 +149,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 				MenuOption nextMenu = Control.confirmMovement(currentMovement);
 
 				if (nextMenu == null) {
+					Control.message = "Programación finalizada";
 					selectedIntent = new Intent(this, MenuActivity.class);
 				} else {
 					Control.setSelectedOption(nextMenu);
@@ -182,7 +183,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 					selectedIntent = new Intent(this, WarehouseActivity.class);
 				}
 			} else {
-				Control.errorMessage = login;
+				Control.message = login;
 				selectedIntent = new Intent(this, MenuActivity.class);
 			}
 		}
