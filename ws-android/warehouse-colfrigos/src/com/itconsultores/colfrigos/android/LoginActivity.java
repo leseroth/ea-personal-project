@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.itconsultores.colfrigos.control.Connector;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
@@ -42,7 +43,7 @@ public class LoginActivity extends AbstractForm {
 
 		if (view.equals(buttonLogin)) {
 			if (isInfoComplete()) {
-				String login = Control.doLogin(user, pass);
+				String login = Connector.doLogin(user, pass);
 
 				if ("".equals(login)) {
 					MenuOption menuOption = Control.getNextMovementMenu();

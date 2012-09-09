@@ -33,6 +33,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/label_op_buscar_programa" />
+    
+    <Button
+        android:id="@+id/sm_button_op_movimiento_sin_balanceo"
+        style="@style/style_button_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_movimiento_sin_balanceo" />
 
     <Button
         android:id="@+id/sm_button_menu_exit"
@@ -41,5 +48,4 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dip"
         android:text="@string/label_exit" />
-
 </LinearLayout>

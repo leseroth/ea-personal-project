@@ -7,12 +7,14 @@
     <uses-sdk android:minSdkVersion="8" />
 
     <application
+        android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="landscape" android:debuggable="true" >
+        android:screenOrientation="landscape" >
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +23,9 @@
         </activity>
         <activity
             android:name=".MenuActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MenuFreeMovementActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".WarehouseActivity"
@@ -38,6 +43,7 @@
             android:name=".FormEstivaActivity"
             android:screenOrientation="landscape" />
     </application>
-<uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

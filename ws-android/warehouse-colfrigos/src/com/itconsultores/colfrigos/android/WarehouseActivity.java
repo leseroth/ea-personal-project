@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.itconsultores.colfrigos.control.Connector;
 import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
@@ -26,7 +27,6 @@ import com.itconsultores.colfrigos.dto.Position;
 public class WarehouseActivity extends Activity implements OnClickListener {
 
 	private Button buttonConfirm;
-	private Button buttonBack;
 	private Button buttonRevalidate;
 	private int maxRow = 0;
 	private int maxColumn = 0;
@@ -45,9 +45,6 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 		buttonConfirm = (Button) findViewById(R.id.button_warehouse_confirm);
 		buttonConfirm.setOnClickListener(this);
-
-		buttonBack = (Button) findViewById(R.id.button_warehouse_back);
-		buttonBack.setOnClickListener(this);
 
 		buttonRevalidate = (Button) findViewById(R.id.button_warehouse_revalidate);
 		buttonRevalidate.setOnClickListener(this);
@@ -146,7 +143,8 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		// Acciones al confirmar
 		if (view.equals(buttonConfirm)) {
 			try {
-				MenuOption nextMenu = Control.confirmMovement(currentMovement);
+				MenuOption nextMenu = Connector
+						.confirmMovement(currentMovement);
 
 				if (nextMenu == null) {
 					Control.message = "Programación finalizada";
@@ -160,20 +158,10 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 			}
 		}
 
-		else if (view.equals(buttonBack)) {
-			if (Control.getMovementList().isEmpty()) {
-				selectedIntent = new Intent(this, MenuActivity.class);
-			} else {
-				Util.showMessage(this, R.string.label_info,
-						"Debe finalizar el movimiento actual");
-			}
-		}
-
 		else if (view.equals(buttonRevalidate)) {
-			String login = Control
-					.doLogin(Control.getUser(), Control.getPass());
+			String result = Connector.doRevalidate();
 
-			if ("".equals(login)) {
+			if ("".equals(result)) {
 				MenuOption menuOption = Control.getNextMovementMenu();
 
 				if (menuOption == null) {
@@ -183,7 +171,7 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 					selectedIntent = new Intent(this, WarehouseActivity.class);
 				}
 			} else {
-				Control.message = login;
+				Control.message = result;
 				selectedIntent = new Intent(this, MenuActivity.class);
 			}
 		}

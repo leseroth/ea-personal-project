@@ -5,10 +5,14 @@ import com.itconsultores.colfrigos.android.R;
 public class Constants {
 
 	public static final String DEBUG_URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
-	public static final String LOGIN_URL = "http://192.168.1.17:8081/temperaturas/mobileLogin.seam?";
-	public static final String MOVEMENT_URL = "http://192.168.1.17:8081/temperaturas/movement.seam?";
-	public static final String CONFIRM_URL = "http://192.168.1.17:8081/temperaturas/confirmation.seam?";
 
+	private static final String SERVER_URL = "http://192.50.8.49:8181/temperaturas/";
+	public static final String LOGIN_URL = SERVER_URL
+			+ "mobileLogin.seam?login=<login>&password=<password>";
+	public static final String MOVEMENT_URL = SERVER_URL
+			+ "movement.seam?login=<login>&pwd=<pwd>&type=<type>&weight=<weight>&clientId=<clientId>&tag=<tag>";
+	public static final String CONFIRM_URL = SERVER_URL
+			+ "confirmation.seam?login=<login>&pwd=<pwd>&movementId=<movementId>";
 
 	protected static final String KEY_POSITIONS = "posiciones";
 	protected static final String KEY_CAR = "carro";

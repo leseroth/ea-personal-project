@@ -14,4 +14,9 @@
     <style name="style_label_text_size" parent="android:Widget.TextView">
         <item name="android:textSize">25sp</item>
     </style>
+    <style name="style_button_warehouse" parent="@style/style_button_text_size">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">20dip</item>
+        <item name="android:textSize">30sp</item>
+    </style>
 </resources>
