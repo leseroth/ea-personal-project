@@ -7,7 +7,6 @@ import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENTS;
 import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_ID;
 import static com.itconsultores.colfrigos.control.Constants.KEY_CLIENT_NAME;
 import static com.itconsultores.colfrigos.control.Constants.KEY_COORDINATE;
-import static com.itconsultores.colfrigos.control.Constants.KEY_ERROR;
 import static com.itconsultores.colfrigos.control.Constants.KEY_ID;
 import static com.itconsultores.colfrigos.control.Constants.KEY_IN;
 import static com.itconsultores.colfrigos.control.Constants.KEY_LABEL;
@@ -45,13 +44,11 @@ public class Control {
 
 	private static MenuOption selectedOption;
 	private static int calculatedWeight = -1;
-	private static String user;
-	private static String pass;
 	private static List<Car> carList;
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
+
 	public static String message;
-	private static boolean debug = false;
 
 	public static MenuOption getSelectedOption() {
 		return selectedOption;
@@ -69,106 +66,6 @@ public class Control {
 		calculatedWeight = basket * box;
 	}
 
-	public static String doLogin(String username, String password) {
-		String result = "Error de comunicacion con el servidor";
-
-		try {
-			String url = Constants.LOGIN_URL + "login=" + username
-					+ "&password=" + password;
-			Log.i(LOG_DEBUG, url);
-
-			String xml = null;
-			if (debug) {
-				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
-			} else {
-				xml = XMLParser.getXMLFromUrl(url);
-			}
-
-			Document doc = XMLParser.XMLfromString(xml);
-
-			user = username;
-			pass = password;
-
-			Log.i(LOG_DEBUG, "Realizando login");
-			NodeList error = doc.getElementsByTagName(KEY_ERROR);
-			result = XMLParser.getElementValue(error.item(0));
-
-			if ("".equals(result)) {
-				// Cargar el listado de carros
-				setCarList(doc);
-				// Cargar el listado de movimientos
-				setMovementsList(doc);
-				// Cargar el listado de clientes
-				setClientList(doc);
-
-				Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
-				Log.i(Constants.LOG_DEBUG,
-						"Movement Total " + movementList.size());
-				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
-			}
-		} catch (IllegalArgumentException e) {
-			result = "Error en los datos recibidos";
-		} catch (Exception e) {
-			result = "Error en la comunicacion";
-		}
-
-		return result;
-	}
-
-	public static String doMovement(String weight, int clientId, String tag,
-			MovementType movementType) {
-		String result = "Error de comunicacion";
-
-		try {
-			String url = Constants.MOVEMENT_URL + "login=" + user + "&pwd="
-					+ pass + "&type=" + movementType.getMovementType();
-
-			switch (movementType) {
-			case IN:
-				url += "&weight=" + weight + "&clientId=" + clientId + "&tag=0";
-				break;
-
-			case OUT:
-				url += "&tag=" + tag + "&weight=0&clientId=0";
-				break;
-			}
-			Log.i(LOG_DEBUG, url);
-
-			String xml = null;
-			if (debug) {
-				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
-			} else {
-				xml = XMLParser.getXMLFromUrl(url);
-			}
-
-			Document doc = XMLParser.XMLfromString(xml);
-
-			Log.i(LOG_DEBUG, "Realizando login");
-			NodeList error = doc.getElementsByTagName(KEY_ERROR);
-			result = XMLParser.getElementValue(error.item(0));
-
-			if ("".equals(result)) {
-				// Cargar el listado de carros
-				setCarList(doc);
-				// Cargar el listado de movimientos
-				setMovementsList(doc);
-				// Cargar el listado de clientes
-				setClientList(doc);
-
-				Log.i(Constants.LOG_DEBUG, "Car Total " + carList.size());
-				Log.i(Constants.LOG_DEBUG,
-						"Movement Total " + movementList.size());
-				Log.i(Constants.LOG_DEBUG, "Client Total " + clientList.size());
-			}
-		} catch (IllegalArgumentException e) {
-			result = "Error en los datos recibidos";
-		} catch (Exception e) {
-			result = "Error en la comunicacion";
-		}
-
-		return result;
-	}
-
 	public static MenuOption getNextMovementMenu() {
 		MenuOption nextMenu = null;
 
@@ -180,43 +77,8 @@ public class Control {
 		return nextMenu;
 	}
 
-	public static MenuOption confirmMovement(Movement movement)
-			throws Exception {
-		movementList.remove(movement);
-
-		String result = null;
-		message = null;
-		try {
-			String url = Constants.CONFIRM_URL + "login=" + user + "&pwd="
-					+ pass + "&movementId=" + movement.getId();
-			Log.i(LOG_DEBUG, url);
-
-			String xml = null;
-			if (debug) {
-				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
-			} else {
-				xml = XMLParser.getXMLFromUrl(url);
-			}
-
-			Document doc = XMLParser.XMLfromString(xml);
-			NodeList error = doc.getElementsByTagName(KEY_ERROR);
-			result = XMLParser.getElementValue(error.item(0));
-		} catch (IllegalArgumentException e) {
-			result = "Error en los datos recibidos";
-		} catch (Exception e) {
-			result = "Error en la comunicacion";
-		}
-
-		if (!"".equals(result)) {
-			message = result;
-			throw new Exception(result);
-		}
-
-		return getNextMovementMenu();
-	}
-
 	@SuppressWarnings("unused")
-	public static void setCarList(Document doc) {
+	protected static void setCarList(Document doc) {
 		carList = new ArrayList<Car>();
 
 		Node positions = doc.getElementsByTagName(KEY_POSITIONS).item(0);
@@ -268,7 +130,7 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static void setMovementsList(Document doc) {
+	protected static void setMovementsList(Document doc) {
 		movementList = new ArrayList<Movement>();
 
 		Node movements = doc.getElementsByTagName(KEY_MOVEMENTS).item(0);
@@ -339,7 +201,7 @@ public class Control {
 	}
 
 	@SuppressWarnings("unused")
-	public static void setClientList(Document doc) {
+	protected static void setClientList(Document doc) {
 		clientList = new ArrayList<Client>();
 
 		Node clients = doc.getElementsByTagName(KEY_CLIENTS).item(0);
@@ -379,14 +241,6 @@ public class Control {
 
 	public static int getCalculatedWeight() {
 		return calculatedWeight;
-	}
-
-	public static String getUser() {
-		return user;
-	}
-
-	public static String getPass() {
-		return pass;
 	}
 
 	public static List<Car> getCarList() {

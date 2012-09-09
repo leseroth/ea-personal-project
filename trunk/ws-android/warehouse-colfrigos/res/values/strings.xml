@@ -4,73 +4,66 @@
     <string name="app_name">warehouse-colfrigos-1.0.1-SNAPSHOT</string>
 
     <string name="label_username">Usuario:</string>
-
     <string name="label_password">Password:</string>
-    
+
     <string name="label_client">Cliente:</string>
-
     <string name="label_weight">Peso:</string>
-    
     <string name="label_position">Posicion:</string>
-
     <string name="label_basket">Canastas:</string>
-       
     <string name="label_box">Cajas:</string>
 
     <string name="label_login">Login</string>
-
     <string name="label_exit">Salir</string>
-    
+
     <string name="label_yes">Si</string>
-    
     <string name="label_no">No</string>
-    
     <string name="label_ok">OK</string>
-    
     <string name="label_info">Atención</string>
-    
     <string name="label_error">Error</string>
-    
     <string name="label_ask_entrada">Ir a la pantalla de entrada?</string>
 
     <string name="label_screen_application">Colfrigos</string>
-    
     <string name="label_op_entrada">Entrada</string>
-
+    <string name="label_op_entrada_sin_balanceo">Entrada sin Balanceo</string>
     <string name="label_op_salida">Salida</string>
-
+    <string name="label_op_salida_sin_balanceo">Salida sin Balanceo</string>
     <string name="label_op_entrada_salida">Entrada - Salida</string>
-
     <string name="label_op_estiva">Calculo de Estiva</string>
-    
+    <string name="label_op_balancear">Balancear Carro</string>
     <string name="label_op_buscar_programa">Buscar programaciones pendientes</string>
+    <string name="label_op_movimiento_sin_balanceo">Realizar movimientos sin balanceo</string>
 
     <string name="label_pos_disponible">Posición Disponible</string>
 
     <string name="label_pos_ocupada">Posición Ocupada</string>
-      
     <string name="label_pos_salida">Posición a Desocupar</string>
-      
     <string name="label_pos_entrada">Posición a Ingresar</string>
-      
     <string name="label_confirm">Confirmar</string>
-    
     <string name="label_back">Regresar</string>
-    
     <string name="label_revalidate">Revalidar</string>
-    
     <string name="label_car">Carro</string>
-    
     <string name="label_side">Lado</string>
-    
+
+    <string-array name="existent_car_array">
+        <item>Seleccione un Carro</item>
+        <item>Carro 1</item>
+        <item>Carro 2</item>
+        <item>Carro 3</item>
+        <item>Carro 4</item>
+        <item>Carro 5</item>
+        <item>Carro 6</item>
+        <item>Carro 7</item>
+        <item>Carro 8</item>
+        <item>Carro 9</item>
+        <item>Carro 10</item>
+        <item>Carro 11</item>
+        <item>Carro 12</item>
+        <item>Carro 13</item>
+    </string-array>
+
     <color name="color_style_warehouse_cell">#000000</color>
-    
     <color name="color_style_warehouse_cell_free">#9bd69b</color>
-    
     <color name="color_style_warehouse_cell_filled">#b9cde5</color>
-    
     <color name="color_style_warehouse_cell_in">#ff6600</color>
-    
     <color name="color_style_warehouse_cell_out">#ffff00</color>
-    
 </resources>

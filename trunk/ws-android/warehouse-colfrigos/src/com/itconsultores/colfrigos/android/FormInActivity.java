@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.itconsultores.colfrigos.control.Connector;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
@@ -50,7 +51,6 @@ public class FormInActivity extends AbstractForm {
 		clientArrayAdapter
 				.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 		clientSpinner.setAdapter(clientArrayAdapter);
-
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class FormInActivity extends AbstractForm {
 				clientId = client.getId();
 			}
 
-			String in = Control.doMovement(weight, clientId, null,
+			String in = Connector.doMovement(weight, clientId, null,
 					MovementType.IN);
 			if ("".equals(in)) {
 				MenuOption menuOption = Control.getNextMovementMenu();

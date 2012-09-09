@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="130dip"
+    android:paddingRight="130dip" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip" >
+
+        <TextView
+            android:id="@+id/sfm_label_car"
+            style="@style/style_label_text_size"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/label_car"
+            android:textSize="25sp" />
+
+        <Spinner
+            android:id="@+id/sfm_spinner_car"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"  />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sfm_button_op_entrada"
+        style="@style/style_button_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_entrada_sin_balanceo" />
+
+    <Button
+        android:id="@+id/sfm_button_op_salida"
+        style="@style/style_button_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_salida_sin_balanceo" />
+
+    <Button
+        android:id="@+id/sfm_button_op_balancear_carro"
+        style="@style/style_button_text_size"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_op_balancear" />
+
+    <Button
+        android:id="@+id/sfm_button_menu_back"
+        style="@style/style_button_text_size"
+        android:layout_width="250dip"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dip"
+        android:text="@string/label_back" />
+
+</LinearLayout>
