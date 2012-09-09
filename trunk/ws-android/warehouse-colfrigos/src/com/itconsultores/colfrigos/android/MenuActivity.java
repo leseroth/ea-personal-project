@@ -8,7 +8,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.itconsultores.colfrigos.control.Connector;
-import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
 
@@ -41,6 +40,8 @@ public class MenuActivity extends Activity implements OnClickListener {
 			Util.showMessage(this, R.string.label_info, Control.message);
 			Control.message = null;
 		}
+
+		Control.freeMovementMenu = false;
 	}
 
 	public void onClick(View view) {
@@ -51,23 +52,14 @@ public class MenuActivity extends Activity implements OnClickListener {
 		} else if (view.equals(buttonOpEntrada)) {
 			selectedIntent = new Intent(this, FormInActivity.class);
 		} else if (view.equals(buttonOpSalida)) {
-			Control.setSelectedOption(MenuOption.Salida);
 			selectedIntent = new Intent(this, FormOutActivity.class);
 		} else if (view.equals(buttonOpPrograma)) {
-			String revalidate = Connector.doRevalidate();
-
-			if ("".equals(revalidate)) {
-				MenuOption menuOption = Control.getNextMovementMenu();
-
-				if (menuOption == null) {
-					Util.showMessage(this, R.string.label_info,
-							"No hay nuevas programaciones");
-				} else {
-					Control.setSelectedOption(menuOption);
-					selectedIntent = new Intent(this, WarehouseActivity.class);
-				}
+			Class<? extends Activity> nextActivity = Connector.doRevalidate();
+			if (nextActivity == this.getClass()) {
+				Util.showMessage(this, R.string.label_info, Control.message);
+				Control.message = null;
 			} else {
-				Util.showMessage(this, R.string.label_info, revalidate);
+				selectedIntent = new Intent(this, nextActivity);
 			}
 		} else if (view.equals(buttonOpSinBalanceo)) {
 			selectedIntent = new Intent(this, MenuFreeMovementActivity.class);

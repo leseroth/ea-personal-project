@@ -10,7 +10,8 @@ public class Constants {
 	public static final String LOGIN_URL = SERVER_URL
 			+ "mobileLogin.seam?login=<login>&password=<password>";
 	public static final String MOVEMENT_URL = SERVER_URL
-			+ "movement.seam?login=<login>&pwd=<pwd>&type=<type>&weight=<weight>&clientId=<clientId>&tag=<tag>";
+			+ "movement.seam?login=<login>&pwd=<pwd>&type=<type>&weight=<weight>&"
+			+ "clientId=<clientId>&tag=<tag>&balanceo=<balanceo>&car=<car>";
 	public static final String CONFIRM_URL = SERVER_URL
 			+ "confirmation.seam?login=<login>&pwd=<pwd>&movementId=<movementId>";
 

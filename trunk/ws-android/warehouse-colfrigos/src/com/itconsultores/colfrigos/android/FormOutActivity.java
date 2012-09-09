@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.itconsultores.colfrigos.control.Connector;
-import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
@@ -15,6 +14,7 @@ public class FormOutActivity extends AbstractForm {
 	private Button buttonOk;
 	private Button buttonBack;
 	private TextView positionTextView;
+	private String position;
 
 	public FormOutActivity() {
 		super(R.layout.form_salida);
@@ -33,31 +33,30 @@ public class FormOutActivity extends AbstractForm {
 	public void onClick(View view) {
 
 		if (view.equals(buttonBack)) {
-			goTo(MenuActivity.class);
+			if (Control.freeMovementMenu) {
+				goTo(MenuFreeMovementActivity.class);
+			} else {
+				goTo(MenuActivity.class);
+			}
 		} else if (view.equals(buttonOk)) {
-
-			String position = positionTextView.getText().toString();
-			String out = Connector.doMovement(null, 0, position,
-					MovementType.OUT);
-			if ("".equals(out)) {
-				MenuOption menuOption = Control.getNextMovementMenu();
-
-				if (menuOption == null) {
-					Util.showMessage(this, R.string.label_info,
-							"No se encontraron movimientos");
-				} else {
-					Control.setSelectedOption(menuOption);
+			if (isInfoComplete()) {
+				boolean goToWarehouse = Connector.doMovement(this, null, 0,
+						position, MovementType.OUT);
+				if (goToWarehouse) {
 					goTo(WarehouseActivity.class);
+				} else if (Control.freeMovementMenu) {
+					goTo(MenuFreeMovementActivity.class);
 				}
 			} else {
-				Util.showMessage(this, R.string.label_error, out);
+				Util.showMessage(this, R.string.label_error,
+						"Debe indicar una posición");
 			}
 		}
 	}
 
 	@Override
 	protected boolean isInfoComplete() {
-		// TODO Validar Informacion
-		return true;
+		position = positionTextView.getText().toString();
+		return position != null && position.trim().length() != 0;
 	}
 }

@@ -7,7 +7,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.itconsultores.colfrigos.control.Connector;
-import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
@@ -19,7 +18,11 @@ public class FormInActivity extends AbstractForm {
 	private Button buttonBack;
 
 	private TextView weightTextView;
+	private String weight;
 	private Spinner clientSpinner;
+	private int clientId;
+	private TextView positionTextView;
+	private String position;
 
 	private String[] clientArray;
 
@@ -46,6 +49,16 @@ public class FormInActivity extends AbstractForm {
 		clientSpinner = (Spinner) findViewById(R.id.f_in_spinner_client);
 		clientArray = Control.getClientArray();
 
+		// Posicion
+		positionTextView = (TextView) findViewById(R.id.f_in_textbox_position);
+		TextView positionLabel = (TextView) findViewById(R.id.f_in_label_position);
+
+		// Solo mostrar posicion si es movimiento libre
+		int visibility = Control.freeMovementMenu ? TextView.VISIBLE
+				: TextView.INVISIBLE;
+		positionLabel.setVisibility(visibility);
+		positionTextView.setVisibility(visibility);
+
 		ArrayAdapter<String> clientArrayAdapter = new ArrayAdapter<String>(
 				this, android.R.layout.simple_spinner_item, clientArray);
 		clientArrayAdapter
@@ -57,37 +70,41 @@ public class FormInActivity extends AbstractForm {
 	public void onClick(View view) {
 
 		if (view.equals(buttonBack)) {
-			goTo(MenuActivity.class);
-		} else if (view.equals(buttonOk)) {
-			String weight = weightTextView.getText().toString();
-
-			int clientId = clientSpinner.getSelectedItemPosition();
-			if (clientId != 0) {
-				Client client = Control.getClientList().get(clientId - 1);
-				clientId = client.getId();
+			if (Control.freeMovementMenu) {
+				goTo(MenuFreeMovementActivity.class);
+			} else {
+				goTo(MenuActivity.class);
 			}
-
-			String in = Connector.doMovement(weight, clientId, null,
-					MovementType.IN);
-			if ("".equals(in)) {
-				MenuOption menuOption = Control.getNextMovementMenu();
-
-				if (menuOption == null) {
-					Util.showMessage(this, R.string.label_info,
-							"No se encontraron movimientos");
-				} else {
-					Control.setSelectedOption(menuOption);
+		} else if (view.equals(buttonOk)) {
+			if (isInfoComplete()) {
+				boolean goToWarehouse = Connector.doMovement(this, weight,
+						clientId, position, MovementType.IN);
+				if (goToWarehouse) {
 					goTo(WarehouseActivity.class);
+				} else if (Control.freeMovementMenu) {
+					goTo(MenuFreeMovementActivity.class);
 				}
 			} else {
-				Util.showMessage(this, R.string.label_error, in);
+				Util.showMessage(this, R.string.label_error,
+						"Hace falta informacion");
 			}
 		}
 	}
 
 	@Override
 	protected boolean isInfoComplete() {
-		// TODO Validar Informacion
-		return true;
+		weight = weightTextView.getText().toString();
+		position = positionTextView.getText().toString();
+		clientSpinner.getSelectedItemPosition();
+		if (clientId != 0) {
+			Client client = Control.getClientList().get(clientId - 1);
+			clientId = client.getId();
+		}
+		if (!Control.freeMovementMenu) {
+			position = "0";
+		}
+
+		return weight != null && weight.trim().length() != 0
+				&& position != null && position.trim().length() != 0;
 	}
 }

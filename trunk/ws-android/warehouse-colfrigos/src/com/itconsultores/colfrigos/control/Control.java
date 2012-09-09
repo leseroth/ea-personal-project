@@ -48,6 +48,11 @@ public class Control {
 	private static List<Movement> movementList;
 	private static List<Client> clientList;
 
+	// Valores asociados a movimientos libres
+	public static int carSelected = 0;
+	public static boolean freeMovementStarted = false;
+	public static boolean freeMovementMenu = false;
+
 	public static String message;
 
 	public static MenuOption getSelectedOption() {

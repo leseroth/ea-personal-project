@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dip" >
+        android:layout_margin="10dip"  >
 
         <TextView
             android:id="@+id/f_in_label_weight"
@@ -58,6 +58,29 @@
             android:ems="25"
             android:inputType="number" >
 
+        </EditText>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip" >
+
+        <TextView
+            android:id="@+id/f_in_label_position"
+            style="@style/style_label_text_size"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="@string/label_position"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/f_in_textbox_position"
+            android:layout_width="250dip"
+            android:layout_height="wrap_content"
+            android:ems="25"
+            android:inputType="text" >
         </EditText>
     </LinearLayout>
 
