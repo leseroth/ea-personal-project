@@ -1,6 +1,7 @@
 package com.itconsultores.colfrigos.android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.itconsultores.colfrigos.control.Connector;
 import com.itconsultores.colfrigos.control.Constants;
+import com.itconsultores.colfrigos.control.Control;
+import com.itconsultores.colfrigos.control.Util;
 
 public class MenuFreeMovementActivity extends Activity implements
 		OnClickListener, OnItemSelectedListener {
@@ -20,7 +24,7 @@ public class MenuFreeMovementActivity extends Activity implements
 	private Button buttonOpEntradaSinBalanceo;
 	private Button buttonOpSalidaSinBalanceo;
 	private Button buttonOpBalancear;
-	private Button buttonVolver;
+	private Button buttonBack;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,45 +35,75 @@ public class MenuFreeMovementActivity extends Activity implements
 		buttonOpEntradaSinBalanceo = (Button) findViewById(R.id.sfm_button_op_entrada);
 		buttonOpSalidaSinBalanceo = (Button) findViewById(R.id.sfm_button_op_salida);
 		buttonOpBalancear = (Button) findViewById(R.id.sfm_button_op_balancear_carro);
-		buttonVolver = (Button) findViewById(R.id.sfm_button_menu_back);
+		buttonBack = (Button) findViewById(R.id.sfm_button_menu_back);
 
 		buttonOpEntradaSinBalanceo.setOnClickListener(this);
 		buttonOpSalidaSinBalanceo.setOnClickListener(this);
 		buttonOpBalancear.setOnClickListener(this);
-		buttonVolver.setOnClickListener(this);
+		buttonBack.setOnClickListener(this);
 
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.existent_car_array,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		carSpinner.setAdapter(adapter);
+		carSpinner.setSelection(Control.carSelected);
 
 		// Agregar el listener al final o va a pensar que el valor por defecto
 		// fue seleccion
 		carSpinner.setOnItemSelectedListener(this);
+		setMenuStatus();
 
-		setStatus(false);
+		if (Control.message != null) {
+			Util.showMessage(this, R.string.label_info, Control.message);
+			Control.message = null;
+		}
+
+		Control.freeMovementMenu = true;
 	}
 
-	private void setStatus(boolean carSelected) {
-		carSpinner.setEnabled(!carSelected);
-		buttonOpEntradaSinBalanceo.setEnabled(carSelected);
-		buttonOpSalidaSinBalanceo.setEnabled(carSelected);
-		buttonOpBalancear.setEnabled(carSelected);
-		buttonVolver.setEnabled(!carSelected);
+	private void setMenuStatus() {
+		carSpinner.setEnabled(Control.carSelected == 0
+				|| !Control.freeMovementStarted);
+		buttonOpEntradaSinBalanceo.setEnabled(Control.carSelected != 0);
+		buttonOpSalidaSinBalanceo.setEnabled(Control.carSelected != 0);
+		buttonOpBalancear.setEnabled(Control.carSelected != 0);
+		buttonBack.setEnabled(Control.carSelected == 0
+				|| !Control.freeMovementStarted);
 	}
 
 	@Override
 	public void onClick(View view) {
+		Intent selectedIntent = null;
+
+		if (view.equals(buttonBack)) {
+			selectedIntent = new Intent(this, MenuActivity.class);
+		} else if (view.equals(buttonOpEntradaSinBalanceo)) {
+			selectedIntent = new Intent(this, FormInActivity.class);
+		} else if (view.equals(buttonOpSalidaSinBalanceo)) {
+			selectedIntent = new Intent(this, FormOutActivity.class);
+		} else if (view.equals(buttonOpBalancear)) {
+			Class<? extends Activity> nextActivity = Connector.doRevalidate();
+			if (nextActivity == this.getClass()) {
+				Util.showMessage(this, R.string.label_info, Control.message);
+				Control.message = null;
+			} else {
+				selectedIntent = new Intent(this, nextActivity);
+			}
+		}
+
+		if (selectedIntent != null) {
+			finish();
+			startActivity(selectedIntent);
+		}
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
 		Log.i(Constants.LOG_DEBUG, "Carro Seleccionado " + pos);
-		if (pos != 0) {
-			setStatus(true);
-		}
+		Control.carSelected = pos;
+		setMenuStatus();
 	}
 
 	@Override

@@ -148,7 +148,14 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 
 				if (nextMenu == null) {
 					Control.message = "Programación finalizada";
-					selectedIntent = new Intent(this, MenuActivity.class);
+					Control.carSelected = 0;
+					Control.freeMovementStarted = false;
+					if (Control.freeMovementMenu) {
+						selectedIntent = new Intent(this,
+								MenuFreeMovementActivity.class);
+					} else {
+						selectedIntent = new Intent(this, MenuActivity.class);
+					}
 				} else {
 					Control.setSelectedOption(nextMenu);
 					selectedIntent = new Intent(this, WarehouseActivity.class);
@@ -159,21 +166,8 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 
 		else if (view.equals(buttonRevalidate)) {
-			String result = Connector.doRevalidate();
-
-			if ("".equals(result)) {
-				MenuOption menuOption = Control.getNextMovementMenu();
-
-				if (menuOption == null) {
-					selectedIntent = new Intent(this, MenuActivity.class);
-				} else {
-					Control.setSelectedOption(menuOption);
-					selectedIntent = new Intent(this, WarehouseActivity.class);
-				}
-			} else {
-				Control.message = result;
-				selectedIntent = new Intent(this, MenuActivity.class);
-			}
+			Class<? extends Activity> nextActivity = Connector.doRevalidate();
+			selectedIntent = new Intent(this, nextActivity);
 		}
 
 		if (selectedIntent != null) {

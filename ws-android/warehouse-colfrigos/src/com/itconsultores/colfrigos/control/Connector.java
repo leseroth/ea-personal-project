@@ -6,8 +6,14 @@ import static com.itconsultores.colfrigos.control.Constants.LOG_DEBUG;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import android.app.Activity;
 import android.util.Log;
 
+import com.itconsultores.colfrigos.android.AbstractForm;
+import com.itconsultores.colfrigos.android.MenuActivity;
+import com.itconsultores.colfrigos.android.MenuFreeMovementActivity;
+import com.itconsultores.colfrigos.android.R;
+import com.itconsultores.colfrigos.android.WarehouseActivity;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.dto.Movement;
@@ -18,12 +24,34 @@ public class Connector {
 
 	private static final boolean debug = true;
 
-	public static String doRevalidate() {
-		return doLogin(user, pass);
+	public static Class<? extends Activity> doRevalidate() {
+		Control.message = null;
+		String result = doLogin(user, pass);
+		Class<? extends Activity> menu = Control.freeMovementMenu ? MenuFreeMovementActivity.class
+				: MenuActivity.class;
+
+		Class<? extends Activity> nextActivity = null;
+		if ("".equals(result)) {
+			MenuOption menuOption = Control.getNextMovementMenu();
+
+			if (menuOption == null) {
+				nextActivity = menu;
+				Control.message = "No hay movimientos pendientes";
+			} else {
+				Control.setSelectedOption(menuOption);
+				nextActivity = WarehouseActivity.class;
+			}
+		} else {
+			Control.message = result;
+			nextActivity = menu;
+		}
+
+		return nextActivity;
 	}
 
 	public static String doLogin(String username, String password) {
 		String result = "Error de comunicacion con el servidor";
+		Control.freeMovementStarted = false;
 
 		try {
 			user = username;
@@ -70,8 +98,8 @@ public class Connector {
 		return result;
 	}
 
-	public static String doMovement(String weight, int clientId, String tag,
-			MovementType movementType) {
+	public static boolean doMovement(AbstractForm caller, String weight,
+			int clientId, String tag, MovementType movementType) {
 		String result = "Error de comunicacion";
 
 		try {
@@ -80,13 +108,20 @@ public class Connector {
 			movementUrl = movementUrl.replaceAll("<pwd>", pass);
 			movementUrl = movementUrl.replaceAll("<type>",
 					movementType.getMovementType());
+			movementUrl = movementUrl.replaceAll("<balanceo>",
+					Control.freeMovementMenu ? "N" : "S");
+			movementUrl = movementUrl.replaceAll("<car>",
+					Control.carSelected + "");
+
+			Control.freeMovementStarted = Control.freeMovementStarted
+					|| Control.freeMovementMenu;
 
 			switch (movementType) {
 			case IN:
 				movementUrl = movementUrl.replaceAll("<weight>", weight);
 				movementUrl = movementUrl.replaceAll("<clientId>", ""
 						+ clientId);
-				movementUrl = movementUrl.replaceAll("<tag>", "0");
+				movementUrl = movementUrl.replaceAll("<tag>", tag);
 				break;
 			case OUT:
 				movementUrl = movementUrl.replaceAll("<weight>", "0");
@@ -129,7 +164,28 @@ public class Connector {
 			result = "Error en la comunicacion";
 		}
 
-		return result;
+		boolean goToWarehouse = false;
+		if ("".equals(result)) {
+			MenuOption menuOption = null;
+
+			if (Control.freeMovementMenu) {
+				Control.message = "Movimiento confirmado";
+			} else {
+				menuOption = Control.getNextMovementMenu();
+
+				if (menuOption == null) {
+					Util.showMessage(caller, R.string.label_info,
+							"No se encontraron movimientos");
+				} else {
+					Control.setSelectedOption(menuOption);
+					goToWarehouse = true;
+				}
+			}
+		} else {
+			Util.showMessage(caller, R.string.label_error, result);
+		}
+
+		return goToWarehouse;
 	}
 
 	public static MenuOption confirmMovement(Movement movement)
