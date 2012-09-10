@@ -1,5 +1,6 @@
 package com.itconsultores.colfrigos.android;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,12 +41,10 @@ public class FormOutActivity extends AbstractForm {
 			}
 		} else if (view.equals(buttonOk)) {
 			if (isInfoComplete()) {
-				boolean goToWarehouse = Connector.doMovement(this, null, 0,
-						position, MovementType.OUT);
-				if (goToWarehouse) {
-					goTo(WarehouseActivity.class);
-				} else if (Control.freeMovementMenu) {
-					goTo(MenuFreeMovementActivity.class);
+				Class<? extends Activity> nextActivity = Connector.doMovement(
+						this, null, 0, position, MovementType.OUT);
+				if (nextActivity != null) {
+					goTo(nextActivity);
 				}
 			} else {
 				Util.showMessage(this, R.string.label_error,

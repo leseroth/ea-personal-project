@@ -207,6 +207,11 @@ public class Control {
 
 	@SuppressWarnings("unused")
 	protected static void setClientList(Document doc) {
+		// Cargar la lista de clientes solo una vez
+		if (clientList != null && !clientList.isEmpty()) {
+			Log.i(LOG_DEBUG, "La lista de clientes ya estaba cargada");
+			return;
+		}
 		clientList = new ArrayList<Client>();
 
 		Node clients = doc.getElementsByTagName(KEY_CLIENTS).item(0);

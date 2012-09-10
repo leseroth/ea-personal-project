@@ -22,7 +22,7 @@ public class Connector {
 	private static String user;
 	private static String pass;
 
-	private static final boolean debug = true;
+	private static final boolean debug = false;
 
 	public static Class<? extends Activity> doRevalidate() {
 		Control.message = null;
@@ -51,7 +51,6 @@ public class Connector {
 
 	public static String doLogin(String username, String password) {
 		String result = "Error de comunicacion con el servidor";
-		Control.freeMovementStarted = false;
 
 		try {
 			user = username;
@@ -98,8 +97,67 @@ public class Connector {
 		return result;
 	}
 
-	public static boolean doMovement(AbstractForm caller, String weight,
-			int clientId, String tag, MovementType movementType) {
+	public static boolean doCarBalancing() {
+		String result = "Error de comunicacion con el servidor";
+
+		try {
+			String balanceCarUrl = Constants.BALANCE_CAR_URL;
+			balanceCarUrl = balanceCarUrl.replaceAll("<login>", user);
+			balanceCarUrl = balanceCarUrl.replaceAll("<pwd>", pass);
+			balanceCarUrl = balanceCarUrl.replaceAll("<car>", ""
+					+ Control.carSelected);
+			Log.i(LOG_DEBUG, balanceCarUrl);
+
+			String xml = null;
+			if (debug) {
+				xml = XMLParser.getXMLFromUrl(Constants.DEBUG_URL);
+			} else {
+				xml = XMLParser.getXMLFromUrl(balanceCarUrl);
+			}
+			Document doc = XMLParser.XMLfromString(xml);
+
+			Log.i(LOG_DEBUG, "Realizando balanceo del carro");
+			NodeList error = doc.getElementsByTagName(KEY_ERROR);
+			result = XMLParser.getElementValue(error.item(0));
+
+			if ("".equals(result)) {
+				// Cargar el listado de carros
+				Control.setCarList(doc);
+				// Cargar el listado de movimientos
+				Control.setMovementsList(doc);
+
+				Log.i(Constants.LOG_DEBUG, "Car Total "
+						+ Control.getCarList().size());
+				Log.i(Constants.LOG_DEBUG, "Movement Total "
+						+ Control.getMovementList().size());
+			}
+		} catch (IllegalArgumentException e) {
+			result = "Error en los datos recibidos";
+		} catch (Exception e) {
+			result = "Error en la comunicacion";
+		}
+
+		boolean goToWarehouse = false;
+		if ("".equals(result)) {
+			MenuOption menuOption = Control.getNextMovementMenu();
+
+			if (menuOption == null) {
+				Control.message = "No es necesario realizar movimientos adicionales para balancear el carro";
+				Control.carSelected = 0;
+				Control.freeMovementStarted = false;
+			} else {
+				Control.setSelectedOption(menuOption);
+				goToWarehouse = true;
+			}
+		} else {
+			Control.message = result;
+		}
+
+		return goToWarehouse;
+	}
+
+	public static Class<? extends Activity> doMovement(AbstractForm caller,
+			String weight, int clientId, String tag, MovementType movementType) {
 		String result = "Error de comunicacion";
 
 		try {
@@ -110,11 +168,8 @@ public class Connector {
 					movementType.getMovementType());
 			movementUrl = movementUrl.replaceAll("<balanceo>",
 					Control.freeMovementMenu ? "N" : "S");
-			movementUrl = movementUrl.replaceAll("<car>",
-					Control.carSelected + "");
-
-			Control.freeMovementStarted = Control.freeMovementStarted
-					|| Control.freeMovementMenu;
+			movementUrl = movementUrl.replaceAll("<car>", Control.carSelected
+					+ "");
 
 			switch (movementType) {
 			case IN:
@@ -142,6 +197,7 @@ public class Connector {
 			Log.i(LOG_DEBUG, "Realizando Movimiento");
 			NodeList error = doc.getElementsByTagName(KEY_ERROR);
 			result = XMLParser.getElementValue(error.item(0));
+			Log.i(LOG_DEBUG, "Resultado movimiento " + result);
 
 			if ("".equals(result)) {
 				// Cargar el listado de carros
@@ -164,28 +220,32 @@ public class Connector {
 			result = "Error en la comunicacion";
 		}
 
-		boolean goToWarehouse = false;
+		Class<? extends Activity> nextActivity = null;
 		if ("".equals(result)) {
 			MenuOption menuOption = null;
 
 			if (Control.freeMovementMenu) {
+				Control.freeMovementStarted = Control.freeMovementStarted
+						|| Control.freeMovementMenu;
+
 				Control.message = "Movimiento confirmado";
+				nextActivity = MenuFreeMovementActivity.class;
 			} else {
 				menuOption = Control.getNextMovementMenu();
 
 				if (menuOption == null) {
-					Util.showMessage(caller, R.string.label_info,
-							"No se encontraron movimientos");
+					Control.message = "No se encontraron movimientos";
+					nextActivity = MenuActivity.class;
 				} else {
 					Control.setSelectedOption(menuOption);
-					goToWarehouse = true;
+					nextActivity = WarehouseActivity.class;
 				}
 			}
 		} else {
 			Util.showMessage(caller, R.string.label_error, result);
 		}
 
-		return goToWarehouse;
+		return nextActivity;
 	}
 
 	public static MenuOption confirmMovement(Movement movement)
