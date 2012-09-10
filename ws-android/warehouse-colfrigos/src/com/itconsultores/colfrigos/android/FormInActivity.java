@@ -1,5 +1,6 @@
 package com.itconsultores.colfrigos.android;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,12 +78,10 @@ public class FormInActivity extends AbstractForm {
 			}
 		} else if (view.equals(buttonOk)) {
 			if (isInfoComplete()) {
-				boolean goToWarehouse = Connector.doMovement(this, weight,
-						clientId, position, MovementType.IN);
-				if (goToWarehouse) {
-					goTo(WarehouseActivity.class);
-				} else if (Control.freeMovementMenu) {
-					goTo(MenuFreeMovementActivity.class);
+				Class<? extends Activity> nextActivity = Connector.doMovement(
+						this, weight, clientId, position, MovementType.IN);
+				if (nextActivity != null) {
+					goTo(nextActivity);
 				}
 			} else {
 				Util.showMessage(this, R.string.label_error,
@@ -95,7 +94,7 @@ public class FormInActivity extends AbstractForm {
 	protected boolean isInfoComplete() {
 		weight = weightTextView.getText().toString();
 		position = positionTextView.getText().toString();
-		clientSpinner.getSelectedItemPosition();
+		clientId = clientSpinner.getSelectedItemPosition();
 		if (clientId != 0) {
 			Client client = Control.getClientList().get(clientId - 1);
 			clientId = client.getId();

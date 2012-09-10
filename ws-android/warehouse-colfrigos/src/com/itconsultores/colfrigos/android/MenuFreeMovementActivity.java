@@ -83,12 +83,13 @@ public class MenuFreeMovementActivity extends Activity implements
 		} else if (view.equals(buttonOpSalidaSinBalanceo)) {
 			selectedIntent = new Intent(this, FormOutActivity.class);
 		} else if (view.equals(buttonOpBalancear)) {
-			Class<? extends Activity> nextActivity = Connector.doRevalidate();
-			if (nextActivity == this.getClass()) {
+			boolean goToWarehouse = Connector.doCarBalancing();
+			if (goToWarehouse) {
+				selectedIntent = new Intent(this, WarehouseActivity.class);
+			} else {
 				Util.showMessage(this, R.string.label_info, Control.message);
 				Control.message = null;
-			} else {
-				selectedIntent = new Intent(this, nextActivity);
+				setMenuStatus();
 			}
 		}
 
