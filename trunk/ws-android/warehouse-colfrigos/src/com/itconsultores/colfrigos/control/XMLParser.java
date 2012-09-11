@@ -21,6 +21,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+/**
+ * Parser XML que permite llamar al servidior y realizar el parseo de la
+ * respuesta
+ * 
+ * @author Erik
+ * 
+ */
 public class XMLParser {
 
 	public static String getXMLFromUrl(String url) {

@@ -12,15 +12,33 @@ import com.itconsultores.colfrigos.control.Util;
 
 public class FormOutActivity extends AbstractForm {
 
+	/**
+	 * Boton de ok
+	 */
 	private Button buttonOk;
+	/**
+	 * Boton volver
+	 */
 	private Button buttonBack;
+	/**
+	 * Casilla de la posicion a sacar
+	 */
 	private TextView positionTextView;
+	/**
+	 * Valor de la posicion
+	 */
 	private String position;
 
+	/**
+	 * Constructor
+	 */
 	public FormOutActivity() {
 		super(R.layout.form_salida);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void initForm() {
 		buttonOk = initButton(R.id.f_out_button_confirm);
@@ -30,6 +48,9 @@ public class FormOutActivity extends AbstractForm {
 		positionTextView = (TextView) findViewById(R.id.f_out_textbox_position);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onClick(View view) {
 
@@ -53,6 +74,9 @@ public class FormOutActivity extends AbstractForm {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected boolean isInfoComplete() {
 		position = positionTextView.getText().toString();

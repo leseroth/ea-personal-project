@@ -4,7 +4,12 @@ import com.itconsultores.colfrigos.android.R;
 
 public class Constants {
 
+	/**
+	 * Dirección de debug
+	 */
 	public static final String DEBUG_URL = "http://ea-personal-project.googlecode.com/svn/trunk/ws-android/movimiento.html?format=xml";
+
+	// Direcciones y mensajes a llamar
 
 	private static final String SERVER_URL = "http://192.168.43.17:8081/temperaturas/";
 	public static final String LOGIN_URL = SERVER_URL
@@ -16,6 +21,8 @@ public class Constants {
 			+ "confirmation.seam?login=<login>&pwd=<pwd>&movementId=<movementId>";
 	public static final String BALANCE_CAR_URL = SERVER_URL
 			+ "balance.seam?login=<login>&pwd=<pwd>&car=<car>";
+
+	// Etiquetas del xml de respuesta
 
 	protected static final String KEY_POSITIONS = "posiciones";
 	protected static final String KEY_CAR = "carro";
@@ -45,6 +52,12 @@ public class Constants {
 
 	public static final String LOG_DEBUG = "debug info";
 
+	/**
+	 * Opciones de menu
+	 * 
+	 * @author Erik
+	 * 
+	 */
 	public enum MenuOption {
 		Entrada(R.string.label_op_entrada), //
 		Salida(R.string.label_op_salida), //
@@ -63,6 +76,12 @@ public class Constants {
 
 	}
 
+	/**
+	 * Tipo de movimiento
+	 * 
+	 * @author Erik
+	 * 
+	 */
 	public enum MovementType {
 		IN_OUT("SE", MenuOption.EntradaSalida, StatusColor.INEXISTENT), //
 		IN("E", MenuOption.Entrada, StatusColor.IN), //
@@ -102,6 +121,12 @@ public class Constants {
 		}
 	}
 
+	/**
+	 * Colores usados por la pantalla de bodega
+	 * 
+	 * @author Erik
+	 * 
+	 */
 	public enum StatusColor {
 		INEXISTENT(R.color.color_style_warehouse_cell), //
 		FREE(R.color.color_style_warehouse_cell_free), //

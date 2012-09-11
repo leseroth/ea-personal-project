@@ -32,6 +32,9 @@ import org.w3c.dom.NodeList;
 
 import android.util.Log;
 
+import com.itconsultores.colfrigos.android.FormInActivity;
+import com.itconsultores.colfrigos.android.MenuActivity;
+import com.itconsultores.colfrigos.android.MenuFreeMovementActivity;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.dto.Car;
@@ -40,48 +43,76 @@ import com.itconsultores.colfrigos.dto.Movement;
 import com.itconsultores.colfrigos.dto.MovementDetail;
 import com.itconsultores.colfrigos.dto.Position;
 
+/**
+ * Clase central que debe ser usada solo de manera estatica por toda la
+ * aplicacion, permite controlar los movimientos realizados, pendientes, carros,
+ * clientes, etc.
+ * 
+ * @author Erik
+ * 
+ */
 public class Control {
 
+	/**
+	 * Permite identificar la opcion de menu seleccionada, ver
+	 * {@link MenuOption}
+	 */
 	private static MenuOption selectedOption;
+	/**
+	 * Peso calculado, se usa cuado desde la pantalla de Calculo de estiva se
+	 * pasa a la de entrada
+	 */
 	private static int calculatedWeight = -1;
+	/**
+	 * Listado de carros, se actualiza cada vez que se recibe una programación,
+	 * debe haber carros para todos los movimientos identificados. Ver
+	 * {@link Car}
+	 */
 	private static List<Car> carList;
+	/**
+	 * Listado de movimientos, se llena cuando se recibe una programación, estos
+	 * deben llegar en el orden que deben ejecutarse, a medida que se va a
+	 * confirmando cada movimiento se retira la primera posicion de la lista.
+	 * Ver {@link Movement}
+	 */
 	private static List<Movement> movementList;
+	/**
+	 * Listado de clientes, debe venir como respuesta al login, se lee una única
+	 * vez, para recargar el listado de clientes se debe salir de la aplicación.
+	 * Ver {@link Client}
+	 */
 	private static List<Client> clientList;
 
 	// Valores asociados a movimientos libres
+	/**
+	 * Identifica el carro que fue seleccionado para movimientos sin balanceo
+	 */
 	public static int carSelected = 0;
+	/**
+	 * Indica que se han iniciado movimientos sobre el carro seleccionado, esta
+	 * bandera cambia a true cuando se confirma al menos un movimiento contra el
+	 * servidor.
+	 */
 	public static boolean freeMovementStarted = false;
+	/**
+	 * Indica si se esta accediendo a Entrada o Salida por medio del menu de
+	 * movimientos sin balanceo
+	 */
 	public static boolean freeMovementMenu = false;
 
+	/**
+	 * Mensaje de error que se muestra desde {@link MenuActivity} o
+	 * {@link MenuFreeMovementActivity} como resultado a una entrada o una
+	 * salida, una vez se muestra en pantalla debe borrarse.
+	 */
 	public static String message;
 
-	public static MenuOption getSelectedOption() {
-		return selectedOption;
-	}
-
-	public static void setSelectedOption(MenuOption selected) {
-		selectedOption = selected;
-	}
-
-	public static void resetCalculatedWeight() {
-		calculatedWeight = -1;
-	}
-
-	public static void setCalculatedWeight(int basket, int box) {
-		calculatedWeight = basket * box;
-	}
-
-	public static MenuOption getNextMovementMenu() {
-		MenuOption nextMenu = null;
-
-		if (!movementList.isEmpty()) {
-			nextMenu = movementList.get(0).getMovementType().getMenuOption();
-			Log.i(LOG_DEBUG, "Next Menu " + nextMenu);
-		}
-
-		return nextMenu;
-	}
-
+	/**
+	 * Recibe un {@link Document} e inicializaliza el listado de carros
+	 * 
+	 * @param doc
+	 *            Documento
+	 */
 	@SuppressWarnings("unused")
 	protected static void setCarList(Document doc) {
 		carList = new ArrayList<Car>();
@@ -116,13 +147,13 @@ public class Control {
 						+ coordinate + " " + status);
 
 				Position position = new Position(coordinate, status);
-				if ("A".equals(position.getSide())) {
+				if ("A".equals(position.getCarSide())) {
 					sideA.add(position);
-				} else if ("B".equals(position.getSide())) {
+				} else if ("B".equals(position.getCarSide())) {
 					sideB.add(position);
 				} else {
 					Log.i(LOG_DEBUG, "El lado solo puede ser A o B : "
-							+ position.getSide());
+							+ position.getCarSide());
 					throw new IllegalArgumentException();
 				}
 			}
@@ -134,6 +165,12 @@ public class Control {
 		return;
 	}
 
+	/**
+	 * Recibe un {@link Document} e inicializa la lista de movimientos
+	 * 
+	 * @param doc
+	 *            Documento
+	 */
 	@SuppressWarnings("unused")
 	protected static void setMovementsList(Document doc) {
 		movementList = new ArrayList<Movement>();
@@ -188,6 +225,17 @@ public class Control {
 		return;
 	}
 
+	/**
+	 * Permite inicializar el detalle de un movimento
+	 * 
+	 * @param id
+	 *            Id del movimiento
+	 * @param node
+	 *            Nodo que contiene el movmiento
+	 * @param mvType
+	 *            Tipo de movimiento
+	 * @return Detalle de un movimiento, {@link MovementDetail}
+	 */
 	private static MovementDetail initMovementDetail(String id, Node node,
 			MovementType mvType) {
 
@@ -205,6 +253,12 @@ public class Control {
 		return md;
 	}
 
+	/**
+	 * Recibe un {@link Document} e incializa la lista de clientes
+	 * 
+	 * @param doc
+	 *            Documento
+	 */
 	@SuppressWarnings("unused")
 	protected static void setClientList(Document doc) {
 		// Cargar la lista de clientes solo una vez
@@ -239,6 +293,12 @@ public class Control {
 		return;
 	}
 
+	/**
+	 * Retorna un arreglo con el nombre de los clientes para ser visualizado en
+	 * el Spinner de {@link FormInActivity}
+	 * 
+	 * @return
+	 */
 	public static String[] getClientArray() {
 		String[] clientArray = new String[clientList.size() + 1];
 		clientArray[0] = "Seleccione el cliente";
@@ -247,6 +307,47 @@ public class Control {
 			clientArray[++index] = client.getName();
 		}
 		return clientArray;
+	}
+
+	/**
+	 * Retorna el siguiente movimiento que debe ejecutarse
+	 * 
+	 * @return
+	 */
+	public static MenuOption getNextMovementMenu() {
+		MenuOption nextMenu = null;
+
+		if (!movementList.isEmpty()) {
+			nextMenu = movementList.get(0).getMovementType().getMenuOption();
+			Log.i(LOG_DEBUG, "Next Menu " + nextMenu);
+		}
+
+		return nextMenu;
+	}
+
+	/**
+	 * Resetea el peso calculado
+	 */
+	public static void resetCalculatedWeight() {
+		calculatedWeight = -1;
+	}
+
+	/**
+	 * Calcula el peso en la pantalla de estiva
+	 * 
+	 * @param basket
+	 * @param box
+	 */
+	public static void setCalculatedWeight(int basket, int box) {
+		calculatedWeight = basket * box;
+	}
+
+	public static MenuOption getSelectedOption() {
+		return selectedOption;
+	}
+
+	public static void setSelectedOption(MenuOption selected) {
+		selectedOption = selected;
 	}
 
 	public static int getCalculatedWeight() {
