@@ -13,24 +13,63 @@ import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
 import com.itconsultores.colfrigos.dto.Client;
 
+/**
+ * Pantalla de entrada
+ * 
+ * @author Erik
+ * 
+ */
 public class FormInActivity extends AbstractForm {
 
+	/**
+	 * Boton ok
+	 */
 	private Button buttonOk;
+	/**
+	 * Boton volver
+	 */
 	private Button buttonBack;
 
+	/**
+	 * Campo de texto del peso
+	 */
 	private TextView weightTextView;
+	/**
+	 * Peso
+	 */
 	private String weight;
+	/**
+	 * Listado de clientes
+	 */
 	private Spinner clientSpinner;
+	/**
+	 * Id del cliente seleccionado
+	 */
 	private int clientId;
+	/**
+	 * Campo de texto de la posicion
+	 */
 	private TextView positionTextView;
+	/**
+	 * Posicion
+	 */
 	private String position;
 
+	/**
+	 * Arreglo de nombres de clientes para ser mostrados en pantalla
+	 */
 	private String[] clientArray;
 
+	/**
+	 * Constructor
+	 */
 	public FormInActivity() {
 		super(R.layout.form_entrada);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void initForm() {
 		// Botones
@@ -67,6 +106,9 @@ public class FormInActivity extends AbstractForm {
 		clientSpinner.setAdapter(clientArrayAdapter);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onClick(View view) {
 
@@ -90,6 +132,9 @@ public class FormInActivity extends AbstractForm {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected boolean isInfoComplete() {
 		weight = weightTextView.getText().toString();

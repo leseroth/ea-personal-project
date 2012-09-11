@@ -24,20 +24,62 @@ import com.itconsultores.colfrigos.dto.Movement;
 import com.itconsultores.colfrigos.dto.MovementDetail;
 import com.itconsultores.colfrigos.dto.Position;
 
+/**
+ * Pantalla de la bodega
+ * 
+ * @author Erik
+ * 
+ */
 public class WarehouseActivity extends Activity implements OnClickListener {
 
+	/**
+	 * Boton confirmar
+	 */
 	private Button buttonConfirm;
+	/**
+	 * Boton revalidar
+	 */
 	private Button buttonRevalidate;
+	/**
+	 * Maximo numero de filas
+	 */
 	private int maxRow = 0;
+	/**
+	 * Maximo numero de filas
+	 */
 	private int maxColumn = 0;
+	/**
+	 * Grilla de la bodega
+	 */
 	private LinearLayout warehouseGrid;
+	/**
+	 * Movimiento que esta siendo ejecutado actualmente
+	 */
 	private transient Movement currentMovement;
+	/**
+	 * Lado del carro
+	 */
 	private String carSide;
+	/**
+	 * Numero del carro
+	 */
 	private int carNumber;
+	/**
+	 * Color de entrada, se usa para poder pintar la etiqueta
+	 */
 	private TextView inColor;
+	/**
+	 * Color de salida, se usa para poder pintar la etiqueta
+	 */
 	private TextView outColor;
+	/**
+	 * Referncia al objeto {@link Resources}
+	 */
 	private Resources res;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,6 +103,9 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		Log.i(Constants.LOG_DEBUG, "Max column : " + maxColumn);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -79,12 +124,18 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		res = getResources();
 		subTitleText.setText(res.getString(R.string.label_car) + " "
 				+ carNumber + " - " + res.getString(R.string.label_side) + " "
-				+ carSide);
+				+ carSide + " - Peso: "
+				+ currentMovement.getMovementDetails().get(0).getWeight()
+				+ " Kg");
 
 		Util.showMessage(this, R.string.label_info, "Debe realizar "
 				+ Control.getMovementList().size() + " Movimientos");
 	}
 
+	/**
+	 * Pinta las etiquetas en pantalla, como lo son el numero del carro, el
+	 * lado, el peso, etc.
+	 */
 	private void setWarehouseStatus() {
 		currentMovement = Control.getMovementList().get(0);
 		List<Position> side = null;
@@ -124,6 +175,13 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * Pinta una celda con el color determinado, por defecto todas las celdas
+	 * estan vacias, por tanto todas las posiciones que no se reciban se
+	 * consideran vacias
+	 * 
+	 * @param ac
+	 */
 	private void paintCell(AbstractCell ac) {
 		TextView text = (TextView) ((LinearLayout) warehouseGrid
 				.getChildAt(maxRow - 1 - ac.getRow())).getChildAt(ac
@@ -137,6 +195,10 @@ public class WarehouseActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void onClick(View view) {
 		Intent selectedIntent = null;
 

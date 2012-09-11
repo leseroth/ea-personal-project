@@ -17,15 +17,39 @@ import com.itconsultores.colfrigos.control.Constants;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
 
+/**
+ * Menu de movimientos sin balanceo
+ * 
+ * @author Erik
+ * 
+ */
 public class MenuFreeMovementActivity extends Activity implements
 		OnClickListener, OnItemSelectedListener {
 
+	/**
+	 * Listado de clientes
+	 */
 	private Spinner carSpinner;
+	/**
+	 * Boton de Entrada sin balanceo
+	 */
 	private Button buttonOpEntradaSinBalanceo;
+	/**
+	 * Boton de Salida sin balanceo
+	 */
 	private Button buttonOpSalidaSinBalanceo;
+	/**
+	 * Boton de Balancear
+	 */
 	private Button buttonOpBalancear;
+	/**
+	 * Boton de Volver
+	 */
 	private Button buttonBack;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,6 +86,18 @@ public class MenuFreeMovementActivity extends Activity implements
 		Control.freeMovementMenu = true;
 	}
 
+	/**
+	 * Pinta el estado de las opciones de menu
+	 * <ul>
+	 * <li>Cuando no se ha seleccionado un carro solo se puede presionar volver</li>
+	 * <li>Cuando se selecciona un carro pero no se han ejecutado movimientos,
+	 * se puede presionar cualquiera de los botones</li>
+	 * <li>Cuando se confirma un movimiento con el servidor, se deshabilita el
+	 * listado de carros y el boton volver hasta que se presione balancear</li>
+	 * <li>Una vez se balancea el carro, el menu vuelve al estado original, es
+	 * decir, solo con el listado de carros y el boton volver habilitados</li>
+	 * </ul>
+	 */
 	private void setMenuStatus() {
 		carSpinner.setEnabled(Control.carSelected == 0
 				|| !Control.freeMovementStarted);
@@ -72,6 +108,9 @@ public class MenuFreeMovementActivity extends Activity implements
 				|| !Control.freeMovementStarted);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onClick(View view) {
 		Intent selectedIntent = null;
@@ -99,6 +138,9 @@ public class MenuFreeMovementActivity extends Activity implements
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int pos,
 			long id) {
@@ -107,6 +149,9 @@ public class MenuFreeMovementActivity extends Activity implements
 		setMenuStatus();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 	}

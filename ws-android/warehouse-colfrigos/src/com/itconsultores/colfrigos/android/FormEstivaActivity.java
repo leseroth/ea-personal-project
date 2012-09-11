@@ -9,6 +9,12 @@ import android.widget.TextView;
 import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 
+/**
+ * Pantalla de calculo de estiva
+ * 
+ * @author Erik
+ * 
+ */
 public class FormEstivaActivity extends AbstractForm {
 
 	private Button buttonOk;

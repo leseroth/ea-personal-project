@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.itconsultores.colfrigos.android.AbstractForm;
+import com.itconsultores.colfrigos.android.FormInActivity;
+import com.itconsultores.colfrigos.android.FormOutActivity;
 import com.itconsultores.colfrigos.android.MenuActivity;
 import com.itconsultores.colfrigos.android.MenuFreeMovementActivity;
 import com.itconsultores.colfrigos.android.R;
@@ -18,12 +20,36 @@ import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Constants.MovementType;
 import com.itconsultores.colfrigos.dto.Movement;
 
+/**
+ * Clase que envia los mensajes al servidor e interpreta la respuesta dada
+ * 
+ * @author Erik
+ * 
+ */
 public class Connector {
+
+	/**
+	 * Usuario
+	 */
 	private static String user;
+	/**
+	 * Password
+	 */
 	private static String pass;
 
+	/**
+	 * Cuando se setea en true, todos los mensajes llaman a la direccion
+	 * {@link Constants#DEBUG_URL}
+	 */
 	private static final boolean debug = false;
 
+	/**
+	 * Revalida una programación al realizar nuevamente el login
+	 * 
+	 * @return La siguiente pantalla a donde se debe mover, puede ser
+	 *         {@link WarehouseActivity}, {@link MenuFreeMovementActivity} o
+	 *         {@link MenuActivity}
+	 */
 	public static Class<? extends Activity> doRevalidate() {
 		Control.message = null;
 		String result = doLogin(user, pass);
@@ -49,6 +75,16 @@ public class Connector {
 		return nextActivity;
 	}
 
+	/**
+	 * Realiza el login contra el servidor
+	 * 
+	 * @param username
+	 *            Nombre de usuario
+	 * @param password
+	 *            Password
+	 * @return String con el mensaje de error entregado por el servidor, o vacio
+	 *         en caso de que el login sea correcto
+	 */
 	public static String doLogin(String username, String password) {
 		String result = "Error de comunicacion con el servidor";
 
@@ -97,6 +133,13 @@ public class Connector {
 		return result;
 	}
 
+	/**
+	 * Realiza el balanceo del carro en la pantalla de
+	 * {@link MenuFreeMovementActivity}
+	 * 
+	 * @return <code>true</code> en caso de que se deba ejecutar una
+	 *         programacion o <code>false</code> en caso contrario.
+	 */
 	public static boolean doCarBalancing() {
 		String result = "Error de comunicacion con el servidor";
 
@@ -156,6 +199,27 @@ public class Connector {
 		return goToWarehouse;
 	}
 
+	/**
+	 * Realiza un movimiento
+	 * 
+	 * @param caller
+	 *            Pantalla que realiza el movimiento, puede ser entrada o
+	 *            salida, es decir {@link FormInActivity} o
+	 *            {@link FormOutActivity}
+	 * @param weight
+	 *            Peso a mover
+	 * @param clientId
+	 *            Identificador del cliente, o 0 en caso de que no se seleccione
+	 *            ninguno
+	 * @param tag
+	 *            Etiqueta de la posicion
+	 * @param movementType
+	 *            Tipo de movimiento, puede ser {@link MovementType#IN} o
+	 *            {@link MovementType#OUT}
+	 * @return La siguiente pantalla a la que se debe ir, puede ser
+	 *         <code>null</code> en caso de error, o
+	 *         {@link MenuFreeMovementActivity}, o {@link MenuActivity}.
+	 */
 	public static Class<? extends Activity> doMovement(AbstractForm caller,
 			String weight, int clientId, String tag, MovementType movementType) {
 		String result = "Error de comunicacion";
@@ -248,6 +312,15 @@ public class Connector {
 		return nextActivity;
 	}
 
+	/**
+	 * Confirma un movimiento contra el servidor
+	 * 
+	 * @param movement
+	 *            Movimiento a ejecutar
+	 * @return {@link MenuOption} que indica la siguiente pantalla a la que se
+	 *         debe ir
+	 * @throws Exception
+	 */
 	public static MenuOption confirmMovement(Movement movement)
 			throws Exception {
 		Control.getMovementList().remove(movement);

@@ -11,14 +11,38 @@ import com.itconsultores.colfrigos.control.Connector;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
 
+/**
+ * Menu principal
+ * 
+ * @author Erik
+ * 
+ */
 public class MenuActivity extends Activity implements OnClickListener {
 
+	/**
+	 * Boton de entrada
+	 */
 	private Button buttonOpEntrada;
+	/**
+	 * Boton de salida
+	 */
 	private Button buttonOpSalida;
+	/**
+	 * Boton de buscar programacion
+	 */
 	private Button buttonOpPrograma;
+	/**
+	 * Boton de realizar movimientos sin balanceo
+	 */
 	private Button buttonOpSinBalanceo;
+	/**
+	 * Boton de salida de la aplicacion
+	 */
 	private Button buttonExit;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,6 +68,10 @@ public class MenuActivity extends Activity implements OnClickListener {
 		Control.freeMovementMenu = false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void onClick(View view) {
 		Intent selectedIntent = null;
 

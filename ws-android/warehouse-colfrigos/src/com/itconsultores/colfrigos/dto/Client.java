@@ -1,9 +1,31 @@
 package com.itconsultores.colfrigos.dto;
 
+/**
+ * Información de un cliente
+ * 
+ * @author Erik
+ * 
+ */
 public class Client {
+	/**
+	 * Identificador del cliente
+	 */
 	private int id;
+	/**
+	 * Nombre del cliente
+	 */
 	private String name;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param id
+	 *            Id del cliente
+	 * @param name
+	 *            Nombre del cliente
+	 * @throws IllegalArgumentException
+	 * @throws NumberFormatException
+	 */
 	public Client(String id, String name) throws IllegalArgumentException,
 			NumberFormatException {
 		if (id == null || name == null) {
@@ -21,5 +43,4 @@ public class Client {
 	public String getName() {
 		return name;
 	}
-
 }

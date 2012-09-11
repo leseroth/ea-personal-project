@@ -9,21 +9,51 @@ import com.itconsultores.colfrigos.control.Constants.MenuOption;
 import com.itconsultores.colfrigos.control.Control;
 import com.itconsultores.colfrigos.control.Util;
 
+/**
+ * Pantalla de login
+ * 
+ * @author Erik
+ * 
+ */
 public class LoginActivity extends AbstractForm {
 
+	/**
+	 * Usuario
+	 */
 	private String user;
+	/**
+	 * Password
+	 */
 	private String pass;
 
+	/**
+	 * Boton de login
+	 */
 	private Button buttonLogin;
+	/**
+	 * Boton de salida
+	 */
 	private Button buttonExit;
 
+	/**
+	 * Vista de usuario
+	 */
 	private TextView userTextView;
+	/**
+	 * Vista de password
+	 */
 	private TextView passTextView;
 
+	/**
+	 * Constructor
+	 */
 	public LoginActivity() {
 		super(R.layout.screen_login);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected void initForm() {
 		// Botones
@@ -38,6 +68,9 @@ public class LoginActivity extends AbstractForm {
 		passTextView = (TextView) findViewById(R.id.sl_textbox_password);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void onClick(View view) {
 
@@ -68,6 +101,9 @@ public class LoginActivity extends AbstractForm {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected boolean isInfoComplete() {
 		user = userTextView.getText().toString();
