@@ -1,11 +1,13 @@
 package co.earcos.budget.dao;
 
-import co.earcos.budget.util.Util;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.h2.jdbcx.JdbcConnectionPool;
+
+import co.earcos.budget.util.Util;
 
 public class DBConnection {
 
@@ -18,7 +20,7 @@ public class DBConnection {
             String dbUrl = Util.getProperty("h2.database.url");
             String dbUser = Util.getProperty("h2.database.user");
             String dbPass = Util.getProperty("h2.database.pass");
-            
+
             if (connPool == null) {
                 connPool = JdbcConnectionPool.create(dbUrl, dbUser, dbPass);
             }

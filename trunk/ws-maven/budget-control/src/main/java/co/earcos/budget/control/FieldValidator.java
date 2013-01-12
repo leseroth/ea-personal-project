@@ -6,7 +6,8 @@ import javax.swing.text.PlainDocument;
 
 public class FieldValidator extends PlainDocument {
 
-    // Validation
+	private static final long serialVersionUID = 5567192555106745159L;
+	// Validation
     public static final int VALIDATE_TEXT = 1;
     public static final int VALIDATE_CURRENCY = 2;
     // Attributes

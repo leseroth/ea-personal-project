@@ -1,17 +1,18 @@
 package co.earcos.budget.control;
 
-import co.earcos.budget.dao.ControlDao;
-import co.earcos.budget.dao.DBConnection;
-import co.earcos.budget.util.Constants.Account;
-import co.earcos.budget.util.Constants.Concept;
 import java.sql.Connection;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
 
+import co.earcos.budget.dao.ControlDao;
+import co.earcos.budget.dao.DBConnection;
+import co.earcos.budget.util.Constants.Account;
+import co.earcos.budget.util.Constants.Concept;
+
 /**
- *
+ * 
  * @author Erik
  */
 public class MonthData {
@@ -49,6 +50,7 @@ public class MonthData {
         }
     }
 
+    @SuppressWarnings("unused")
     private void getCalendarDayData(Connection conn, ControlDao controlDao) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, 1, 0, 0, 0);
@@ -68,10 +70,8 @@ public class MonthData {
         daysOfMonth = new DayData[(int) weekCount][7];
 
         calendar.setTime(startDate);
-        weekLoop:
-        for (int i = 0; i < weekCount; i++) {
-            dayLoop:
-            for (int j = 0; j < 7; j++) {
+        weekLoop: for (int i = 0; i < weekCount; i++) {
+            dayLoop: for (int j = 0; j < 7; j++) {
                 if ((i == 0 && j < startDay - 1) || (i == weekCount - 1 && j >= finalDay)) {
                     daysOfMonth[i][j] = null;
                 } else {

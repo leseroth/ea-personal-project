@@ -4,23 +4,29 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /**
- *
+ * 
  * @author earcos
  */
 public class Constants {
 
     public static final int GAP = 4;
-    
+
     public static final String ICON_FORMAT = ".png";
     public static final String INGRESO = "ingreso";
     public static final String EGRESO = "egreso";
     public static NumberFormat DEFAULT_CURRENCY = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
-    
+
     public enum Account {
 
-        CASH("ef", "Efectivo"), SAVING("ah", "Ahorro"),
-        UNIACCION("un", "Uniaccion"), FIDUCUENTA("fi", "Fiducuenta"), INDEACCION("in", "Indeaccion"),
-        AMEX("cp", "AMEX Pesos"), AMEXUSD("cd", "AMEX Dolares", "en", "US"), CMR("cm", "CMR");
+        CASH("ef", "Efectivo"), //
+        SAVING("ah", "Ahorro"), //
+        UNIACCION("un", "Uniaccion"), //
+        FIDUCUENTA("fi", "Fiducuenta"), //
+        INDEACCION("in", "Indeaccion"), //
+        AMEX("cp", "AMEX Pesos"), //
+        AMEXUSD("cd", "AMEX Dolares", "en", "US"), //
+        VISABBVA("cv", "Visa BBVA"), //
+        CMR("cm", "CMR");
         private String id;
         private String label;
         private NumberFormat currencyFormat;
@@ -50,17 +56,30 @@ public class Constants {
         }
 
         public boolean isCreditCard() {
-            return this == AMEX || this == AMEXUSD || this == CMR;
+            return this == AMEX || this == AMEXUSD || this == VISABBVA || this == CMR;
         }
     }
 
     public enum Concept {
 
-        FOOD("Comida"), TRANSPORT("Transporte"), OTHERS("Otros"), INTERESTS("Intereses"),
-        LOAN_INTEREST("Intereses Prestamo"), LOAN("Prestamo"), MOVEMENT("Movimiento"), SALARY("Sueldo"),
-        SERVICES("Servicios"), RENT("Arriendo"), PAYMENT("Pago"), CELLPHONE("Celular"),
-        CLOTHES("Ropa"), MOVIES("Cine"), UNIVERSITY("Universidad"), TRAVEL("Viaje"),
-        IVA_DEVOLUTION("Devolucion de iva"), GROUPON("Groupon"), XD_APPS("XD Apps");
+        FOOD("Comida"), //
+        TRANSPORT("Transporte"), //
+        OTHERS("Otros"), //
+        INTERESTS("Intereses"), //
+        LOAN_INTEREST("Intereses Prestamo"), //
+        LOAN("Prestamo"), //
+        MOVEMENT("Movimiento"), //
+        SALARY("Sueldo"), //
+        SERVICES("Servicios"), //
+        RENT("Arriendo"), //
+        PAYMENT("Pago"), //
+        CELLPHONE("Celular"), //
+        CLOTHES("Ropa"), MOVIES("Cine"), //
+        UNIVERSITY("Universidad"), //
+        TRAVEL("Viaje"), //
+        IVA_DEVOLUTION("Devolucion de iva"), //
+        GROUPON("Groupon"), //
+        XD_APPS("XD Apps");
         private String label;
 
         Concept(String labels) {

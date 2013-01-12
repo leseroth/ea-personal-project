@@ -1,31 +1,42 @@
 package co.earcos.budget.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import co.earcos.budget.control.MonthData;
 import co.earcos.budget.util.Constants;
 import co.earcos.util.SwingUtil;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
 
 /**
- *
+ * 
  * @author Erik
  */
-public class ExpenseControlFrame extends JFrame implements ActionListener {
+public class ExpenseControlFrame extends JFrame implements ActionListener, ChangeListener {
 
+    private static final long serialVersionUID = 3913298396116054954L;
     // Menu
     private JMenu menu;
     private JMenuBar menuBar;
     private JMenuItem exitItem;
-    //Frame
+    // Frame
     public static ExpenseControlFrame controlFrame;
-    //Panels
+    // Panels
     private DateSelectionPanel dateSelectionPanel;
     private CalendarPanel calendarPanel;
     private MonthResumePanel monthResumePanel;
     private CompleteResumePanel completeResumePanel;
     private StackedAccountChartPanel stackedAccountChart;
-    //Data
+    // Data
     private MonthData monthData;
 
     private ExpenseControlFrame(String title) {
@@ -47,7 +58,6 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         monthResumePanel = new MonthResumePanel();
         completeResumePanel = new CompleteResumePanel();
         stackedAccountChart = new StackedAccountChartPanel();
-        resetCalendarPanel();
 
         Box calendarTabBox = Box.createHorizontalBox();
         calendarTabBox.add(calendarPanel);
@@ -61,6 +71,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         mainTabbedPane.addTab("Estado Mes", calendarTabPanel);
         mainTabbedPane.addTab("Activos", stackedAccountChart);
         mainTabbedPane.addTab("Resumen", completeResumePanel);
+        mainTabbedPane.addChangeListener(this);
 
         Box mainBox = Box.createVerticalBox();
         mainBox.add(dateSelectionPanel);
@@ -76,6 +87,7 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
         ExpenseControlFrame frame = new ExpenseControlFrame("Control de Gastos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SwingUtil.centerFrame(frame);
+        frame.resetCalendarPanel();
     }
 
     @Override
@@ -86,17 +98,25 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
     }
 
     public final void resetCalendarPanel() {
-        int[] date = dateSelectionPanel.getSelectedDate();
-        monthData = new MonthData(date[0], date[1]);
-        calendarPanel.initCalendarPanel(monthData);
-        calendarPanel.setSize(calendarPanel.getPreferredSize());
-        calendarPanel.validate();
+        if (calendarPanel.isShowing()) {
+            int[] date = dateSelectionPanel.getSelectedDate();
+            monthData = new MonthData(date[0], date[1]);
+            calendarPanel.initCalendarPanel(monthData);
+            calendarPanel.setSize(calendarPanel.getPreferredSize());
+            calendarPanel.validate();
+        }
 
-        monthResumePanel.restartMonthResumePanel(monthData);
+        if (monthResumePanel.isShowing()) {
+            monthResumePanel.restartMonthResumePanel(monthData);
+        }
 
-        stackedAccountChart.restartStackedAccountChartPanel();
+        if (stackedAccountChart.isShowing()) {
+            stackedAccountChart.restartStackedAccountChartPanel();
+        }
 
-        completeResumePanel.resetCompleteResumePanel();
+        if (completeResumePanel.isShowing()) {
+            completeResumePanel.resetCompleteResumePanel();
+        }
 
         pack();
         SwingUtil.centerFrame(this);
@@ -108,6 +128,11 @@ public class ExpenseControlFrame extends JFrame implements ActionListener {
 
     public MonthData getMonthData() {
         return monthData;
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent event) {
+        resetCalendarPanel();
     }
 
     public static void main(String[] args) {

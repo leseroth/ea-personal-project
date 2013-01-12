@@ -11,7 +11,9 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class CurrencyCellRenderer extends DefaultTableCellRenderer {
     
-    @Override
+	private static final long serialVersionUID = -7763670383058887420L;
+
+	@Override
     public Component getTableCellRendererComponent(JTable table, Object obj, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cell = super.getTableCellRendererComponent(table, obj, isSelected, hasFocus, row, column);
 

@@ -1,12 +1,5 @@
 package co.earcos.budget.dao;
 
-import co.earcos.budget.control.DayData;
-import co.earcos.budget.control.MonthData;
-import co.earcos.budget.control.ResumeData;
-import co.earcos.budget.util.Constants.Account;
-import co.earcos.budget.util.Constants.Concept;
-import co.earcos.budget.util.Util;
-import co.earcos.budget.view.ExpenseControlFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,11 +9,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import co.earcos.budget.control.DayData;
+import co.earcos.budget.control.MonthData;
+import co.earcos.budget.control.ResumeData;
+import co.earcos.budget.util.Constants.Account;
+import co.earcos.budget.util.Constants.Concept;
+import co.earcos.budget.util.Util;
+import co.earcos.budget.view.ExpenseControlFrame;
+
 /**
- *
+ * 
  * @author Erik
  */
 public class ControlDao {
@@ -32,8 +34,7 @@ public class ControlDao {
 
     public void loadMonthTotal(Connection conn, MonthData monthData) {
         try {
-            String sql = "select mov.cuenta, sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where formatdatetime(mov.fecha,'yyyyMM') <= ? group by mov.cuenta";
+            String sql = "select mov.cuenta, sum(valor) total from TBL_MOVIMIENTO mov " + "where formatdatetime(mov.fecha,'yyyyMM') <= ? group by mov.cuenta";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             ResultSet result = stmt.executeQuery();
@@ -57,8 +58,7 @@ public class ControlDao {
 
     public void loadMonthConcept(Connection conn, Concept concept, MonthData monthData) {
         try {
-            String sql = "select sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where formatdatetime(mov.fecha,'yyyyMM') <= ? and concepto = ?";
+            String sql = "select sum(valor) total from TBL_MOVIMIENTO mov " + "where formatdatetime(mov.fecha,'yyyyMM') <= ? and concepto = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             stmt.setString(2, concept.getLabel());
@@ -84,8 +84,7 @@ public class ControlDao {
         Double monthAccountConcept = null;
 
         try {
-            String sql = "select sum(valor) total from TBL_MOVIMIENTO mov "
-                    + "where formatdatetime(mov.fecha,'yyyyMM') = ? and cuenta = ? and concepto = ?";
+            String sql = "select sum(valor) total from TBL_MOVIMIENTO mov " + "where formatdatetime(mov.fecha,'yyyyMM') = ? and cuenta = ? and concepto = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, monthData.getFixedMonth());
             stmt.setString(2, account.getId());
@@ -157,7 +156,7 @@ public class ControlDao {
 
                     if (!account.isCreditCard()) {
                         String total = result.getString(account.getLabel());
-                        chartData.add(new String[]{total == null ? "0.0" : total, account.getLabel(), column});
+                        chartData.add(new String[] { total == null ? "0.0" : total, account.getLabel(), column });
                     }
                 }
             }
@@ -209,25 +208,25 @@ public class ControlDao {
         Calendar startCalendar = Calendar.getInstance();
 
         switch (option) {
-            case CURRENT_MONTH:
-                int[] date = ExpenseControlFrame.controlFrame.getDateSelectionPanel().getSelectedDate();
-                startCalendar.set(date[0], date[1], 1);
-                int lastDay = startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-                for (int i = 0; i < lastDay; i++) {
-                    values.add(queryDateFormat.format(startCalendar.getTime()));
-                    startCalendar.add(Calendar.DATE, 1);
-                }
-                break;
-            case LAST_YEAR:
-                startCalendar.add(Calendar.MONTH, -10);
+        case CURRENT_MONTH:
+            int[] date = ExpenseControlFrame.controlFrame.getDateSelectionPanel().getSelectedDate();
+            startCalendar.set(date[0], date[1], 1);
+            int lastDay = startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            for (int i = 0; i < lastDay; i++) {
+                values.add(queryDateFormat.format(startCalendar.getTime()));
+                startCalendar.add(Calendar.DATE, 1);
+            }
+            break;
+        case LAST_YEAR:
+            startCalendar.add(Calendar.MONTH, -10);
 
-                for (int i = 0; i < 12; i++) {
-                    startCalendar.set(Calendar.DATE, 1);
-                    startCalendar.add(Calendar.DATE, -1);
-                    values.add(queryDateFormat.format(startCalendar.getTime()));
-                    startCalendar.add(Calendar.DATE, 33);
-                }
-                break;
+            for (int i = 0; i < 12; i++) {
+                startCalendar.set(Calendar.DATE, 1);
+                startCalendar.add(Calendar.DATE, -1);
+                values.add(queryDateFormat.format(startCalendar.getTime()));
+                startCalendar.add(Calendar.DATE, 33);
+            }
+            break;
         }
 
         return values;
@@ -241,8 +240,7 @@ public class ControlDao {
     public List<ResumeData> loadResumeBalance(Connection conn, String fixedMonth) throws SQLException {
         List<ResumeData> balanceData = new ArrayList<ResumeData>();
 
-        String sql = "select tm.cue,"
-                + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue ) total,"
+        String sql = "select tm.cue," + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue ) total,"
                 + "(select sum(mov.valor) from tbl_movimiento mov where mov.cuenta = tm.cue and formatdatetime(mov.fecha,'yyyyMM') = ?) mesactual"
                 + " from (select distinct(tm.cuenta) cue from tbl_movimiento tm) tm order by tm.cue";
         PreparedStatement stmt = conn.prepareStatement(sql);

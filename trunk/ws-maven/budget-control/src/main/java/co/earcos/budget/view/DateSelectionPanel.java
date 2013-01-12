@@ -5,12 +5,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Calendar;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 public class DateSelectionPanel extends JPanel implements ItemListener, ActionListener {
 
+    private static final long serialVersionUID = 2661308912492617928L;
     private JComboBox yearCombo;
     private JComboBox monthCombo;
     private JButton next;
@@ -21,9 +23,8 @@ public class DateSelectionPanel extends JPanel implements ItemListener, ActionLi
     }
 
     private void initDateSelectionPanel() {
-        String[] years = {"2011","2012"};
-        String[] months = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        String[] years = { "2011", "2012", "2013" };
+        String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 
         previous = new JButton("<");
         yearCombo = new JComboBox(years);
@@ -46,17 +47,17 @@ public class DateSelectionPanel extends JPanel implements ItemListener, ActionLi
     }
 
     public int[] getSelectedDate() {
-        return new int[]{Integer.parseInt((String) yearCombo.getSelectedItem()), monthCombo.getSelectedIndex()};
+        return new int[] { Integer.parseInt((String) yearCombo.getSelectedItem()), monthCombo.getSelectedIndex() };
     }
 
-  @Override
+    @Override
     public void itemStateChanged(ItemEvent event) {
         if (event.getStateChange() == ItemEvent.SELECTED) {
             ExpenseControlFrame.controlFrame.resetCalendarPanel();
         }
     }
 
-  @Override
+    @Override
     public void actionPerformed(ActionEvent event) {
         int month = monthCombo.getSelectedIndex();
         int year = yearCombo.getSelectedIndex();
