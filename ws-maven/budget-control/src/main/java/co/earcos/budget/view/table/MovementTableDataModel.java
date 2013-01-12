@@ -1,87 +1,94 @@
 package co.earcos.budget.view.table;
 
+import java.util.List;
+
+import javax.swing.table.AbstractTableModel;
+
 import co.earcos.budget.model.MovementVO;
 import co.earcos.budget.util.Util;
 import co.earcos.util.FormattingTools;
-import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
- *
+ * 
  * @author Erik
  */
 public class MovementTableDataModel extends AbstractTableModel {
 
-  private String[] columnNames;
-  private List<MovementVO> movementList;
-  private boolean complete;
+	private static final long serialVersionUID = -7215475889655677306L;
+	private String[] columnNames;
+	private List<MovementVO> movementList;
+	private boolean complete;
 
-  public MovementTableDataModel(boolean complete, List<MovementVO> movementVOList) {
-    this.complete = complete;
+	public MovementTableDataModel(boolean complete,
+			List<MovementVO> movementVOList) {
+		this.complete = complete;
 
-    if (this.complete) {
-      columnNames = new String[]{"Fecha", "Cuenta", "Valor", "Concepto", "Observacion"};
-    } else {
-      columnNames = new String[]{"Cuenta", "Valor", "Concepto", "Observacion"};
-    }
+		if (this.complete) {
+			columnNames = new String[] { "Fecha", "Cuenta", "Valor",
+					"Concepto", "Observacion" };
+		} else {
+			columnNames = new String[] { "Cuenta", "Valor", "Concepto",
+					"Observacion" };
+		}
 
-    movementList = movementVOList;
-  }
+		movementList = movementVOList;
+	}
 
-  @Override
-  public int getColumnCount() {
-    return columnNames.length;
-  }
+	@Override
+	public int getColumnCount() {
+		return columnNames.length;
+	}
 
-  @Override
-  public int getRowCount() {
-    return movementList.size();
-  }
+	@Override
+	public int getRowCount() {
+		return movementList.size();
+	}
 
-  @Override
-  public String getColumnName(int col) {
-    return columnNames[col];
-  }
+	@Override
+	public String getColumnName(int col) {
+		return columnNames[col];
+	}
 
-  @Override
-  public Object getValueAt(int row, int col) {
-    String value = null;
-    MovementVO movementData = movementList.get(row);
+	@Override
+	public Object getValueAt(int row, int col) {
+		String value = null;
+		MovementVO movementData = movementList.get(row);
 
-    if (complete) {
-      col--;
-      value = FormattingTools.getFormattedDate(movementData.getDate());
-    }
+		if (complete) {
+			col--;
+			value = FormattingTools.getFormattedDate(movementData.getDate());
+		}
 
-    switch (col) {
-      case 0:
-        value = movementData.getAccount().getLabel();
-        break;
-      case 1:
-        value = Util.getCurrencyValue(movementData.getAccount(), movementData.getValue());
-        break;
-      case 2:
-        value = movementData.getConcept();
-        break;
-      case 3:
-        value = movementData.getObservation();
-        break;
-    }
-    return value;
-  }
+		switch (col) {
+		case 0:
+			value = movementData.getAccount().getLabel();
+			break;
+		case 1:
+			value = Util.getCurrencyValue(movementData.getAccount(),
+					movementData.getValue());
+			break;
+		case 2:
+			value = movementData.getConcept();
+			break;
+		case 3:
+			value = movementData.getObservation();
+			break;
+		}
+		return value;
+	}
 
-  public void addMovement(MovementVO movementData) {
-    movementList.add(movementData);
-    fireTableDataChanged();
-  }
+	public void addMovement(MovementVO movementData) {
+		movementList.add(movementData);
+		fireTableDataChanged();
+	}
 
-  public void removeMovement(int index) {
-    movementList.remove(index);
-    fireTableDataChanged();
-  }
+	public void removeMovement(int index) {
+		movementList.remove(index);
+		fireTableDataChanged();
+	}
 
-  public void clearMovementList() {
-    movementList.clear();
-    fireTableDataChanged();
-  }
+	public void clearMovementList() {
+		movementList.clear();
+		fireTableDataChanged();
+	}
 }

@@ -1,12 +1,18 @@
 package co.earcos.budget.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
+
 import co.earcos.budget.model.MovementVO;
 import co.earcos.budget.util.Constants.Account;
 import co.earcos.budget.util.Constants.Concept;
 import co.earcos.budget.util.Util;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MovementDao {
 
@@ -27,8 +33,7 @@ public class MovementDao {
 
     public List<MovementVO> loadAdviceInfo(Connection conn) throws SQLException {
         String sql = "select mov.* from tbl_movimiento mov where concepto = ? and cuenta = ? "
-                + "and fecha > (select max(fecha) from tbl_movimiento where concepto = ? and cuenta = ?) "
-                + "order by fecha desc, concepto desc";
+                + "and fecha > (select max(fecha) from tbl_movimiento where concepto = ? and cuenta = ?) " + "order by fecha desc, concepto desc";
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, Concept.INTERESTS.getLabel());
         stmt.setString(2, Account.INDEACCION.getId());
