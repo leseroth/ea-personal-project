@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">AndroidBudget</string>
+    <string name="title_activity_dbroulette">DBRoulette</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
