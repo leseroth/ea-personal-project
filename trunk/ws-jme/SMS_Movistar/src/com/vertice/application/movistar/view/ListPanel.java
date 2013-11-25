@@ -11,35 +11,32 @@ public class ListPanel extends CustomCanvas {
     Header header;
     Scroll scroll;
 
-    ItemListComponent il1,il2,il3,il4,il5,il6,il7;
+    ItemListComponent il1,il2,il3,il4,il5,il6;
 
-    CAEQPanel caeqp;
     CASIPanel casip;
     CAPanel cap;
     CPCVPanel cpcvp;
     CSCPanel cscp;
     PromPanel promp;
 
-    String op1,op2,op3,op4,op5,op6;
+    String op1,op2,op3,op4,op5;
 
     public ListPanel(){
         super();
 
         ImageComponent ic=new ImageComponent(MovistarSMS.logo,ImageComponent.ALIGN_CENTER);
-        op1="CAEQ";
-        op2="MGEQ";
-        op3="CASI";
-        op4="Consulta";
-        op5="Consulta CAPL";
-        op6="Promociones";
+        op1="MGEQ";
+        op2="CASI";
+        op3="Consulta";
+        op4="Consulta CAPL";
+        op5="Promociones";
         
         il1=new ItemListComponent(this,op1, null);
         il2=new ItemListComponent(this,op2, null);
         il3=new ItemListComponent(this,op3, null);
         il4=new ItemListComponent(this,op4, null);
         il5=new ItemListComponent(this,op5, null);
-        il6=new ItemListComponent(this,op6, null);
-        il7=new ItemListComponent(this,"Salir", null);
+        il6=new ItemListComponent(this,"Salir", null);
 
         header=new Header("Movistar");
         components.addElement(ic);
@@ -49,7 +46,6 @@ public class ListPanel extends CustomCanvas {
         components.addElement(il4);
         components.addElement(il5);
         components.addElement(il6);
-        components.addElement(il7);
         footer=new Footer("","Ok");
 
         offsetY=0;
@@ -78,36 +74,31 @@ public class ListPanel extends CustomCanvas {
                 clear();
                 switch(current){
                     case 0: case 1:
-                        caeqp=new CAEQPanel(this,op1);
-                        ((ItemListComponent)components.elementAt(1)).setToCanvas(caeqp);
+                        casip=new CASIPanel(this,op1);
+                        ((ItemListComponent)components.elementAt(1)).setToCanvas(casip);
                         ((ItemListComponent)components.elementAt(1)).setFocusedAction();
                         break;
                     case 2:
-                        casip=new CASIPanel(this,op2);
-                        ((ItemListComponent)components.elementAt(2)).setToCanvas(casip);
-                        ((ItemListComponent)components.elementAt(2)).setFocusedAction();
+                        cscp=new CSCPanel(this,op2);
+                        ((ItemListComponent)components.elementAt(current)).setToCanvas(cscp);
+                        ((ItemListComponent)components.elementAt(current)).setFocusedAction();
                         break;
                     case 3:
-                        cscp=new CSCPanel(this,op3);
-                        ((ItemListComponent)components.elementAt(5)).setToCanvas(cscp);
-                        ((ItemListComponent)components.elementAt(5)).setFocusedAction();
+                        cap=new CAPanel(this,op3);
+                        ((ItemListComponent)components.elementAt(current)).setToCanvas(cap);
+                        ((ItemListComponent)components.elementAt(current)).setFocusedAction();
                         break;
                     case 4:
-                        cap=new CAPanel(this,op4);
-                        ((ItemListComponent)components.elementAt(3)).setToCanvas(cap);
-                        ((ItemListComponent)components.elementAt(3)).setFocusedAction();
+                        cpcvp=new CPCVPanel(this,op4);
+                        ((ItemListComponent)components.elementAt(current)).setToCanvas(cpcvp);
+                        ((ItemListComponent)components.elementAt(current)).setFocusedAction();
                         break;
                     case 5:
-                        cpcvp=new CPCVPanel(this,op5);
-                        ((ItemListComponent)components.elementAt(4)).setToCanvas(cpcvp);
-                        ((ItemListComponent)components.elementAt(4)).setFocusedAction();
+                        promp=new PromPanel(this, op5);
+                        ((ItemListComponent)components.elementAt(current)).setToCanvas(promp);
+                        ((ItemListComponent)components.elementAt(current)).setFocusedAction();
                         break;
                     case 6:
-                        promp=new PromPanel(this, op6);
-                        ((ItemListComponent)components.elementAt(6)).setToCanvas(promp);
-                        ((ItemListComponent)components.elementAt(6)).setFocusedAction();
-                        break;
-                    case 7:
                         Control.control.exit();
                         break;
                 }
@@ -118,7 +109,6 @@ public class ListPanel extends CustomCanvas {
     }
 
     public void clear(){
-        if(caeqp!=null) { caeqp.destroy(); caeqp=null; }
         if(casip!=null) { casip.destroy(); casip=null; }
         if(cap!=null)   { cap.destroy(); cap=null; }
         if(cpcvp!=null) { cpcvp.destroy(); cpcvp=null; }
