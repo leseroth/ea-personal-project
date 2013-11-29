@@ -46,28 +46,23 @@ public class CAPanel extends FormCanvas {
     }
 
     private String getCAMessage() {
-        String res = "";
-        res = Constants.LLAVE_ACCESO + Constants.TRAMA_CA + CalendarData.getDate() + CalendarData.getHour();
+        String res = Constants.getLlaveAcceso() + Constants.TRAMA_CA + CalendarData.getDate() + CalendarData.getHour();
         res += Formater.getFixedStringFillWithSpacesAtTheEnd(numeroTelefonicoTF.getString(), 12);
-        res += Formater.getFixedStringFillWithZerosAtTheEnd(claveVendedorTF.getString(), 16);
+        res += Formater.getFixedStringFillWithSpacesAtTheEnd(claveVendedorTF.getString(), 16);
         return res;
     }
 
     private boolean validData() {
         boolean res = true;
-        int errors = 0;
 
         if (numeroTelefonicoTF.getString().length() < 9) {
-            errors++;
-            Control.control.showAlert("Error", "El n�mero telefonico debe tener al menos 9 digitos");
+            res = false;
+            Control.control.showAlert("Error", "El numero telefonico debe tener al menos 9 digitos");
         } else if (claveVendedorTF.getString().length() != 6) {
-            errors++;
+            res = false;
             Control.control.showAlert("Error", "La clave del vendedor debe tener 6 digitos");
         }
 
-        if (errors > 0) {
-            res = false;
-        }
         return res;
     }
 }

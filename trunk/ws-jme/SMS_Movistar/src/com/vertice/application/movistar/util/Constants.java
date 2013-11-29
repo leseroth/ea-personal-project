@@ -1,5 +1,7 @@
 package com.vertice.application.movistar.util;
 
+import java.util.Random;
+
 public class Constants {
 
     public static final String NUMERO_CORTO_CAEQ = "5800";
@@ -22,4 +24,22 @@ public class Constants {
     public static final String ICCID_PREFIX = "895106";
     public static final String LLAVE_ACCESO = "1234567890";
     public static final String SEPARADOR_CSC = ",";
+    
+    private static final Random RANDOM = new Random();
+
+    public static String getLlaveAcceso() {
+        int high = RANDOM.nextInt(100000);
+        int low = RANDOM.nextInt(100000);
+
+        if (high == 0 || high == 100000) {
+            high = 12345;
+        }
+        if (low == 0 || low == 100000) {
+            high = 67890;
+        }
+
+        String higher = Formater.getFixedStringFillWithZerosAtTheEnd(high + "", 5);
+        String lower = Formater.getFixedStringFillWithZerosAtTheEnd(low + "", 5);
+        return higher + lower;
+    }
 }
