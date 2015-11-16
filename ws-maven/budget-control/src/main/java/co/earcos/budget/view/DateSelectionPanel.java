@@ -23,7 +23,7 @@ public class DateSelectionPanel extends JPanel implements ItemListener, ActionLi
     }
 
     private void initDateSelectionPanel() {
-        String[] years = { "2011", "2012", "2013", "2014" };
+        String[] years = { "2011", "2012", "2013", "2014", "2015" };
         String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 
         previous = new JButton("<");
