@@ -18,14 +18,14 @@ public class Constants {
 
     public enum Account {
 
-        CASH("ef", "Efectivo"), //
-        SAVING("ah", "Ahorro"), //
-        UNIACCION("un", "Uniaccion"), //
-        FIDUCUENTA("fi", "Fiducuenta"), //
-        INDEACCION("in", "Indeaccion"), //
-        AMEX("cp", "AMEX Pesos"), //
-        AMEXUSD("cd", "AMEX Dolares", "en", "US"), //
-        VISABBVA("cv", "Visa BBVA"), //
+        CASH("ef", "Efectivo"),
+        SAVING("ah", "Ahorro"),
+        UNIACCION("un", "Uniaccion"),
+        FIDUCUENTA("fi", "Fiducuenta"),
+        INDEACCION("in", "Indeaccion"),
+        AMEX("cp", "AMEX Pesos"),
+        AMEXUSD("cd", "AMEX Dolares", "en", "US"),
+        VISABBVA("cv", "Visa BBVA"),
         CMR("cm", "CMR");
         private String id;
         private String label;
@@ -62,23 +62,26 @@ public class Constants {
 
     public enum Concept {
 
-        FOOD("Comida"), //
-        TRANSPORT("Transporte"), //
-        OTHERS("Otros"), //
-        INTERESTS("Intereses"), //
-        LOAN_INTEREST("Intereses Prestamo"), //
-        LOAN("Prestamo"), //
-        MOVEMENT("Movimiento"), //
-        SALARY("Sueldo"), //
-        SERVICES("Servicios"), //
-        RENT("Arriendo"), //
-        PAYMENT("Pago"), //
-        CELLPHONE("Celular"), //
-        CLOTHES("Ropa"), MOVIES("Cine"), //
-        UNIVERSITY("Universidad"), //
-        TRAVEL("Viaje"), //
-        IVA_DEVOLUTION("Devolucion de iva"), //
-        GROUPON("Groupon"), //
+        FOOD("Comida"),
+        TRANSPORT("Transporte"),
+        OTHERS("Otros"),
+        INTERESTS("Intereses"),
+        LOAN_INTEREST("Intereses Prestamo"),
+        LOAN("Prestamo"),
+        MOVEMENT("Movimiento"),
+        SALARY("Sueldo"),
+        SERVICES("Servicios"),
+        RENT("Arriendo"),
+        PAYMENT("Pago"),
+        CELLPHONE("Celular"),
+        CLOTHES("Ropa"),
+        MOVIES("Cine"),
+        CAR("Carro"),
+        APARTMENT("Apartamento"),
+        UNIVERSITY("Universidad"),
+        TRAVEL("Viaje"),
+        IVA_DEVOLUTION("Devolucion de iva"),
+        GROUPON("Groupon"),
         XD_APPS("XD Apps");
         private String label;
 
