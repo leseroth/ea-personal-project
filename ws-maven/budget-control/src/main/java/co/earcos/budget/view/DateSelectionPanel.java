@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 public class DateSelectionPanel extends JPanel implements ItemListener, ActionListener {
 
     private static final long serialVersionUID = 2661308912492617928L;
-    private JComboBox yearCombo;
-    private JComboBox monthCombo;
+    private JComboBox<String> yearCombo;
+    private JComboBox<String> monthCombo;
     private JButton next;
     private JButton previous;
 
@@ -27,8 +27,8 @@ public class DateSelectionPanel extends JPanel implements ItemListener, ActionLi
         String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
 
         previous = new JButton("<");
-        yearCombo = new JComboBox(years);
-        monthCombo = new JComboBox(months);
+        yearCombo = new JComboBox<String>(years);
+        monthCombo = new JComboBox<String>(months);
         next = new JButton(">");
 
         yearCombo.setSelectedIndex(Calendar.getInstance().get(Calendar.YEAR) - Integer.parseInt(years[0]));

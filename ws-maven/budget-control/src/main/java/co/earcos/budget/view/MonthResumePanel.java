@@ -46,8 +46,9 @@ public class MonthResumePanel extends JPanel {
 		for (Account account : Account.values()) {
 			if (!account.isCreditCard() && account != Account.CASH) {
 				double value = monthData.getAccountInterest(account);
-				addRow(new JLabel(account.getLabel(), JLabel.TRAILING),
-						initValueLabel(account, value));
+				if(value == 0)
+					continue;
+				addRow(new JLabel(account.getLabel(), JLabel.TRAILING), initValueLabel(account, value));
 			}
 		}
 	}
@@ -55,8 +56,10 @@ public class MonthResumePanel extends JPanel {
 	private void addBalanceSection(MonthData monthData) {
 		addTitleRow("Saldo");
 		for (Account account : Account.values()) {
-			addRow(new JLabel(account.getLabel(), JLabel.TRAILING),
-					initValueLabel(account, monthData.getAccountTotal(account)));
+			double total = monthData.getAccountTotal(account);
+			if(total == 0)
+				continue;
+			addRow(new JLabel(account.getLabel(), JLabel.TRAILING), initValueLabel(account, total));
 		}
 	}
 

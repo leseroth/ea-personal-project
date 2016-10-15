@@ -57,9 +57,9 @@ public class MovementFrame extends JFrame implements ActionListener {
 	private MovementTableDataModel tableModel;
 	// Fields
 	private JCheckBox adjustCheck;
-	private JComboBox accountCombo;
+	private JComboBox<String> accountCombo;
 	private JFormattedTextField valueField;
-	private JComboBox conceptCombo;
+	private JComboBox<String> conceptCombo;
 	private JTextField observationField;
 
 	public MovementFrame(DayData day, DayPanel main) {
@@ -128,7 +128,7 @@ public class MovementFrame extends JFrame implements ActionListener {
 		adjustCheck = new JCheckBox();
 		adjustCheck.setSelected(false);
 
-		accountCombo = new JComboBox();
+		accountCombo = new JComboBox<String>();
 		for (Account account : Account.values()) {
 			accountCombo.addItem(account.getLabel());
 		}
@@ -142,7 +142,7 @@ public class MovementFrame extends JFrame implements ActionListener {
 						valueDisplayFormat), new NumberFormatter(
 						NumberFormat.getNumberInstance())));
 
-		conceptCombo = new JComboBox();
+		conceptCombo = new JComboBox<String>();
 		for (Concept concept : Concept.values()) {
 			conceptCombo.addItem(concept.getLabel());
 		}
