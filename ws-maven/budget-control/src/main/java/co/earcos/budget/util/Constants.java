@@ -19,6 +19,7 @@ public class Constants {
     public enum Account {
 
         CASH("ef", "Efectivo"),
+        AFC("af", "AFC"),
         SAVING("ah", "Ahorro"),
         UNIACCION("un", "Uniaccion"),
         FIDUCUENTA("fi", "Fiducuenta"),
@@ -26,6 +27,7 @@ public class Constants {
         AMEX("cp", "AMEX Pesos"),
         AMEXUSD("cd", "AMEX Dolares", "en", "US"),
         VISABBVA("cv", "Visa BBVA"),
+        AFCCREDIT("ca", "AFC Prestamo"),
         CMR("cm", "CMR");
         private String id;
         private String label;
@@ -56,7 +58,7 @@ public class Constants {
         }
 
         public boolean isCreditCard() {
-            return this == AMEX || this == AMEXUSD || this == VISABBVA || this == CMR;
+            return this == AMEX || this == AMEXUSD || this == VISABBVA || this == CMR || this == AFCCREDIT;
         }
     }
 

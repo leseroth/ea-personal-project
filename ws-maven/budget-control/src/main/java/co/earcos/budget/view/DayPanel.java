@@ -32,6 +32,7 @@ import co.earcos.budget.util.Util;
  */
 public class DayPanel extends JPanel implements MouseListener {
 
+	private static final Account[] ACCOUNTS = new Account[]{Account.CASH, Account.SAVING, Account.FIDUCUENTA};
 	private static final long serialVersionUID = -7830724316276016221L;
 	private static final String holydays;
 	private static Log log = LogFactory.getLog(DayPanel.class);
@@ -56,11 +57,9 @@ holydays =
 		dayData = day;
 		JLabel dayLabel = initDayLabel(dayData.getDate());
 		List<JLabel> accountLabelList = new ArrayList<JLabel>();
-		for (Account account : Account.values()) {
-			if (!account.isCreditCard()) {
-				accountLabelList.add(initValueLabel(
-						dayData.getAccountDayTotal(account), account));
-			}
+		accountLabelList.add(getEmptyLabel());
+		for (Account account : ACCOUNTS) {
+			accountLabelList.add(initValueLabel(dayData.getAccountDayTotal(account), account));
 		}
 
 		Box mainBox = Box.createVerticalBox();
@@ -109,6 +108,12 @@ holydays =
 			label.setForeground(value < 0 ? Color.red : Color.black);
 			label.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		}
+		return label;
+	}
+	
+	private JLabel getEmptyLabel() {
+		JLabel label = new JLabel(".");
+		label.setForeground(Color.white);
 		return label;
 	}
 
